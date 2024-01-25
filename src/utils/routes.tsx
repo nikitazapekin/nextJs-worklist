@@ -7,6 +7,7 @@ import {
 } from "./consts"
 import Homepage from "../pages/homepage/homepage"
 import LoginPage from "../pages/loginPage/loginPage"
+import RegisterPage from "../pages/registerPage/registerPage"
  
 export const publicRoutes = [
     {
@@ -18,7 +19,12 @@ export const publicRoutes = [
         Component: LoginPage
      },
      
-
+   
+   {
+      path: SIGN_UP_ROUTE,
+      Component: RegisterPage
+   },
+   
  
 
 ]

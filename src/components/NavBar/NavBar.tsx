@@ -4,7 +4,12 @@ const NavBar = () => {
     return (
         <Navbar background="black">
             <NavBarWrapper>
-            <NavBarItem>Home</NavBarItem>
+
+            <NavBarItem>
+            <Link style={{textDecoration: "none", color: "#fff"}} to="/">
+                Home
+                </Link>
+                </NavBarItem>
             <NavBarItem>Offers</NavBarItem>
             <NavBarItem>CV</NavBarItem>       
             <NavBarItems>

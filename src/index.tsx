@@ -13,6 +13,13 @@ import { Routes, Route } from 'react-router-dom';
 import { Global } from './components/globalStyles';
 import Homepage from './pages/homepage/homepage';
 import LoginPage from './pages/loginPage/loginPage';
+
+
+
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './store';
+
 const root = document.getElementById('root');
 
 if (!root) {
@@ -24,16 +31,21 @@ const container = createRoot(root);
 
  
 container.render(
+    <Provider store={store}>
+		<PersistGate loading={null} persistor={persistor}>
     <ErrorBoundary>
 <BrowserRouter>
 <Routes>
             {publicRoutes.map(({ path, Component }) => (<Route key={path} path={path} element={<Component   />} />)
             )}
 
+            
 
        {/*     <Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} /> */}
 
          </Routes>
 </BrowserRouter> 
             </ErrorBoundary>
+        </PersistGate>
+        </Provider>
 );

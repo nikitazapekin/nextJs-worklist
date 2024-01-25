@@ -1,57 +1,84 @@
-/*
-"use client"
-import { useLogin } from "@/app/hooks/loginHook";
-import "@/app/components/loginForm/loginForm"
-import React ,  { ChangeEvent }  from "react";
-import { useRef } from "react";
-//import { fetchOneDevice, registerUser } from "@/app/http/authHttp";
-//import Link from "next/link";
+import { useLogin } from "../../hooks/loginHook";
+ 
+import { OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper } from "./loginFormStyles";
 import { Link } from "react-router-dom";
-const RegisterForm = () => {
-    const {setLoginState, loginState} = useLogin()
-const form = useRef(null)
-    const handleSubmit=()=> {
-//fetchOneDevice()
-registerUser(loginState)
-    }
-    const handleChange =(event: ChangeEvent<HTMLInputElement>): void=> {
-   setLoginState((prevLoginState) => ({
-    ...prevLoginState,
-    [event.target.name]: event.target.value,
-}));
-    }
-    return ( 
-        <div className="loginForm">
-            <h1 className="loginTitle">Sign up</h1>
-            <form action=""
-ref={form}
-             className="loginFormWrapper">
-<input name="username" onChange={handleChange} placeholder="type username" type="text" className="loginFormUsername"  required/>
-            <input name="email" onChange={handleChange} type="text" placeholder="type email" className="loginFormEmail" required />
-            <input name="password" onChange={handleChange}type="text" placeholder="type password" className="loginFormPassword" required />
-            <button
-            className="loginFormButton"
-             onClick={handleSubmit}
-             >Submit</button>
-             </form>
-<div className="loginFormBackground">
-</div>
-<h2 className="or">
-    <Link
-    style={{textDecoration: "none", color: "#fff"}}
-    href="/profile">
-Or sign in
-    </Link>
-    </h2>
-        </div>
-     );
-}
-export default RegisterForm; */
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCityByName } from "../../store";
+ //import city
+const LoginForm = () => {
 
-export const LoginForm =()=> {
-    return  (
-        <LoginForm>
-            
-        </LoginForm>
-    )
+//const {} = useSelector(city)
+    const dispatch = useDispatch();
+
+	/*useEffect(() => {
+		if (selectedLocation !== null) {
+			dispatch(fetchHourlyWeather(selectedLocation));
+		}
+	}, [selectedLocation]); */
+
+const handleClick=() => {
+    console.log("handle click")
+dispatch(fetchCityByName("Minsk"))
 }
+fetchCityByName("Minsk")
+   const {loginState, setLoginState}= useLogin()
+    const handleRegister = (event:  React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setLoginState((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    }
+    return (
+    <RegisterFormComponent>
+        <RegisterFormWrapper>
+            <RegisterComponentTitle>
+                Sign in
+            </RegisterComponentTitle>
+       
+
+
+            <RegisterFormInputWrapper>
+            <RegisterFormInputMarkdown>
+          Email
+            </RegisterFormInputMarkdown>
+            <RegisterFormInputUsername 
+            name="email"
+            onChange={(event)=> handleRegister(event)}
+            type="email" placeholder="Type email" required />
+         </RegisterFormInputWrapper>
+
+
+         <RegisterFormInputWrapper>
+            <RegisterFormInputMarkdown>
+           Password
+            </RegisterFormInputMarkdown>
+            <RegisterFormInputUsername
+onChange={(event)=> handleRegister(event)}
+name="password"
+            type="password"
+            placeholder="Type password" required />
+         </RegisterFormInputWrapper>
+
+
+<RegisterFormSubmit type="button"
+onClick={handleClick}
+>
+    Submit
+</RegisterFormSubmit>
+
+
+<OrHaveAnAccount>
+    <Link
+    style={{color: "#fff", textDecoration: "none"}}
+    to="/sign_up">
+Or sign up
+    </Link>
+</OrHaveAnAccount>
+        </RegisterFormWrapper>
+        <RegisterFormBaccground />
+    </RegisterFormComponent>
+      );
+}
+ 
+export default LoginForm;
