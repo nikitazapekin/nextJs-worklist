@@ -1,14 +1,20 @@
 import useRegister from "../../hooks/useRegister";
+import { useSelector, useDispatch } from 'react-redux';
 import { OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper } from "./registerFormStyles";
 import { Link } from "react-router-dom";
+import { fetchAuthFunction } from "../../store/slices/auth.slice";
 const RegisterForm = () => {
     const {registerState, setRegisterState}= useRegister()
+    const dispatch = useDispatch();
     const handleRegister = (event:  React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setRegisterState((prev) => ({
             ...prev,
             [name]: value,
         }));
+    }
+    const handleSubmit =()=> {
+        dispatch(fetchAuthFunction(registerState))
     }
     return (
     <RegisterFormComponent>
@@ -100,6 +106,7 @@ name="password"
             placeholder="Type password" required />
          </RegisterFormInputWrapper>
 <RegisterFormSubmit type="button"
+onClick={handleSubmit}
 >
     Submit
 </RegisterFormSubmit>

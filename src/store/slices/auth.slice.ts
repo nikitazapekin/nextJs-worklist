@@ -20,7 +20,14 @@ const initialState: AuthState = {
 	citySearchResult: null,
 	searchCitiesLoadingStatus: LOADING_STATUS.IDLE,
 };
- 
+interface AuthProps {
+    username: string,
+    country: string,
+    city: string,
+    telephone: string,
+    email: string,
+    password: string
+ }
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
@@ -36,7 +43,7 @@ export const authSlice = createSlice({
             state.token=  action.payload
 		//	state.citySearchResult = action.payload.results?.map(transformCityResponse) ?? null;
 		},
-		fetchAuthFunction: (state, action: PayloadAction<string>) => {}, 
+		fetchAuthFunction: (state, action: PayloadAction<AuthProps>) => {}, 
 	},
 });
 

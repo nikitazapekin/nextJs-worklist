@@ -19,8 +19,7 @@ const LoginForm = () => {
 
 const handleClick=() => {
     console.log("handle click")
-//dispatch(fetchCityByName("Minsk"))
-dispatch(fetchAuthFunction("hh"))
+//dispatch(fetchAuthFunction("hh"))
 }
 fetchCityByName("Minsk")
    const {loginState, setLoginState}= useLogin()

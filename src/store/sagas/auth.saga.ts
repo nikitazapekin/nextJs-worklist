@@ -6,7 +6,15 @@ import { serverApi } from '../../api/server.api';
  import { setCurrentAuth, setAuthLoadingStatus, setAuth, fetchAuthFunction} from '../slices/auth.slice';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
-function* fetchAuth(action: PayloadAction<string>) {
+interface AuthProps {
+    username: string,
+    country: string,
+    city: string,
+    telephone: string,
+    email: string,
+    password: string
+}
+function* fetchAuth(action: PayloadAction<AuthProps>) {
     console.log("ACT" +action.payload)
 //yield put(setSearchCitiesLoadingStatus(LOADING_STATUS.LOADING));
 yield put(setAuthLoadingStatus(LOADING_STATUS.LOADING));
@@ -22,6 +30,5 @@ yield put(setAuthLoadingStatus(LOADING_STATUS.LOADING));
 }
 
 export function*  authWatcher() {
-	//yield takeLatest(fetchCityByName.type, fetchAuth);
     yield takeLatest(fetchAuthFunction.type, fetchAuth);
 }

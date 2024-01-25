@@ -2,9 +2,6 @@ import React, { useEffect } from 'react';
 import useSlide from '../../hooks/useSlide';
 import SliderCarouselItemComponent from '../SliderCarouselItem/SliderCarouselItem';
 import { useRef } from 'react';
-import EE from "../../assets/ee.jpg"
-import FD from "../../assets/fd.jpg"
-import TT from "../../assets/tt.jpg"
 import Slider1 from "../../assets/slider1.jpg"
 import Slider2 from "../../assets/slider2.jpg"
 import Slider3 from "../../assets/slider3.png"
@@ -21,6 +18,7 @@ const SliderCarouselComponent = () => {
   
   const { currentPosition, setCurrentPosition, currentSlide, setCurrentSlide } = useSlide();
 const slider  =useRef<HTMLDivElement>()
+
   const handleClick = (direction: 'left' | 'right') => {
       if(  slider.current!=undefined){
     if (direction === 'left') {
@@ -52,6 +50,21 @@ console.log("ind" +index)
 setCurrentSlide(index)
 setCurrentPosition( -slider.current.offsetWidth*index)
    }
+   useEffect(() => {
+    const intervalId = setInterval(() => {
+      if(currentSlide!=2){
+
+        setCurrentPosition(prev=>prev-slider.current.offsetWidth )
+        setCurrentSlide(prev=>prev+1)
+      }
+      else{
+        setCurrentPosition(0)
+        setCurrentSlide(0)
+      }
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [setCurrentSlide, setCurrentPosition, currentSlide]);
   return (
       <SliderCarousel
       ref={slider}

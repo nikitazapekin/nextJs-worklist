@@ -4,13 +4,26 @@ const apiHost = process.env.REACT_APP_API_BASE_URL;
 const serverApiInstance: AxiosInstance = axios.create({
 baseURL: `http://localhost:5000/${apiHost}/`,
 });
+interface RegProps {
+    username: string,
+    country: string,
+    city: string,
+    telephone: string,
+    email: string,
+    password: string
+}
 export const serverApi = {
-    signUpAction(city: string) {
-        console.log("FUNC" + city);
+    signUpAction(regData: RegProps) {
+        console.log("REEEEEEEEEE"+JSON.stringify(regData))
         return serverApiInstance.post('/signup', {
-            params: {
-                name: "Nik"
-            }
+          //  params: {
+                username: regData.username,
+                country: regData.country,
+                city: regData.city,
+                telephone: regData.telephone,
+                email: regData.email,
+                password: regData.password
+        //    }
         })
         .then(response => {
             console.log("SERVER", response.data);
@@ -19,8 +32,7 @@ export const serverApi = {
         .catch(error => {
             console.error("Error during signInAction:", error);
             const fullURL = serverApiInstance.defaults.baseURL + '/signup';
-console.log('Full URL:', fullURL);
-            throw error; // Optionally rethrow the error
+            throw error; 
         });
     },
 };
