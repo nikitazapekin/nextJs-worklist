@@ -4,6 +4,7 @@ import { OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, Regist
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCityByName } from "../../store";
+import { fetchAuthFunction } from "../../store/slices/auth.slice";
  //import city
 const LoginForm = () => {
 
@@ -18,7 +19,8 @@ const LoginForm = () => {
 
 const handleClick=() => {
     console.log("handle click")
-dispatch(fetchCityByName("Minsk"))
+//dispatch(fetchCityByName("Minsk"))
+dispatch(fetchAuthFunction("hh"))
 }
 fetchCityByName("Minsk")
    const {loginState, setLoginState}= useLogin()

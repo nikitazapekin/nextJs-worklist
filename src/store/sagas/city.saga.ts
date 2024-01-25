@@ -1,9 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
-//import { LOADING_STATUS } from '@constants';
-//import type { CitySearchResponse } from '@interfaces';
 import { CitySearchResponse } from '../../interfaces/city';
-//import { openMeteoApi } from '@api';
 import { openMeteoApi } from '../../api';
 import { 
     //setTodos
@@ -22,15 +19,6 @@ yield put(setSearchCitiesLoadingStatus(LOADING_STATUS.LOADING));
 	} catch (error) {
 		yield put(setSearchCitiesLoadingStatus(LOADING_STATUS.ERROR));
 	} 
-
-   /* yield put(setSearchCitiesLoadingStatus(LOADING_STATUS.LOADING));
-	try {
-		const data: CitySearchResponse = yield call(openMeteoApi.searchCityByName, action.payload);
-		yield put(setCitiesSearchResult(data));
-		yield put(setSearchCitiesLoadingStatus(LOADING_STATUS.IDLE));
-	} catch (error) {
-		yield put(setSearchCitiesLoadingStatus(LOADING_STATUS.ERROR));
-	} */
 }
 
 export function* cityWatcher() {

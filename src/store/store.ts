@@ -15,6 +15,7 @@ import forecastWeatherReducer from './slices/forecastweather.slice';
 import calendarReducer from './slices/calendar.slice'; */
 
 import type { ThunkAction, Action } from '@reduxjs/toolkit';
+import authSlice from './slices/auth.slice';
 
 const rootReducer = combineReducers({
 	/*todayWeather: todayWeatherReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
 	forecastWeather: forecastWeatherReducer,
 	location: locationReducer,
 	calendar: calendarReducer, */
+    authSlice: authSlice,
 	city: cityReducer,
 });
 
