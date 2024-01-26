@@ -23,7 +23,7 @@ export * from './sagas/index';
 export * from './sagas/todayweather.saga'; */
 
 // Selectors
-export * from './selectors/city.selector';
+export * from './selectors/auth.selector';
 /*
 export * from './selectors/calendar.selector';
 export * from './selectors/dailyweather.selector';

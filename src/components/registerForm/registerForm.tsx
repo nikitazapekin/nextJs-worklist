@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper } from "./registerFormStyles";
 import { Link } from "react-router-dom";
 import { fetchAuthFunction } from "../../store/slices/auth.slice";
+import { authSelector } from "../../store";
 const RegisterForm = () => {
+    const authResponse  = useSelector(authSelector);
+    console.log("AUTTTTTTTT" +authResponse)
     const {registerState, setRegisterState}= useRegister()
     const dispatch = useDispatch();
     const handleRegister = (event:  React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +17,12 @@ const RegisterForm = () => {
         }));
     }
     const handleSubmit =()=> {
-        dispatch(fetchAuthFunction(registerState))
+        try {
+
+            dispatch(fetchAuthFunction(registerState))
+        } catch(e) {
+            console.log("ERRR" +e)
+        }
     }
     return (
     <RegisterFormComponent>

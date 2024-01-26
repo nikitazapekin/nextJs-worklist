@@ -12,6 +12,7 @@ interface AuthState {
     token: string;
 	citySearchResult: string | null;
 	searchCitiesLoadingStatus: LOADING_STATUS;
+	authResponse: string
 }
 
 const initialState: AuthState = {
@@ -19,6 +20,7 @@ const initialState: AuthState = {
     token: "",
 	citySearchResult: null,
 	searchCitiesLoadingStatus: LOADING_STATUS.IDLE,
+	authResponse:""
 };
 interface AuthProps {
     username: string,
@@ -28,6 +30,14 @@ interface AuthProps {
     email: string,
     password: string
  }
+ /*interface AuthResponse {
+   authResponse: string
+ } */
+ interface AuthResponse {
+    authResponse: string
+  }
+  
+ 
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
@@ -35,6 +45,11 @@ export const authSlice = createSlice({
 		setCurrentAuth: (state, action: PayloadAction<City>) => {
             console.log("ACT" +action.payload)
 		//	state.currentCity = action.payload;
+		},
+		setAuthSearchResult: (state, action: PayloadAction<AuthResponse>) => {
+			state.authResponse= action.payload.authResponse
+			console.log("AUTH AT slice"+state.authResponse)
+		//	state.citySearchResult = action.payload.results?.map(transformCityResponse) ?? null;
 		},
 		setAuthLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
 			state.searchCitiesLoadingStatus = action.payload;
@@ -48,7 +63,7 @@ export const authSlice = createSlice({
 });
 
 export const { 
-
+setAuthSearchResult,
   setCurrentAuth, setAuthLoadingStatus, setAuth, fetchAuthFunction
 } =
 	authSlice.actions;
