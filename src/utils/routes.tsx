@@ -2,12 +2,14 @@ import { Route, Routes, Navigate } from "react-router-dom"
 import {
    HOMEPAGE_ROUTE, 
    SIGN_IN_ROUTE,
-   SIGN_UP_ROUTE
+   SIGN_UP_ROUTE,
+   TYPE_CODE_ROUTE
    
 } from "./consts"
 import Homepage from "../pages/homepage/homepage"
 import LoginPage from "../pages/loginPage/loginPage"
 import RegisterPage from "../pages/registerPage/registerPage"
+import TypeCodePage from "../pages/tydeCodePage/typeCodePage"
  
 export const publicRoutes = [
     {
@@ -25,6 +27,10 @@ export const publicRoutes = [
       Component: RegisterPage
    },
    
+   {
+      path: TYPE_CODE_ROUTE,
+      Component: TypeCodePage
+   },
  
 
 ]

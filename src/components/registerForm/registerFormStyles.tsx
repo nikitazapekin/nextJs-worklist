@@ -13,6 +13,7 @@ export const RegisterFormWrapper = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: center;
+position: relative;
 width: 100%;
 align-items: center;
 padding: 30px;
@@ -40,6 +41,7 @@ export const RegisterFormInputWrapper = styled.div`
 width: 90%;
 padding 30px;
 height: 90px;
+position: relative;
 `
 export const RegisterFormInputUsername = styled.input`
 font-size: 22px;
@@ -70,5 +72,18 @@ font-weight: 900;
 export const OrHaveAnAccount = styled.h2`
 color: #fff;
 cursor: pointer;
-
+`
+export const ErrorRegisterInformation = styled.h2`
+color: red;
+position: absolute;
+right: 0;
+top: 0;
+`
+export const RegisterIcon = styled.img`
+width: 30px;
+height: 30px;
+position: absolute;
+ right: 0;
+ top: 35px;
+ margin-right: 10px;
 `

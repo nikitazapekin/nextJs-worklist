@@ -72,3 +72,11 @@ color: #fff;
 cursor: pointer;
 
 `
+interface ErrorLoginProps {
+  display: string
+}
+export const  ErrorLogin = styled.h1<ErrorLoginProps>`
+color: red;
+font-size: 32px;
+display: ${props=>props.display}
+`

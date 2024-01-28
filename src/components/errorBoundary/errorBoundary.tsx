@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 interface ErrorState {
 	error: boolean;
 }
@@ -28,8 +29,10 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorStat
 	render(): ReactNode {
 		if (this.state.error) {
 			return (
-				 
+				 <>
 					<h1>Произошла ошибка</h1>
+					<Link to="/"> На главную</Link>
+				 </>
 			 
 			);
 		}

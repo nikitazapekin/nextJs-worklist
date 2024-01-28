@@ -3,12 +3,9 @@ import { LOADING_STATUS } from '../../constants/loadingStatus';
 import { CitySearchResponse } from '../../interfaces/city';
 import { openMeteoApi } from '../../api';
 import { 
-    //setTodos
     fetchCityByName, setCitiesSearchResult, setSearchCitiesLoadingStatus
  } from '../slices/city.slice';
-
 import type { PayloadAction } from '@reduxjs/toolkit';
-
 function* fetchCityByNameWorker(action: PayloadAction<string>) {
     console.log("ACT" +action.payload)
 yield put(setSearchCitiesLoadingStatus(LOADING_STATUS.LOADING));

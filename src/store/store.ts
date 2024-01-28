@@ -3,42 +3,28 @@ import storage from 'redux-persist/lib/storage';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { getPersistConfig } from 'redux-deep-persist';
 import createSagaMiddleware from 'redux-saga';
-
 import { rootSaga } from './sagas';
 import cityReducer from './slices/city.slice';
-/*
-import todayWeatherReducer from './slices/todayweather.slice';
-import hourlyWeatherReducer from './slices/hourlyweather.slice';
-import dailyWeatherReducer from './slices/dailyweather.slice';
-import locationReducer from './slices/location.slice';
-import forecastWeatherReducer from './slices/forecastweather.slice';
-import calendarReducer from './slices/calendar.slice'; */
-
 import type { ThunkAction, Action } from '@reduxjs/toolkit';
 import authSlice from './slices/auth.slice';
+import loginSlice from './slices/login.slice';
+import emailCodeSlice from './slices/emailCode.slice';
 
 const rootReducer = combineReducers({
-	/*todayWeather: todayWeatherReducer,
-	hourlyWeather: hourlyWeatherReducer,
-	dailyWeather: dailyWeatherReducer,
-	forecastWeather: forecastWeatherReducer,
-	location: locationReducer,
-	calendar: calendarReducer, */
     authSlice: authSlice,
+	loginSlice: loginSlice,
 	city: cityReducer,
+	emailCodeSlice: emailCodeSlice,
 });
 
 const persistConfig = getPersistConfig({
 	key: 'root',
 	storage,
-	blacklist: [],
+	blacklist: ['loginSlice'],
 	rootReducer,
 });
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const sagaMiddleware = createSagaMiddleware();
-
 export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
