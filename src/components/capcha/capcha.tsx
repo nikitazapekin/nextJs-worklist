@@ -1,15 +1,17 @@
 import { CaptchaCode, CaptchaCodeForm, CaptchaComponent, CaptchaError, CaptchaInput, CaptchaRefresh, CaptchaSymbol, RefreshWrapper } from "./capchaStyles";
 import Refresh from "../../assets/refresh-page-option.png"
 import {  Dispatch, SetStateAction } from "react";
+import useCaptcha from "../../hooks/useCaptcha";
 interface CaptchaProps {
 captchaCode: String[],
 enteredCaptchaCode: string,
 setEnteredCaptchaCode:Dispatch<SetStateAction<string>>,
 setIsCorrectCaptcha: Dispatch<SetStateAction<boolean>>,
 isCorrectCaptcha: boolean,
-regenerateCaptcha: ()=> void
+regenerateCaptcha: ()=> void,
 }
 const Captcha = ({captchaCode, regenerateCaptcha, enteredCaptchaCode, setEnteredCaptchaCode, isCorrectCaptcha, setIsCorrectCaptcha}: CaptchaProps) => {
+  //const {captcha} =useCaptcha()
    const handleChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
     setEnteredCaptchaCode(event.target.value)
    }
@@ -32,7 +34,9 @@ const Captcha = ({captchaCode, regenerateCaptcha, enteredCaptchaCode, setEntered
           src={Refresh} alt ="refresh" />
         </CaptchaCodeForm> 
         <RefreshWrapper>
-        <CaptchaInput type="text" 
+        <CaptchaInput
+      //  ref={captcha}
+        type="text" 
         placeholder="Type code"
         value={enteredCaptchaCode}
         onChange={(event)=>handleChange(event)}
