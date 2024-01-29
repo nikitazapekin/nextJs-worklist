@@ -14,7 +14,17 @@ interface RegProps {
     city: string,
     telephone: string,
     email: string,
-    password: string
+    password: string,
+    code: string,
+}
+interface ReggProps {
+    username: string,
+    country: string,
+    city: string,
+    telephone: string,
+    email: string,
+    password: string,
+   
 }
 export const serverApi = {
     signUpAction(regData: RegProps) {
@@ -26,7 +36,8 @@ export const serverApi = {
                 city: regData.city,
                 telephone: regData.telephone,
                 email: regData.email,
-                password: regData.password
+                password: regData.password,
+                code: regData.code
         //    }
         })
         .then(response => {
@@ -56,7 +67,7 @@ export const serverApi = {
             throw error; 
         });
     },
-   getEmailCodeAction(regData: RegProps) {
+   getEmailCodeAction(regData: ReggProps) {
         console.log("REEEEEEEEEE"+JSON.stringify(regData))
         return serverApiInstance.post('/sendCode', {
             username: regData.username,

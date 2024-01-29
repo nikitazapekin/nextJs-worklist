@@ -213,16 +213,15 @@ console.log("Em code" +emailCode)
     if(!emailCode.includes("password") && !emailCode.includes("email")){
         const str= captchaCode.join('')
         console.log(str)
+        console.log("ENT"+enteredCaptchaCode)
     if(enteredCaptchaCode==str){
         console.log("is corrrreect")
         navigate("/type_code")
-    } else {
-        setIsCorrectCaptcha(false)
-        console.log("is incorrrreect")
     }
-  /*  if(emailCode.includes("sended") && enteredCaptchaCode==str){
-        navigate("/type_code")
-    } */
+  //  } else {
+    //    setIsCorrectCaptcha(false)
+      //  console.log("is incorrrreect")
+  //  }
     }
 }, [emailCode, isClickedFirst])
     const handlePassword= ()=> {
