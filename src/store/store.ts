@@ -9,18 +9,19 @@ import type { ThunkAction, Action } from '@reduxjs/toolkit';
 import authSlice from './slices/auth.slice';
 import loginSlice from './slices/login.slice';
 import emailCodeSlice from './slices/emailCode.slice';
-
+import finalRegisterSlice from './slices/finalRegister.slice';
 const rootReducer = combineReducers({
     authSlice: authSlice,
 	loginSlice: loginSlice,
 	city: cityReducer,
 	emailCodeSlice: emailCodeSlice,
+	finalRegisterSlice: finalRegisterSlice
 });
 
 const persistConfig = getPersistConfig({
 	key: 'root',
 	storage,
-	blacklist: ['loginSlice'],
+	blacklist: ['loginSlice', 'emailCodeSlice', 'finalRegisterSlice'],
 	rootReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);

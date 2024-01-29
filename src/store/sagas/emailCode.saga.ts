@@ -34,7 +34,6 @@ yield put(setPersonalData({username, country, city, email, password, telephone} 
 	yield put(setEmailCodeResult(code));
         yield put(setEmailCodeLoadingStatus(LOADING_STATUS.IDLE));
 	} catch (error) {
-        console.log("SAAAAAAGA ERR"+JSON.stringify(error.response.data.error))
         yield put(setEmailCodeResult(error.response.data.error));
         yield put(setEmailCodeLoadingStatus(LOADING_STATUS.ERROR));
 	} 

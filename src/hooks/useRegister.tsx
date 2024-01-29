@@ -41,7 +41,6 @@ useEffect(()=> {
 useEffect(()=> {
     if(isClickedFirst==true){
         for(let i=1; i<7; i++){
-            console.log( registerForm.current.children[i].children[3].value)
         if(registerForm.current.children[i].children[3].value==0){
              setIsErrorInput((prev) => ({
                 ...prev,
@@ -67,6 +66,7 @@ useEffect(()=> {
             ["emailInput"]: emailCode,
         }));
     }
+   
       }
 }, [emailCode, isClickedFirst])
 return {registerState, setRegisterState, isVisiblePassword, setIsVisiblePassword, isErrorInput, setIsErrorInput,  handleRegister, registerForm, setIsClickedFirst, isClickedFirst}

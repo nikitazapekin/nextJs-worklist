@@ -182,8 +182,6 @@ import useRegister from "../../hooks/useRegister";
 import { useSelector, useDispatch } from 'react-redux';
 import { ErrorRegisterInformation, OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper, RegisterIcon } from "./registerFormStyles";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchAuthFunction } from "../../store/slices/auth.slice";
-import { authSelector } from "../../store";
 import { useEffect, useRef, useState } from "react";
 import useCaptcha from "../../hooks/useCaptcha";
 import Captcha from "../capcha/capcha";
@@ -194,40 +192,33 @@ import Tel from "../../assets/tel.png"
 import Email from "../../assets/email.png"
 import Eye from "../../assets/eye.png"
 import EyeCrossed from "../../assets/eye-crossed.png"
-import { fetchEmailCodeFunction } from "../../store/slices/emailCode.slice";
+import { fetchEmailCodeFunction, setClearCode } from "../../store/slices/emailCode.slice";
 import { emailCodeSelector } from "../../store/selectors/emailCode.selector";
 const RegisterForm = () => {
-    const navigate= useNavigate()
-    const emailCode= useSelector(emailCodeSelector)
-    const passwordForm = useRef(null)
-    const [enteredCaptchaCode, setEnteredCaptchaCode] = useState<string>("")
     const {captchaCode, regenerateCaptcha, isCorrectCaptcha, setIsCorrectCaptcha} = useCaptcha()
+    const [enteredCaptchaCode, setEnteredCaptchaCode] = useState<string>("")
     const {registerState,  isVisiblePassword, setIsVisiblePassword, handleRegister, registerForm, isErrorInput, setIsClickedFirst, isClickedFirst }= useRegister()
     const dispatch = useDispatch();
+    const emailCode= useSelector(emailCodeSelector)
+    const navigate= useNavigate()
+    const passwordForm = useRef(null)
     const handleSubmit =()=> {
             setIsClickedFirst(true)
             dispatch(fetchEmailCodeFunction(registerState))
         }
-useEffect(()=> {
-console.log("Em code" +emailCode)
-    if(!emailCode.includes("password") && !emailCode.includes("email")){
-        const str= captchaCode.join('')
-        console.log(str)
-        console.log("ENT"+enteredCaptchaCode)
-    if(enteredCaptchaCode==str){
-        console.log("is corrrreect")
-        navigate("/type_code")
-    }
-  //  } else {
-    //    setIsCorrectCaptcha(false)
-      //  console.log("is incorrrreect")
-  //  }
-    }
-}, [emailCode, isClickedFirst])
-    const handlePassword= ()=> {
-setIsVisiblePassword(prev=>!prev)
-passwordForm.current.type = isVisiblePassword ? "text" : "password";
-    }
+        const handlePassword= ()=> {
+        setIsVisiblePassword(prev=>!prev)
+        passwordForm.current.type = isVisiblePassword ? "text" : "password";
+        } 
+        useEffect(()=> {
+if(emailCode.includes("sended") //&& enteredCaptchaCode==captchaCode.join('')
+) {
+    navigate("/type_code")
+    dispatch(setClearCode())
+    //emailCode=""
+}
+        }, [emailCode])
+
     return (
     <RegisterFormComponent
     >
@@ -340,7 +331,7 @@ name="password"
             ref={passwordForm}
             placeholder="Type password" required />
          </RegisterFormInputWrapper>
-         <Captcha captchaCode={captchaCode} regenerateCaptcha={regenerateCaptcha} enteredCaptchaCode={enteredCaptchaCode} setEnteredCaptchaCode={setEnteredCaptchaCode} setIsCorrectCaptcha={setIsCorrectCaptcha} isCorrectCaptcha={isCorrectCaptcha}  />
+      {/*   <Captcha captchaCode={captchaCode} regenerateCaptcha={regenerateCaptcha} enteredCaptchaCode={enteredCaptchaCode} setEnteredCaptchaCode={setEnteredCaptchaCode} setIsCorrectCaptcha={setIsCorrectCaptcha} isCorrectCaptcha={isCorrectCaptcha}  />  */}
 <RegisterFormSubmit type="button"
 onClick={handleSubmit}
 >

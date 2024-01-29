@@ -61,8 +61,8 @@ state.city= action.payload.city,
             console.log("ACT" +action.payload)
 		},
 		setAuthSearchResult: (state, action: PayloadAction<AuthResponse>) => {
+			console.log("auth slice response" +action.payload.authResponse )
 			state.authResponse= action.payload.authResponse
-			console.log("AUTH AT slice"+state.authResponse)
 		},
 		setAuthLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
 			state.searchCitiesLoadingStatus = action.payload;

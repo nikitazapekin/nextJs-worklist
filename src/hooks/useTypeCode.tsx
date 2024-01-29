@@ -4,6 +4,9 @@ import { fetchAuthFunction } from "../store/slices/auth.slice";
 import { useSelector, useDispatch } from 'react-redux';
 import useRegister from "./useRegister";
 import { authSelector } from "../store";
+import { useNavigate } from "react-router-dom";
+import { fetchFinalRegisterFunction } from "../store/slices/finalRegister.slice";
+import { finalRegisterMessageSelector } from "../store/selectors/finalRegisterMessage.selector";
 interface CodeState {
     firstForm: string;
     secondForm: string;
@@ -14,7 +17,23 @@ interface CodeState {
   }
 const useTypeCode = () => {
     const dispatch= useDispatch()
+    const navigate= useNavigate()
     const  {username, password, city, country, email, telephone, authResponse} =useSelector(authSelector)
+    const finalRegisterMessage = useSelector(finalRegisterMessageSelector)
+    useEffect(()=> {
+        if(finalRegisterMessage.includes("correct")){
+            navigate("/sign_in")
+        }
+        console.log("final"+finalRegisterMessage)
+        /*
+if(finalRegisterMessage!=undefined  && finalRegisterMessage!="undefined" && !finalRegisterMessage.includes("Incorrect")) {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+finalRegisterMessage)
+  //  navigate("/sign_in")
+
+   console.log("INCORRECT WORK")
+} */
+     //   console.log("finalRegisterMessageSelector" +finalRegisterMessage)
+    }, [finalRegisterMessage])
     console.log("TOOOOOKEN"+authResponse)
     const {registerState, setRegisterState} =useRegister()
     const selectInput = useRef(null)
@@ -51,8 +70,9 @@ console.log(JSON.stringify(registerState))
          code: typedCode
     }
 console.log("OBj" +JSON.stringify(obj))
-   dispatch(fetchAuthFunction(obj));
+ //  dispatch(fetchAuthFunction(obj));
     console.log("Все поля заполнены!");
+    dispatch(fetchFinalRegisterFunction(obj))
   } else {
     console.log("Не все поля заполнены");
   }

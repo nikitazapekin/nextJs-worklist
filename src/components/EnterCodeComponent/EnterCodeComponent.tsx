@@ -1,9 +1,17 @@
 import useTypeCode from "../../hooks/useTypeCode";
 import { TypeCodeBaccground, TypeCodeForm, TypeCodeInput, TypeCodeInputLine, TypeCodeSubmit, TypeCodeThatWasSendedOnYourEmail } from "./EnterCodeComponentStyles";
 import { useEffect, useRef, useState } from "react";
-
+import { useSelector } from "react-redux";
+import { finalRegisterMessageSelector } from "../../store/selectors/finalRegisterMessage.selector";
 const EnterCodeComponent = () => {
-const {selectInput, handleChange, } = useTypeCode()   
+
+    const {selectInput, handleChange, } = useTypeCode()   
+    const finalRegisterMessage = useSelector(finalRegisterMessageSelector)
+    console.log("findwwddwwdwd" + finalRegisterMessage)
+    useEffect(()=> {
+
+        console.log("findwwddwwdwd" +JSON.stringify(finalRegisterMessage))
+    }, [finalRegisterMessage])
     return ( 
       <TypeCodeForm>
 <TypeCodeThatWasSendedOnYourEmail>

@@ -18,13 +18,8 @@ interface AuthResponse {
     authResponse: string
   }
 function* fetchAuth(action: PayloadAction<AuthProps>) {
-    console.log("ACT" +action.payload)
-  /*  const username= action.payload.username
-    const country = action.payload.country
-    const city = action.payload.city
-    const email = action.payload.email
-    const password = action.payload.password
-    const telephone = action.payload.telephone */
+    console.log("fetch authResponse" +action.payload)
+ 
 yield put(setAuthLoadingStatus(LOADING_STATUS.LOADING));
 
 	try {

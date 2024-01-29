@@ -88,6 +88,31 @@ export const serverApi = {
             console.log("full" +fullURL)
             throw error; 
         });
+
+
     },
+    finalRegisterAction(regData: RegProps) {
+        console.log("REEEEEEEEEE"+JSON.stringify(regData))
+        return serverApiInstance.post('/signup', {
+            username: regData.username,
+            country: regData.country,
+            city: regData.city,
+            telephone: regData.telephone,
+            email: regData.email,
+            password: regData.password,
+            code: regData.code
+              
+        })
+        .then(response => {
+            console.log("SERVER", response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error("Error during signInAction:", error);
+            const fullURL = serverApiInstance.defaults.baseURL + '/sendCode';
+            console.log("full" +fullURL)
+            throw error; 
+        });
+    }
 };
  

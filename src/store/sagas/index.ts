@@ -8,12 +8,14 @@ import { cityWatcher } from './city.saga';
 import { authWatcher } from './auth.saga';
 import { loginWatcher } from './login.saga';
 import { EmailCodeWatcher } from './emailCode.saga';
+import {finalRegisterWatcher} from "./finalRegister.saga"
 export function* rootSaga() {
 	yield all([
       //  todayWeatherWatcher(), hourlyWeatherWatcher(), dailyWeatherWatcher(),
          cityWatcher(),
          authWatcher(), 
          loginWatcher(),
-         EmailCodeWatcher()
+         EmailCodeWatcher(),
+         finalRegisterWatcher()
     ]);
 }
