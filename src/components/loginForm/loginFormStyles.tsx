@@ -9,7 +9,7 @@ border-radius: 20px;
 padding-top: 100px;
 padding-bottom: 100px;
 `
-export const RegisterFormWrapper = styled.form`
+export const RegisterFormWrapper = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -40,6 +40,7 @@ export const RegisterFormInputWrapper = styled.div`
 width: 90%;
 padding 30px;
 height: 90px;
+position: relative;
 `
 export const RegisterFormInputUsername = styled.input`
 font-size: 22px;
@@ -79,4 +80,10 @@ export const  ErrorLogin = styled.h1<ErrorLoginProps>`
 color: red;
 font-size: 32px;
 display: ${props=>props.display}
+`
+export const ErrorRegisterInformation = styled.h2`
+color: red;
+position: absolute;
+right: 0;
+top: 0;
 `

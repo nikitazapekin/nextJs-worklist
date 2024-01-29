@@ -1,39 +1,15 @@
-import { useLogin } from "../../hooks/loginHook";
-import { ErrorLogin, OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper } from "./loginFormStyles";
+import { useLogin } from "../../hooks/useLogin";
+import { ErrorLogin, OrHaveAnAccount, ErrorRegisterInformation, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper } from "./loginFormStyles";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCityByName } from "../../store";
-import { fetchAuthFunction } from "../../store/slices/auth.slice";
-import { fetchLoginFunction } from "../../store/slices/login.slice";
 import { loginLoadingStatusSelector, loginSelector } from "../../store/selectors/login.selector";
-import { useEffect } from "react";
 const LoginForm = () => {
-    const {loginState, setLoginState}= useLogin()
-    const token = useSelector(loginSelector)
+    const {handleClick, handleRegister, loginForm, passwordForm, isErrorInput}= useLogin()
     const loginLoadingStatus  = useSelector(loginLoadingStatusSelector)
-    console.log("LOAd status" +loginLoadingStatus)
-    const navigate=useNavigate()
-    console.log("TOKENN " +token)
-    useEffect(()=> {
-        if(token.length>1){
-            sessionStorage.setItem('jwtToken', token);
-            navigate("/")
-        }
-    }, [token])
-    const dispatch = useDispatch();
-const handleClick=() => {
-  dispatch(fetchLoginFunction(loginState))
-}
-    const handleRegister = (event:  React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setLoginState((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    }
     return (
     <RegisterFormComponent>
-        <RegisterFormWrapper>
+        <RegisterFormWrapper
+        >
             <RegisterComponentTitle>
                 Sign in
             </RegisterComponentTitle>
@@ -41,7 +17,11 @@ const handleClick=() => {
             <RegisterFormInputMarkdown>
           Email
             </RegisterFormInputMarkdown>
+            <ErrorRegisterInformation>
+       {isErrorInput.emailInput}
+            </ErrorRegisterInformation>
             <RegisterFormInputUsername 
+            ref={loginForm}
             name="email"
             onChange={(event)=> handleRegister(event)}
             type="email" placeholder="Type email" required />
@@ -50,9 +30,13 @@ const handleClick=() => {
             <RegisterFormInputMarkdown>
            Password
             </RegisterFormInputMarkdown>
+            <ErrorRegisterInformation>
+            {isErrorInput.passwordInput}
+            </ErrorRegisterInformation>
             <RegisterFormInputUsername
 onChange={(event)=> handleRegister(event)}
 name="password"
+ref={passwordForm}
             type="password"
             placeholder="Type password" required />
          </RegisterFormInputWrapper>
