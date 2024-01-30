@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { City, CitySearchResponse} from '../../interfaces/city';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
-import { transformCityResponse } from '../../utils/transfrom';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface LoginState {

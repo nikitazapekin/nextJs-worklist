@@ -4,7 +4,6 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { getPersistConfig } from 'redux-deep-persist';
 import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './sagas';
-import cityReducer from './slices/city.slice';
 import type { ThunkAction, Action } from '@reduxjs/toolkit';
 import authSlice from './slices/auth.slice';
 import loginSlice from './slices/login.slice';
@@ -13,7 +12,6 @@ import finalRegisterSlice from './slices/finalRegister.slice';
 const rootReducer = combineReducers({
     authSlice: authSlice,
 	loginSlice: loginSlice,
-	city: cityReducer,
 	emailCodeSlice: emailCodeSlice,
 	finalRegisterSlice: finalRegisterSlice
 });

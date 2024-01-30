@@ -3,7 +3,7 @@ export * from './hooks';
 export * from './store';
 
 // Slices
-export * from './slices/city.slice';
+
 //export * from './slices/todos.slice'
 /*
 export * from './slices/calendar.slice';
@@ -15,7 +15,6 @@ export * from './slices/location.slice';
 export * from './slices/todayweather.slice';
  */
 // Sagas
-export * from './sagas/city.saga';
 /*
 export * from './sagas/dailyweather.saga';
 export * from './sagas/hourlyweather.saga';

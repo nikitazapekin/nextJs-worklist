@@ -13,51 +13,47 @@ import {
   SliderDots,
   SliderDot
 } from './SliderCarouselStyles';
-const imgs= [Slider1, Slider2, Slider3]
+const imgs = [Slider1, Slider2, Slider3]
 const SliderCarouselComponent = () => {
-  
   const { currentPosition, setCurrentPosition, currentSlide, setCurrentSlide } = useSlide();
-const slider  =useRef<HTMLDivElement>()
+  const slider = useRef<HTMLDivElement>()
 
   const handleClick = (direction: 'left' | 'right') => {
-      if(  slider.current!=undefined){
-    if (direction === 'left') {
-      if(currentSlide==0){
-        setCurrentSlide(2)
-        setCurrentPosition(prev=>prev-slider.current.offsetWidth*2 ) //350
-      }
-      else {
-setCurrentSlide(prev=>prev-1)
-        setCurrentPosition(prev=>prev+slider.current.offsetWidth ) //350
-      }
-        } else {
-          if(currentSlide!=2){
-
-            setCurrentPosition(prev=>prev-slider.current.offsetWidth )
-            setCurrentSlide(prev=>prev+1)
-          }
-          else{
-            setCurrentPosition(0)
-            setCurrentSlide(0)
-          }
+    if (slider.current != undefined) {
+      if (direction === 'left') {
+        if (currentSlide == 0) {
+          setCurrentSlide(2)
+          setCurrentPosition(prev => prev - slider.current.offsetWidth * 2) //350
         }
+        else {
+          setCurrentSlide(prev => prev - 1)
+          setCurrentPosition(prev => prev + slider.current.offsetWidth) //350
+        }
+      } else {
+        if (currentSlide != 2) {
+
+          setCurrentPosition(prev => prev - slider.current.offsetWidth)
+          setCurrentSlide(prev => prev + 1)
+        }
+        else {
+          setCurrentPosition(0)
+          setCurrentSlide(0)
+        }
+      }
     }
   };
-   const handleDot = (index: number) => {
-const pureWidthOfCarousel = slider.current.offsetWidth*2 
-console.log("{ure" +pureWidthOfCarousel)
-console.log("ind" +index)
-setCurrentSlide(index)
-setCurrentPosition( -slider.current.offsetWidth*index)
-   }
-   useEffect(() => {
+  const handleDot = (index: number) => {
+    setCurrentSlide(index)
+    setCurrentPosition(-slider.current.offsetWidth * index)
+  }
+  useEffect(() => {
     const intervalId = setInterval(() => {
-      if(currentSlide!=2){
+      if (currentSlide != 2) {
 
-        setCurrentPosition(prev=>prev-slider.current.offsetWidth )
-        setCurrentSlide(prev=>prev+1)
+        setCurrentPosition(prev => prev - slider.current.offsetWidth)
+        setCurrentSlide(prev => prev + 1)
       }
-      else{
+      else {
         setCurrentPosition(0)
         setCurrentSlide(0)
       }
@@ -66,14 +62,14 @@ setCurrentPosition( -slider.current.offsetWidth*index)
     return () => clearInterval(intervalId);
   }, [setCurrentSlide, setCurrentPosition, currentSlide]);
   return (
-      <SliderCarousel
+    <SliderCarousel
       ref={slider}
-      >
+    >
       <SliderCarouselWrapper
-      currentPosition={String(currentPosition)}>
+        currentPosition={String(currentPosition)}>
         {imgs.map((item, index) => (
-          <SliderCarouselItemComponent 
-          key={index} imageLink={item} />
+          <SliderCarouselItemComponent
+            key={index} imageLink={item} />
         ))}
       </SliderCarouselWrapper>
       <SliderCarouselLeft onClick={() => handleClick('left')}>←</SliderCarouselLeft>
@@ -81,8 +77,8 @@ setCurrentPosition( -slider.current.offsetWidth*index)
       <SliderDots>
         {imgs.map((item, index) => (
           <SliderDot key={index}
-         background={currentSlide==index ? "yellow" : "brown"}
-          onClick={()=>handleDot(index)}
+            background={currentSlide == index ? "yellow" : "brown"}
+            onClick={() => handleDot(index)}
           >{index + 1}</SliderDot>
         ))}
       </SliderDots>
@@ -91,8 +87,7 @@ setCurrentPosition( -slider.current.offsetWidth*index)
 };
 
 export default SliderCarouselComponent;
- 
 
 
 
- 
+

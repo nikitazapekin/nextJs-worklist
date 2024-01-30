@@ -1,7 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
-import { CitySearchResponse } from '../../interfaces/city';
-import { openMeteoApi } from '../../api';
 import { serverApi } from '../../api/server.api';
 import { setPersonalData } from '../slices/auth.slice';
 import {setEmailCodeLoadingStatus, setEmailCodeResult, fetchEmailCodeFunction}  from "../slices/emailCode.slice"

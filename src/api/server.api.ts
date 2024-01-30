@@ -88,8 +88,6 @@ export const serverApi = {
             console.log("full" +fullURL)
             throw error; 
         });
-
-
     },
     finalRegisterAction(regData: RegProps) {
         console.log("REEEEEEEEEE"+JSON.stringify(regData))
@@ -100,8 +98,7 @@ export const serverApi = {
             telephone: regData.telephone,
             email: regData.email,
             password: regData.password,
-            code: regData.code
-              
+            code: regData.code    
         })
         .then(response => {
             console.log("SERVER", response.data);

@@ -1,10 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
-import { CitySearchResponse } from '../../interfaces/city';
-import { openMeteoApi } from '../../api';
 import { serverApi } from '../../api/server.api';
 import {setFinalRegisterLoadingStatus, setFinalRegisterResult, fetchFinalRegisterFunction} from "../slices/finalRegister.slice"
-// import { setCurrentAuth, setAuthLoadingStatus, setAuth, fetchAuthFunction, setAuthSearchResult, setPersonalData} from '../slices/auth.slice';
 import type { PayloadAction } from '@reduxjs/toolkit';
 interface AuthProps {
     username: string,

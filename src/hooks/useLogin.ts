@@ -66,7 +66,7 @@ const handleClick=() => {
     
           if(!token.includes("Error") && token!=undefined && token.length!=0){
               sessionStorage.setItem('jwtToken', token);
-            navigate("/")
+            navigate("/personal")
           }
       }, [token])
 return {loginState, setLoginState, isErrorInput, setIsErrorInput, handleClick, handleRegister, loginForm, passwordForm}

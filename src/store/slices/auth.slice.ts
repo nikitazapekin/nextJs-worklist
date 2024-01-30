@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { City, CitySearchResponse} from '../../interfaces/city';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
-import { transformCityResponse } from '../../utils/transfrom';
 import type { PayloadAction } from '@reduxjs/toolkit';
  
 interface AuthState {
@@ -57,9 +55,7 @@ state.city= action.payload.city,
   state.password= action.payload.password, 
   state.telephone= action.payload.telephone
 		},
-		setCurrentAuth: (state, action: PayloadAction<City>) => {
-            console.log("ACT" +action.payload)
-		},
+	 
 		setAuthSearchResult: (state, action: PayloadAction<AuthResponse>) => {
 			console.log("auth slice response" +action.payload.authResponse )
 			state.authResponse= action.payload.authResponse
@@ -76,7 +72,7 @@ state.city= action.payload.city,
 
 export const { 
 setAuthSearchResult, setPersonalData,
-  setCurrentAuth, setAuthLoadingStatus, setAuth, fetchAuthFunction
+  setAuthLoadingStatus, setAuth, fetchAuthFunction
 } =
 	authSlice.actions;
 export default authSlice.reducer;

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-export const RegisterFormComponent  = styled.div`
+export const RegisterFormComponent = styled.div`
 width: 80%;
 height:auto;
 position: relative;
@@ -18,7 +18,7 @@ align-items: center;
 padding: 30px;
  gap: 30px;
 `
-export  const RegisterFormBaccground = styled.div`
+export const RegisterFormBaccground = styled.div`
 width: 100%;
 height: 100%;
 background-color: black;
@@ -29,7 +29,7 @@ background-color: black;
   z-index: -1;
   border-radius: 20px;
   `
-  export const RegisterComponentTitle = styled.div`
+export const RegisterComponentTitle = styled.div`
   font-size: 40px;
  
 font-weight: 800;
@@ -52,11 +52,11 @@ border: none;
 outline: none;
 cursor: pointer;
 `
-export const RegisterFormInputMarkdown =styled.h2`
+export const RegisterFormInputMarkdown = styled.h2`
 color: #fff;
 font-weight: 700;
 `
-export const RegisterFormSubmit =styled.button`
+export const RegisterFormSubmit = styled.button`
 width: 90%;
 height: 70px;
 border-radius: 20px;
@@ -76,14 +76,22 @@ cursor: pointer;
 interface ErrorLoginProps {
   display: string
 }
-export const  ErrorLogin = styled.h1<ErrorLoginProps>`
+export const ErrorLogin = styled.h1<ErrorLoginProps>`
 color: red;
 font-size: 32px;
-display: ${props=>props.display}
+display: ${props => props.display}
 `
 export const ErrorRegisterInformation = styled.h2`
 color: red;
 position: absolute;
 right: 0;
 top: 0;
+`
+export const RegisterIcon = styled.img`
+width: 30px;
+height: 30px;
+position: absolute;
+ right: 0;
+ top: 35px;
+ margin-right: 10px;
 `

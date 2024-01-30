@@ -1,10 +1,15 @@
+import { useEffect } from "react";
+import useJwt from "../../hooks/useJwt";
 import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems} from "./styles.NavBar";
 import { Link } from "react-router-dom";
 const NavBar = () => {
+    const {jwtToken} =useJwt()
+    useEffect(()=> {
+console.log("jwt"+jwtToken)
+    }, [jwtToken])
     return (
         <Navbar background="black">
             <NavBarWrapper>
-
             <NavBarItem>
             <Link style={{textDecoration: "none", color: "#fff"}} to="/">
                 Home
@@ -13,8 +18,9 @@ const NavBar = () => {
             <NavBarItem>Offers</NavBarItem>
             <NavBarItem>CV</NavBarItem>       
             <NavBarItems>
-
-                <SubNavBarItem>
+{jwtToken==null ? (
+<>
+    <SubNavBarItem>
                 <Link style={{textDecoration: "none", color: "#fff"}} to="/sign_up">
                     Sign up
                 </Link>
@@ -24,6 +30,14 @@ const NavBar = () => {
                       Sign in
                     </Link>
                     </SubNavBarItem>
+</>
+                    ) : (
+                        <SubNavBarItem>
+                        <Link style={{textDecoration: "none", color: "#fff"}} to="/personal">
+                         Account
+                          </Link>
+                          </SubNavBarItem>
+                    )}
             </NavBarItems>
             </NavBarWrapper>
 <NavBarBackground />

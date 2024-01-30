@@ -2,44 +2,45 @@ import { createSlice } from '@reduxjs/toolkit';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface FinalRegisterState {
+interface personalInfornationState {
 	emailCodeLoadingStatus: LOADING_STATUS;
     finalRegisterMessage: string
 }
-const initialState: FinalRegisterState = {
+const initialState: personalInfornationState = {
  finalRegisterMessage: "",
 	emailCodeLoadingStatus: LOADING_STATUS.IDLE,
 };
-interface emailCodeProps {
-    username: string,
+interface personalInformationProps {
+  /*  username: string,
     country: string,
     city: string,
     telephone: string,
     email: string,
-    password: string
+    password: string */
+	token: string
  }
- interface emailCodeResponse {
+ interface personalInformationResponse {
     finalRegisterMessage: string 
   }
-export const emailCodeSlice = createSlice({
+export const personalInformationSlice = createSlice({
 	name: 'login',
 	initialState,
 	reducers: {
-		setFinalRegisterResult: (state, action: PayloadAction<emailCodeResponse>) => {
+		setPersonalInformationResult: (state, action: PayloadAction<personalInformationResponse>) => {
             console.log("ACT"+ JSON.stringify(action.payload))
             state.finalRegisterMessage = String(action.payload.finalRegisterMessage)
 			console.log("finalRegisterMessageSelectorrrrrrrrrrrrrrrr "+JSON.stringify(state.finalRegisterMessage))
 		},
-		setFinalRegisterLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
+		setPersonalInformationLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
 			state.emailCodeLoadingStatus = action.payload;
 		},
-		fetchFinalRegisterFunction: (state, action: PayloadAction<emailCodeProps>) => {}, 
+		fetchPersonalInformationFunction: (state, action: PayloadAction<personalInformationProps>) => {}, 
 	},
 });
 
 export const { 
-setFinalRegisterResult,
- setFinalRegisterLoadingStatus, fetchFinalRegisterFunction
+setPersonalInformationResult,
+ setPersonalInformationLoadingStatus, fetchPersonalInformationFunction
 } =
-	emailCodeSlice.actions;
-export default emailCodeSlice.reducer;
+	personalInformationSlice.actions;
+export default personalInformationSlice.reducer;
