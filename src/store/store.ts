@@ -9,11 +9,13 @@ import authSlice from './slices/auth.slice';
 import loginSlice from './slices/login.slice';
 import emailCodeSlice from './slices/emailCode.slice';
 import finalRegisterSlice from './slices/finalRegister.slice';
+import personalInformationSlice from './slices/person.slice';
 const rootReducer = combineReducers({
     authSlice: authSlice,
 	loginSlice: loginSlice,
 	emailCodeSlice: emailCodeSlice,
-	finalRegisterSlice: finalRegisterSlice
+	finalRegisterSlice: finalRegisterSlice,
+	personalInformationSlice: personalInformationSlice
 });
 
 const persistConfig = getPersistConfig({

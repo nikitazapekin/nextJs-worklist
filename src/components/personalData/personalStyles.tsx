@@ -185,4 +185,3 @@ font-size: 60px;
 export const DragYourResume = styled.h1`
 color: #fff;
 `
-//text-align: center;

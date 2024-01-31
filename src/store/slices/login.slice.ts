@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
 interface LoginState {
 	loginLoadingStatus: LOADING_STATUS;
  token: string
@@ -17,7 +16,6 @@ interface LoginProps {
  interface LoginResponse {
     token: string
   }
-  
 export const loginSlice = createSlice({
 	name: 'login',
 	initialState,

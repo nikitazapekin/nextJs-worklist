@@ -6,9 +6,6 @@ const useJwt = () => {
         const jwt = sessionStorage.getItem('jwtToken');
       setJwtToken(jwt)
     }, [sessionStorage]);
-    useEffect(()=> {
-console.log("JWT")
-    }, [jwtToken])
     return {jwtToken}
 }
 export default useJwt
