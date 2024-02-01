@@ -23,7 +23,6 @@ yield put(setAuthLoadingStatus(LOADING_STATUS.LOADING));
         yield put(setAuthLoadingStatus(LOADING_STATUS.IDLE));
 	} catch (error) {
         yield put(setAuthLoadingStatus(LOADING_STATUS.ERROR));
-    
 	} 
 }
 export function*  authWatcher() {

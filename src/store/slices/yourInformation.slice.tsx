@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface personalInfornationState {
+interface yourInfornationState {
 	username: string ,
 	country: string , 
 	city: string ,
@@ -16,8 +16,9 @@ interface personalInfornationState {
 	lastTimeAtNetwork: string ,
 	education: string ,
 	describtion:  string,
+	errorMessage:  string
 }
-const initialState: personalInfornationState = {
+const initialState: yourInfornationState = {
 	username: "" ,
 	country: "" , 
 	city: "" ,
@@ -31,11 +32,12 @@ const initialState: personalInfornationState = {
 	lastTimeAtNetwork: "" ,
 	education: "" ,
 	describtion:  "",
+	errorMessage: ""
 };
-interface personalInformationProps {
+interface yourInformationProps {
 	token: string
  }
- interface personalInformationResponse {
+ interface yourInformationResponse {
 	username: string ,
 	country: string , 
 	city: string ,
@@ -49,14 +51,16 @@ interface personalInformationProps {
 	lastTimeAtNetwork: string ,
 	education: string ,
 	describtion:  string,
+	errorMessage: string
   }
-export const personalInformationSlice = createSlice({
+  interface YourInformationErrorMessage {
+	errorMessage: string 
+  }
+export const yourInformationSlice = createSlice({
 	name: 'pesr',
 	initialState,
 	reducers: {
-		setPersonalInformationResult: (state, action: PayloadAction<personalInformationResponse>) => {
-            console.log("ACT"+ JSON.stringify(action.payload))
-			//state=action.payload
+		setYourInformationResult: (state, action: PayloadAction<yourInformationResponse>) => {
 			state.username= action.payload.username
 			state.country= action.payload.country
 			state.city= action.payload.city
@@ -70,19 +74,28 @@ export const personalInformationSlice = createSlice({
 			state.lastTimeAtNetwork= action.payload.lastTimeAtNetwork
 			state.education= action.payload.education
 			state.describtion= action.payload.describtion
-			console.log("USERNAME AT SLICE" +state.username)
-			console.log("STATE"+JSON.stringify(state))
+		//	state.errorMessage=action.payload.errorMessage
 		},
-		setPersonalInformationLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
+		setYourInformationLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
 			//state.emailCodeLoadingStatus = action.payload;
 		},
-		fetchPersonalInformationFunction: (state, action: PayloadAction<personalInformationProps>) => {}, 
+		setYourInformationErrorMessage: (state, action: PayloadAction<YourInformationErrorMessage>) => {
+			console.log("ERRR SLICE" + action.payload)
+			if(typeof action.payload=="string" ){
+
+				state.errorMessage= action.payload
+			}
+			console.log("Errr state" +JSON.stringify(state))
+			console.log("Errr msg" +state)
+		},
+		fetchYourInformationFunction: (state, action: PayloadAction<yourInformationProps>) => {}, 
 	},
 });
 
 export const { 
-setPersonalInformationResult,
- setPersonalInformationLoadingStatus, fetchPersonalInformationFunction
+	setYourInformationErrorMessage,
+setYourInformationResult,
+ setYourInformationLoadingStatus, fetchYourInformationFunction
 } =
-	personalInformationSlice.actions;
-export default personalInformationSlice.reducer;
+	yourInformationSlice.actions;
+export default yourInformationSlice.reducer;

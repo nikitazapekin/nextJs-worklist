@@ -25,14 +25,6 @@ const useTypeCode = () => {
             navigate("/sign_in")
         }
         console.log("final"+finalRegisterMessage)
-        /*
-if(finalRegisterMessage!=undefined  && finalRegisterMessage!="undefined" && !finalRegisterMessage.includes("Incorrect")) {
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+finalRegisterMessage)
-  //  navigate("/sign_in")
-
-   console.log("INCORRECT WORK")
-} */
-     //   console.log("finalRegisterMessageSelector" +finalRegisterMessage)
     }, [finalRegisterMessage])
     console.log("TOOOOOKEN"+authResponse)
     const {registerState, setRegisterState} =useRegister()

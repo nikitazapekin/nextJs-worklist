@@ -10,12 +10,16 @@ import loginSlice from './slices/login.slice';
 import emailCodeSlice from './slices/emailCode.slice';
 import finalRegisterSlice from './slices/finalRegister.slice';
 import personalInformationSlice from './slices/person.slice';
+import yourInformationSlice from './slices/yourInformation.slice';
+import setAvatarSlice from './slices/setAvatar.slice';
 const rootReducer = combineReducers({
     authSlice: authSlice,
 	loginSlice: loginSlice,
 	emailCodeSlice: emailCodeSlice,
 	finalRegisterSlice: finalRegisterSlice,
-	personalInformationSlice: personalInformationSlice
+	personalInformationSlice: personalInformationSlice,
+	yourInformation: yourInformationSlice,
+	setAvatarSlice: setAvatarSlice
 });
 
 const persistConfig = getPersistConfig({

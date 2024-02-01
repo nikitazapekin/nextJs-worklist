@@ -60,6 +60,16 @@ color: #fff;
 white-space: wrap;
 positition: relative;
 `
+export const AboutPersonalEducationInput = styled.input`
+widthL 100%;
+background-color: rgba(66, 65, 65);
+border-radius: 10px;
+cursor: pointer;
+border: none;
+outline: none;
+height: 40px;
+padding-left: 20px;
+`
 export const AboutPersonalAvatarWrapper= styled.div`
 width: auto;
 padding-top: 15px;
@@ -67,6 +77,7 @@ height: auto;
  white-space: wrap;
 position: relative;
 display: flex;
+align-items: center;
 `
 
 interface AboutPersonalAvatarDrawProps {
@@ -89,8 +100,6 @@ flex-direction: column;
 margin-left: 10px;
 width: auto;
 `
-//background-color: orange
-//gap: 10px;
 export const PersonalNavBarItem =styled.div`
 font-size: 32px;
 cursor: pointer;
@@ -104,6 +113,20 @@ width: 90%;
 display: flex;
 margin: 0 auto;
 position: relative;
+`
+export const AvatarPersonalWrapper = styled.div`
+width: 150px;
+height: 150px;
+position: relative;
+
+`
+export const AvatarPersonalInput = styled.input`
+width: 100%;
+height: 100%;
+position: absolute; 
+left: 0;
+opacity: 0;
+z-index: 111
 `
 export const AvatarPersonal = styled.img`
 width: 150px;
@@ -141,7 +164,6 @@ margin-bottom: 20px;
 export const AboutPersonalFormTitle = styled.h1`
 color: #fff;
 ` 
-//background-color: transparent;
 export const AboutPersonalFormInput = styled.input`
 background-color: rgba(66, 65, 65);
 width: 90%;
@@ -180,8 +202,40 @@ border: none;
 outline: none;
 text-align: center;
 font-size: 60px;
-
+padding-top: 70px;
 `
 export const DragYourResume = styled.h1`
 color: #fff;
+`
+export const ResumeDocumentElement = styled.div`
+width: 100%;
+height: 70px;
+position: relative;
+background-color:gray;
+display: flex;
+border-radius: 5px;
+align-items: center;
+`
+export const ResumeDocumentElementTitle = styled.a`
+cursor: pointer;
+padding-left: 10px;
+`
+export const ResumeDocumentElementButtonWrapper = styled.div`
+position: absolute;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+right: 0;
+`
+export const ResumeDocumentElementButton = styled.img`
+border: none;
+outline: none;
+cursor: pointer;
+width: 50px;
+height: 50px;
+`
+export const ErrorLog = styled.h1`
+color: red;
+position: absolute;
+right: 0;
 `

@@ -4,12 +4,16 @@ import { loginWatcher } from './login.saga';
 import { EmailCodeWatcher } from './emailCode.saga';
 import {finalRegisterWatcher} from "./finalRegister.saga"
 import { personalInformationWatcher } from './personalData.saga';
+import { yourInformationWatcher } from './yourInformation.saga';
+import { setAvatarWatcher } from './setAvatar.saga';
 export function* rootSaga() {
 	yield all([
          authWatcher(), 
          loginWatcher(),
          EmailCodeWatcher(),
          finalRegisterWatcher(),
-          personalInformationWatcher()
+          personalInformationWatcher(),
+          yourInformationWatcher(),
+          setAvatarWatcher()
     ]);
 }

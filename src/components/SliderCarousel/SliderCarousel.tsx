@@ -15,57 +15,58 @@ import {
 } from './SliderCarouselStyles';
 const imgs = [Slider1, Slider2, Slider3]
 const SliderCarouselComponent = () => {
-  const { currentPosition, setCurrentPosition, currentSlide, setCurrentSlide } = useSlide();
-  const slider = useRef<HTMLDivElement>()
+  const { currentPosition, setCurrentPosition, currentSlide, setCurrentSlide, handleClick, handleDot, slider } = useSlide();
 
-  const handleClick = (direction: 'left' | 'right') => {
-    if (slider.current != undefined) {
-      if (direction === 'left') {
-        if (currentSlide == 0) {
-          setCurrentSlide(2)
-          setCurrentPosition(prev => prev - slider.current.offsetWidth * 2) //350
-        }
-        else {
-          setCurrentSlide(prev => prev - 1)
-          setCurrentPosition(prev => prev + slider.current.offsetWidth) //350
-        }
-      } else {
-        if (currentSlide != 2) {
-
-          setCurrentPosition(prev => prev - slider.current.offsetWidth)
-          setCurrentSlide(prev => prev + 1)
-        }
-        else {
-          setCurrentPosition(0)
-          setCurrentSlide(0)
-        }
-      }
-    }
-  };
-  const handleDot = (index: number) => {
-    setCurrentSlide(index)
-    setCurrentPosition(-slider.current.offsetWidth * index)
-  }
+const sld=useRef(null)
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (currentSlide != 2) {
+    let isDown = false;
+    let startX =0;
+    let scrollLeft=0;
 
-        setCurrentPosition(prev => prev - slider.current.offsetWidth)
-        setCurrentSlide(prev => prev + 1)
-      }
-      else {
-        setCurrentPosition(0)
-        setCurrentSlide(0)
-      }
-    }, 5000);
+    const handleMouseDown = (e: any) => {
+      isDown = true;
+      startX = e.pageX - slider.current.offsetLeft;
+      scrollLeft = sld.current.scrollLeft;
+    };
 
-    return () => clearInterval(intervalId);
-  }, [setCurrentSlide, setCurrentPosition, currentSlide]);
+    const handleMouseLeave = () => {
+      isDown = false;
+    };
+
+    const handleMouseUp = () => {
+      isDown = false;
+    };
+
+    const handleMouseMove = (e: any) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.current.offsetLeft;
+      const SCROLL_SPEED = 3;
+      const walk = (x - startX) * SCROLL_SPEED;
+      sld.current.scrollLeft = scrollLeft - walk;
+    };
+//if(sld.current!=undefined){
+    sld.current.addEventListener('mousedown', handleMouseDown);
+    sld.current.addEventListener('mouseleave', handleMouseLeave);
+    sld.current.addEventListener('mouseup', handleMouseUp);
+    sld.current.addEventListener('mousemove', handleMouseMove);
+//}
+    return () => {
+       // if(sld.current!=undefined){
+    /*  sld.current.removeEventListener('mousedown', handleMouseDown);
+      sld.current.removeEventListener('mouseleave', handleMouseLeave);
+      sld.current.removeEventListener('mouseup', handleMouseUp);
+      sld.current.removeEventListener('mousemove', handleMouseMove); */
+      //  }
+    }; 
+  }, []);
+
   return (
     <SliderCarousel
       ref={slider}
     >
       <SliderCarouselWrapper
+      ref={sld}
         currentPosition={String(currentPosition)}>
         {imgs.map((item, index) => (
           <SliderCarouselItemComponent
@@ -91,3 +92,51 @@ export default SliderCarouselComponent;
 
 
 
+/*
+
+ useEffect(() => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    const handleMouseDown = (e) => {
+      isDown = true;
+      slider.current.classList.add('activeSlide');
+      startX = e.pageX - slider.current.offsetLeft;
+      scrollLeft = slider.current.scrollLeft;
+    };
+
+    const handleMouseLeave = () => {
+      isDown = false;
+      slider.current.classList.remove('activeSlide');
+    };
+
+    const handleMouseUp = () => {
+      isDown = false;
+      slider.current.classList.remove('activeSlide');
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.current.offsetLeft;
+      const SCROLL_SPEED = 3;
+      const walk = (x - startX) * SCROLL_SPEED;
+      slider.current.scrollLeft = scrollLeft - walk;
+    };
+if(slider.current!=undefined){
+    slider.current.addEventListener('mousedown', handleMouseDown);
+    slider.current.addEventListener('mouseleave', handleMouseLeave);
+    slider.current.addEventListener('mouseup', handleMouseUp);
+    slider.current.addEventListener('mousemove', handleMouseMove);
+}
+    return () => {
+        if(slider.current!=undefined){
+      slider.current.removeEventListener('mousedown', handleMouseDown);
+      slider.current.removeEventListener('mouseleave', handleMouseLeave);
+      slider.current.removeEventListener('mouseup', handleMouseUp);
+      slider.current.removeEventListener('mousemove', handleMouseMove);
+        }
+    };
+  }, []);
+  */
