@@ -11,7 +11,6 @@ interface emailCodeProps {
     telephone: string,
     email: string,
     password: string,
-    //code: string
 }
 interface emailCodeResponse {
     code: string

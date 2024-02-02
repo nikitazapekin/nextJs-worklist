@@ -15,7 +15,11 @@ console.log("jwt"+jwtToken)
                 Home
                 </Link>
                 </NavBarItem>
-            <NavBarItem>Offers</NavBarItem>
+            <NavBarItem>
+            <Link style={{textDecoration: "none", color: "#fff"}} to="/offers">
+                Offers
+            </Link>
+                </NavBarItem>
             <NavBarItem>CV</NavBarItem>       
             <NavBarItems>
 {jwtToken==null ? (

@@ -17,14 +17,17 @@ export const useLogin=()=> {
         passwordInput: ""
     })
     const loginForm = useRef(null)
-    const passwordForm= useRef(null)
+    const passwordForm= useRef<HTMLInputElement>(null)
     useEffect(()=> {
         if(isClickedFirst==true){
-if(loginForm.current.value==0) {
-        setIsErrorInput((prev) => ({
-           ...prev,
-           ["emailInput"]: "This field cannot be empty",
-       }))
+          //  if(typeof loginForm=HTMLInputElement){
+
+                if(loginForm.current && loginForm.current.value===0) {
+                    setIsErrorInput((prev) => ({
+                        ...prev,
+                        ["emailInput"]: "This field cannot be empty",
+                    }))
+                //}
 } else{
     setIsErrorInput((prev) => ({
         ...prev,

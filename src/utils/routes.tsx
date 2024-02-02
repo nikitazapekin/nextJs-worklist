@@ -4,7 +4,8 @@ import {
    SIGN_IN_ROUTE,
    SIGN_UP_ROUTE,
    TYPE_CODE_ROUTE,
-   PERSONAL_PAGE_ROUTE
+   PERSONAL_PAGE_ROUTE,
+   OFFERS_PAGE_ROUTE
    
 } from "./consts"
 import Homepage from "../pages/homepage/homepage"
@@ -12,6 +13,7 @@ import LoginPage from "../pages/loginPage/loginPage"
 import RegisterPage from "../pages/registerPage/registerPage"
 import TypeCodePage from "../pages/tydeCodePage/typeCodePage"
  import PersonalPage from "../pages/PersonalPage/PersonalPage"
+import OffersPage from "../pages/offersPage/offersPage"
 export const publicRoutes = [
     {
         path: HOMEPAGE_ROUTE,
@@ -36,7 +38,10 @@ export const publicRoutes = [
       path: PERSONAL_PAGE_ROUTE,
       Component: PersonalPage
    },
- 
+ {
+   path: OFFERS_PAGE_ROUTE,
+   Component: OffersPage
+ }
 
 ]
 const privateRoutes = [
