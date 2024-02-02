@@ -20,26 +20,11 @@ interface EditDataProps {
     token: string;
 }
 
-/*
-        username: string ,
-        country: string , 
-        city: string ,
-        telephone: string ,
-        email:  string,
-        RegistrationData: string ,
-        avatar: string ,
-        document: string ,
-        favouriteOffers:  string ,
-        experience: string ,
-        lastTimeAtNetwork: string ,
-        education: string ,
-        describtion:  string,
-        token: string,
-*/
 interface AvatarProps {
-    token: string,
-    avatar: string
+
+    formData: any
 }
+
 export const personalApi = {
     PersonalInformationAction(regData: RegProps) {
         console.log("REEEEEEEEEE" + JSON.stringify(regData))
@@ -69,24 +54,13 @@ export const personalApi = {
         }
         )
     },
+/*
+removePersonalResume(EditData) {
 
-
+}, */
    setAvatar(EditData: AvatarProps) {
-    console.log("AVA" +EditData.avatar)
-        return serverApiInstance.post(`/getPersonalInformation/setAvatar?token=${EditData.token}`, {
-            avatar: EditData.avatar
-          /*  education: EditData.token,
-            about: EditData.about,
-            experience: EditData.experience,
-            email: EditData.email,
-            password: EditData.password,
-            telephone: EditData.telephone,
-            country: EditData.country,
-            city: EditData.city,
-            document: EditData.document,
-            token: EditData.token, */
-        }
-        )
+    console.log("EDIT DATA" +JSON.stringify(EditData))
+
     },
 
 };

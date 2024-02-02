@@ -55,8 +55,6 @@ export const personalInformationSlice = createSlice({
 	initialState,
 	reducers: {
 		setPersonalInformationResult: (state, action: PayloadAction<personalInformationResponse>) => {
-            console.log("ACT"+ JSON.stringify(action.payload))
-			//state=action.payload
 			state.username= action.payload.username
 			state.country= action.payload.country
 			state.city= action.payload.city
@@ -70,11 +68,12 @@ export const personalInformationSlice = createSlice({
 			state.lastTimeAtNetwork= action.payload.lastTimeAtNetwork
 			state.education= action.payload.education
 			state.describtion= action.payload.describtion
-			console.log("USERNAME AT SLICE" +state.username)
-			console.log("STATE"+JSON.stringify(state))
 		},
 		setPersonalInformationLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
 			//state.emailCodeLoadingStatus = action.payload;
+		},
+		setClearDocument: (state)=> {
+			state.document=""
 		},
 		fetchPersonalInformationFunction: (state, action: PayloadAction<personalInformationProps>) => {}, 
 	},
@@ -82,6 +81,7 @@ export const personalInformationSlice = createSlice({
 
 export const { 
 setPersonalInformationResult,
+setClearDocument,
  setPersonalInformationLoadingStatus, fetchPersonalInformationFunction
 } =
 	personalInformationSlice.actions;

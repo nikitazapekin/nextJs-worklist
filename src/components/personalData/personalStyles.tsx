@@ -91,8 +91,9 @@ position: relative;
 margin-left: 10px;
 right: 0;
 `
-export const AboutPersonalInput = styled.input`
-
+export const  PersonalFormSubmit = styled.form`
+width: 100%;
+height: 100%
 `
 export const AboutPersonalBlock =  styled.div`
 display: flex;

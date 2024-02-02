@@ -4,10 +4,12 @@ const useSlide  =  () => {
     const [currentPosition, setCurrentPosition] =useState<number>(0)
     const [currentSlide, setCurrentSlide] = useState<number>(0)
     const handleClick = (direction: 'left' | 'right') => {
-        if (slider.current != undefined) {
+        if (slider.current !== undefined) {
           if (direction === 'left') {
-            if (currentSlide == 0) {
-              setCurrentSlide(2)
+           
+
+              if (currentSlide == 0) {
+                setCurrentSlide(2)
               setCurrentPosition(prev => prev - slider.current.offsetWidth * 2) //350
             }
             else {
@@ -24,7 +26,8 @@ const useSlide  =  () => {
               setCurrentPosition(0)
               setCurrentSlide(0)
             }
-          }
+          
+        }
         }
       };
       const handleDot = (index: number) => {

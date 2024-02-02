@@ -20,3 +20,4 @@ const Homepage = () => {
 export default Homepage;
 
 //yarn run lint
+//  "strictNullChecks": true, tsconfig

@@ -5,8 +5,9 @@ import {setAvatarLoadingStatus, setAvatarResult, fetchAvatarFunction } from "../
 //import {setPersonalInformationLoadingStatus, setPersonalInformationResult, fetchPersonalInformationFunction} from "../slices/person.slice"
 import type { PayloadAction } from '@reduxjs/toolkit';
 interface AuthProps {
-   token: string,
-   avatar: string
+ /*  token: string,
+   avatar: string */
+   formData: any
 }
 interface AuthResponse {
       avatar: string

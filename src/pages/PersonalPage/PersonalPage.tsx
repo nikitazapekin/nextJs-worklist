@@ -7,6 +7,7 @@ const PersonalPage = () => {
         <NavBar />
         <PersonalPageForm />
         <Global />
+        
         </>
       );
 }

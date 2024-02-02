@@ -9,8 +9,9 @@ const initialState: setAvatarState = {
 	avatar: ""
 };
 interface setAvatarProps {
-	token: string,
-    avatar: string
+	/*token: string,
+    avatar: string */
+	formData: any
  }
  interface setAvatarResponse {
 	avatar: string

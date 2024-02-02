@@ -1,32 +1,59 @@
-import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper } from "./personalStyles";
+import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper, PersonalFormSubmit } from "./personalStyles";
 import usePersonalInformation from "../../hooks/usePersonalInformation";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState, useRef } from "react";
 import Draw from "../../assets/draw.png"
 import Trash from "../../assets/trash.png"
+import useJwt from "../../hooks/useJwt";
+import axios from "axios";
+import { fetchAvatarFunction } from "../../store/slices/setAvatar.slice";
 const PersonalData = () => {
-    
-    const {handleChange, handleClearDocument, fileUploader, username, email, country, city, 
-         handleSave, handleAvatar, handleChangeFile,
+    const dispatch = useDispatch()
+    const {jwtToken} =useJwt()
+    const {handleChange, handleClearDocument, handleRemoveDocument, fileUploader, username, email, country, city, 
+         handleSave,// handleAvatar, 
+         handleChangeFile,
          telephone, RegistrationData, avatar, document, favouriteOffers, 
          experience, lastTimeAtNetwork, education, describtion } = usePersonalInformation()
   const [isClickedEducation, setIsClickedEducation] =useState<boolean>(false)
   const [isClickedAboutYourself, setIsClickedAboutYourself] =useState<boolean>(false)
+  const logo = useRef(null)
+ 
+const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+        const formData = new FormData(event.currentTarget);
+        formData.append('jwtToken', jwtToken);
+        const response = await axios.post(`http://localhost:5000/test?token=${jwtToken}`, formData);
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}; ///worklist.com/getPersonalInformation/getAvatar
+
     return (
         <>
-            <SaveButton onClick={handleSave}>
+        <PersonalFormSubmit
+         onSubmit={handleSubmit}
+                method="POST" encType="multipart/form-data" 
+        >
+            <SaveButton 
+             type="submit"
+            onClick={(event)=>handleSave(event)}>
                 Save
             </SaveButton>
             <AboutPersonal>
-               <AvatarPersonalWrapper>
+               <AvatarPersonalWrapper
+               >
                 <AvatarPersonal 
-                src={avatar} 
+              src={`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}`}
                 alt="logo" 
                 />
                 <AvatarPersonalInput 
                  type="file"
+                 name="my-file"
                  accept="image/*"
-                 onChange={handleAvatar}
-                // onChange={handleFileChange}
+ref={logo}
                  />
                  </AvatarPersonalWrapper> 
                 <AboutPersonalDateOfRegister>{RegistrationData}</AboutPersonalDateOfRegister>
@@ -155,13 +182,15 @@ const PersonalData = () => {
                             </ResumeDocumentElementTitle>
                             <ResumeDocumentElementButtonWrapper>
                                 <ResumeDocumentElementButton src={Trash}
-                                    onClick={handleClearDocument}
+                                onClick={handleRemoveDocument}
+                                   // onClick={handleClearDocument}
                                 />
                             </ResumeDocumentElementButtonWrapper>
                         </ResumeDocumentElement>
                     )}
                 </ResumeWrapper>
             </AboutPersonalForm>
+                    </PersonalFormSubmit>
         </>
     );
 }

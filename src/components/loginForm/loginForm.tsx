@@ -12,7 +12,10 @@ const LoginForm = () => {
     const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false)
     const handlePassword = () => {
         setIsVisiblePassword(prev => !prev)
-        passwordForm.current.type = isVisiblePassword ? "text" : "password";
+        if (passwordForm.current) { 
+
+            passwordForm.current.type = isVisiblePassword ? "text" : "password";
+        }
     }
     const loginLoadingStatus = useSelector(loginLoadingStatusSelector)
     return (

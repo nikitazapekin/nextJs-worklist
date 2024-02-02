@@ -34,7 +34,7 @@ export const useLogin=()=> {
         ["emailInput"]: "",
     }))
 }
-if(passwordForm.current.value==0) {
+if(passwordForm.current.value=="0") {
          setIsErrorInput((prev) => ({
             ...prev,
             ["passwordInput"]: "This field cannot be empty",

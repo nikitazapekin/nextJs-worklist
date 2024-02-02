@@ -7,7 +7,7 @@ import { useRef } from "react";
 import useJwt from "./useJwt";
 import { fetchYourInformationFunction } from "../store/slices/yourInformation.slice";
 import { yourInformationSelector } from "../store/selectors/yourInformation.selector";
-import { fetchAvatarFunction } from "../store/slices/setAvatar.slice";
+import { setClearDocument } from "../store/slices/person.slice";
 interface YourResume {
   documentTitle: string,
   uploadLink: string
@@ -27,14 +27,14 @@ interface PersonalInformationTypes {
 }
 const usePersonalInformation = () => {
   const fileUploader = useRef(null)
-  const {errorMessage} = useSelector(yourInformationSelector)
-  const [errorMessagesForm,setErrorMessagesForm] = useState({
+  const { errorMessage } = useSelector(yourInformationSelector)
+  const [errorMessagesForm, setErrorMessagesForm] = useState({
     emailError: "",
     passwordError: ""
-  }) 
+  })
   console.log("ERRROR" + errorMessage)
-  useEffect(()=> {
-    console.log("ERR" +JSON.stringify(errorMessage))
+  useEffect(() => {
+    console.log("ERR" + JSON.stringify(errorMessage))
   }, [errorMessage])
   const dispatch = useDispatch()
   const { jwtToken } = useJwt()
@@ -57,9 +57,9 @@ const usePersonalInformation = () => {
       ["token"]: jwtToken,
     }))
   }, [jwtToken])
-  const { username, email, country, city, telephone, RegistrationData, avatar, document, favouriteOffers, experience, lastTimeAtNetwork, education, describtion} = useSelector(personalInfSelector)
+  const { username, email, country, city, telephone, RegistrationData, avatar, document, favouriteOffers, experience, lastTimeAtNetwork, education, describtion } = useSelector(personalInfSelector)
   const navigate = useNavigate()
-  useEffect(()=> {
+  useEffect(() => {
     setPersonalDataState({
       education: education,
       about: describtion,
@@ -67,13 +67,13 @@ const usePersonalInformation = () => {
       email: email,
       password: "",
       telephone: telephone,
-      country:country,
+      country: country,
       city: city,
       document: document,
       token: jwtToken,
       errorMessage: "",
     })
-  }, [username, email, country, city, telephone,  document, favouriteOffers, experience, education, describtion])
+  }, [username, email, country, city, telephone, document, favouriteOffers, experience, education, describtion])
   const [yourResume, setYourResume] = useState<YourResume>({
     documentTitle: "",
     uploadLink: ""
@@ -104,31 +104,20 @@ const usePersonalInformation = () => {
       [event.target.name]: event.target.value
     }))
   }
-  const handleSave = () => {
-    dispatch(fetchYourInformationFunction(personalInformationState))
+  const handleRemoveDocument = () => {
+    setPersonalDataState((prev) => ({
+      ...prev,
+      ["document"]: ""
+    }))
+    dispatch(setClearDocument());
   }
+  const handleSave = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    dispatch(fetchYourInformationFunction(personalInformationState))
 
-  const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (file.size > 100 * 1024 * 1024) {
-        console.log("Файл слишком большой. Выберите файл размером до 100 МБ.");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (typeof reader.result === "string") {
-          let avatar = reader.result
-          let token = jwtToken
-          console.log("AVATAR "+ avatar)
-          dispatch(fetchAvatarFunction({avatar, token} ))
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  return { handleLogout, handleSave, handleChangeFile, handleAvatar, handleClearDocument, handleChange, yourResume, fileUploader, username, email, country, city, telephone, RegistrationData, avatar, document, favouriteOffers, experience, lastTimeAtNetwork, education, describtion,
-  //   errorMessage
-     }
+  }
+  return {
+    handleLogout, handleSave, handleChangeFile,// handleAvatar, 
+    handleClearDocument, handleChange, handleRemoveDocument, yourResume, fileUploader, username, email, country, city, telephone, RegistrationData, avatar, document, favouriteOffers, experience, lastTimeAtNetwork, education, describtion,
+  }
 }
 export default usePersonalInformation
