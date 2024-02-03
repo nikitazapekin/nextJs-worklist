@@ -1,4 +1,4 @@
-import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper, PersonalFormSubmit } from "./personalStyles";
+import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper, PersonalFormSubmit, AvatarPersonalDefault } from "./personalStyles";
 import usePersonalInformation from "../../hooks/usePersonalInformation";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from "react";
@@ -29,7 +29,29 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     } catch (error) {
         console.error('Error:', error);
     }
-}; ///worklist.com/getPersonalInformation/getAvatar
+};
+
+
+const [avatarSrc, setAvatarSrc] = useState('');
+
+  useEffect(() => {
+    const checkImageExists = async () => {
+        try{
+
+            const response = await fetch(`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}`);
+            if (response.ok) {
+                setAvatarSrc(`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}`);
+            } else {
+                // Если изображение не найдено, установите другой путь или используйте изображение по умолчанию.
+                setAvatarSrc("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgifiMlmwUfmgW5vpgz7_YA73mu7KFNiVsolT-sm8_7A&s");
+            }
+            } catch(e) {
+                console.log(e)
+      }
+    };
+
+    checkImageExists();
+  }, [jwtToken]);
 
     return (
         <>
@@ -45,10 +67,19 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
             <AboutPersonal>
                <AvatarPersonalWrapper
                >
-                <AvatarPersonal 
-              src={`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}`}
-                alt="logo" 
+                <AvatarPersonalDefault 
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA4LdzM-bNWY-M5ENlwAJ5UU4b96ZxFEGIAy_tOb9SJA&s"
                 />
+                <AvatarPersonal 
+                 src={avatarSrc}
+            /*  src={`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}` ?
+              `http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}` : Draw
+            } */
+
+ 
+             //   alt="logo" 
+                />
+                
                 <AvatarPersonalInput 
                  type="file"
                  name="my-file"
@@ -74,8 +105,6 @@ ref={logo}
                         <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"20px"}  onClick={()=>setIsClickedEducation(prev=>!prev)}/>
                     </AboutPersonalAvatarWrapper>
                     <AboutPersonalAvatarWrapper>
-                        
-
                     {isClickedAboutYourself ? (
                             <AboutPersonalEducationInput name="about" placeholder="Type about yourself" 
                             onChange={(event)=>handleChange(event)}/>
@@ -183,7 +212,6 @@ ref={logo}
                             <ResumeDocumentElementButtonWrapper>
                                 <ResumeDocumentElementButton src={Trash}
                                 onClick={handleRemoveDocument}
-                                   // onClick={handleClearDocument}
                                 />
                             </ResumeDocumentElementButtonWrapper>
                         </ResumeDocumentElement>

@@ -61,7 +61,7 @@ white-space: wrap;
 positition: relative;
 `
 export const AboutPersonalEducationInput = styled.input`
-widthL 100%;
+width: 100%;
 background-color: rgba(66, 65, 65);
 border-radius: 10px;
 cursor: pointer;
@@ -134,6 +134,16 @@ width: 150px;
 height: 150px;
 border-radius: 50%;
 cursor: pointer;
+transform: translateX(1px);
+z-index: 2
+`
+export const AvatarPersonalDefault = styled.img`
+width: 150px;
+height: 150px;
+border-radius: 50%;
+cursor: pointer;
+position: absolute;
+z-index: 0
 `
 export const AboutPersonalUsername = styled.h1`
 color: #fff;

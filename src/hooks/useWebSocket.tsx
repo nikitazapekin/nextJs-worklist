@@ -1,4 +1,4 @@
-import { useState } from "react";
+/*import { useState } from "react";
 function displayMessage(message: string) {
     console.log(message)
  
@@ -16,13 +16,69 @@ const useWebSocket  = ({socket}: { socket: WebSocket }) => {
         const el:SocketMessageTypes = { user: `Alex${Math.random()}` };
         console.log(el)
         socket.send(JSON.stringify(el));
-        socket.send("mess")
+     //   socket.send("mess")
+    };
+
+    socket.onmessage = function(event) {
+        const message = event.data;
+        displayMessage("Server: " + message);
     };
 
     return {amountOfOnlineUsers}
 }
- export default useWebSocket
+ export default useWebSocket  */
 
+
+ import { useEffect, useState } from "react";
+ interface SocketMessageTypes  { 
+    user: string,
+
+}
+ function displayMessage(message: string) {
+    console.log(message)
+ 
+}
+const users = ["Alex202", "NEkit", "Shrek2004", "Bob", "feefef"]
+//function useWebSocket({ socket }: { socket: WebSocket }) {
+    function useWebSocket() {
+  const [amountOfOnlineUsers, setAmountOfOnlineUsers] = useState("");
+ const [isConnected, setIsConnected] =useState(false)
+ useEffect(()=>{
+     const socket = new WebSocket("ws://localhost:5000/ws")
+if(isConnected==false){
+    socket.onopen = function (event) {
+        setIsConnected(true)
+        console.log("Connected to WebSocket server");
+    console.log( Math.floor(123*Math.random())%5)
+    const el:SocketMessageTypes = { user: `${users[Math.floor(123*Math.random())%5]}` };
+    console.log(el)
+};
+}
+  socket.onmessage = function (event) {
+    const message= event.data
+    console.log("MESS" +message)
+    console.log("ONLINE"+message)
+    console.log("tip" + typeof message)
+   setAmountOfOnlineUsers(String(Math.floor(Number(message)/2)))
+      displayMessage("Server: " + event.data);
+
+};
+socket.onerror = function(error) {
+    console.error("WebSocket Error: ", error);
+};
+socket.onclose = function(event) {
+    if (event.wasClean) {
+        displayMessage(`Connection closed cleanly, code=${event.code}, reason=${event.reason}`);
+    } else {
+        displayMessage('Connection died');
+    }
+};
+}, [isConnected])
+
+  return { amountOfOnlineUsers };
+}
+
+export default useWebSocket;
 
  /*
  

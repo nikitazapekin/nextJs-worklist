@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { AboutPersonal, AboutPersonalAvatarDraw, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume } from "./personalPageFormStyles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import useJwt from "../../hooks/useJwt";
 import { fetchPersonalInformationFunction } from "../../store/slices/person.slice";
 import usePersonalInformation from "../../hooks/usePersonalInformation";
 import PersonalData from "../personalData/personalData";
+import CreateYourOfferComponent from "../createYourOffer/createYourOffer";
 const PersonalPageForm = () => {
   const dispatch = useDispatch()
   const {jwtToken} = useJwt()
+  const  [currentPagePersonal, setCurrentPagePersonal] = useState<string>("")
   const {handleLogout} =usePersonalInformation()
   useEffect(() => {
     const token = jwtToken
@@ -17,13 +19,10 @@ const PersonalPageForm = () => {
     }
   }, [jwtToken])
   const handleNavigate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-
-console.log((event.target as HTMLElement).dataset.name);
-
+setCurrentPagePersonal((event.target as HTMLElement).dataset.name)
   }
   return (
     <PersonalForm>
- 
       <PersonalFormWrapper>
 <PersonalNaBar> 
 <PersonalNavBarItem onClick={(event)=> handleNavigate(event)} data-name="data">Your data</PersonalNavBarItem>
@@ -35,8 +34,14 @@ console.log((event.target as HTMLElement).dataset.name);
 </PersonalNaBar>
 
 
-
+{currentPagePersonal=="data" && (
 <PersonalData />
+)}
+{ currentPagePersonal=="job" && (
+  <CreateYourOfferComponent />
+)
+
+}
 
       </PersonalFormWrapper>
       <PersonalFormBackground />
