@@ -54,10 +54,20 @@ export const personalApi = {
         }
         )
     },
-/*
-removePersonalResume(EditData) {
-
-}, */
+ CreateOfferAction(EditData: EditDataProps){
+    return serverApiInstance.post(`/getPersonalInformation/editPersonalData?token=${EditData.token}`, {
+        education: EditData.token,
+        about: EditData.about,
+        experience: EditData.experience,
+        email: EditData.email,
+        password: EditData.password,
+        telephone: EditData.telephone,
+        country: EditData.country,
+        city: EditData.city,
+        document: EditData.document,
+        token: EditData.token,
+    })
+ },
    setAvatar(EditData: AvatarProps) {
     console.log("EDIT DATA" +JSON.stringify(EditData))
 

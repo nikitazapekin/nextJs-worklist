@@ -1,5 +1,7 @@
 
 import { useEffect, useState, useRef } from "react"
+import axios from "axios"
+import useJwt from "./useJwt"
 interface TypesOfStateOfOffer {
  title: string,
  describtion: string,
@@ -9,8 +11,10 @@ interface TypesOfStateOfOffer {
     salary: string
 }
 const useCreateOffer = () => {
+    const {jwtToken} = useJwt()
     const skillInput = useRef(null)
     const removeElement= useRef(null)
+    const [selectedFiles, setSelectedFiles] = useState<File[]>([])
     const [isClickedFirst, setIsClickedFirst] = useState(false) 
 const [stateOfOffer, setStateOfOffer] = useState<TypesOfStateOfOffer>({
     title: "",
@@ -75,10 +79,31 @@ useEffect(()=> {
 useEffect(()=> {
     setIsClickedFirst(false)
 }, [stateOfOffer])
+const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const formData = new FormData();
+      Array.from(files).forEach((file) => {
+        formData.append("my-files", file);
+      });
+      setSelectedFiles([...selectedFiles, ...Array.from(files)]);
+    }
+  };    
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData(event.currentTarget);
+      formData.append('jwtToken', jwtToken);
+      const response = await axios.post("http://localhost:5000/testMultiple", formData);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 return {handleChange, handleAddSkill, skillInput, stateOfOffer,
      handleRemove, removeElement, stateOfOfferError,
-    handleSave, 
-    isClickedFirst
+    handleSave,  handleFileChange, selectedFiles,
+    isClickedFirst, handleSubmit
     }
 }
 export default useCreateOffer

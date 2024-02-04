@@ -3,22 +3,22 @@ import Draw from "../../assets/draw.png"
 import useCreateOffer from "../../hooks/useCreateOffer";
 import { useState } from "react";
 import TrashSkill from "../../assets/trashSkill.png"
+import axios from "axios";
+import useJwt from "../../hooks/useJwt";
 const CreateYourOfferComponent = () => {
-    const [selectedFiles, setSelectedFiles] = useState<File[]>([])
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files;
-      if (files) {
-        setSelectedFiles([...selectedFiles, ...Array.from(files)]);
-      }
-    };
-    const { handleChange, handleAddSkill, handleSave, isClickedFirst, 
-        skillInput, stateOfOffer, handleRemove,   stateOfOfferError } = useCreateOffer()
+    const {jwtToken} =useJwt()
+   
+    const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange, handleSubmit,
+        skillInput, stateOfOffer, handleRemove,   stateOfOfferError, selectedFiles} = useCreateOffer()        
     return (
         <CreateYourOffer>
             <CreateYourOfferTitle>
                 Create your offer
             </CreateYourOfferTitle>
-            <CreateYourOfferForm>
+            <CreateYourOfferForm
+             onSubmit={handleSubmit}
+             method="POST" encType="multipart/form-data" 
+            >
                 <InputBlockWrapper>
                     <InputBlockTitle>Titlle</InputBlockTitle>
                     <FormError>{isClickedFirst && stateOfOfferError.titleError}</FormError>
@@ -64,8 +64,8 @@ const CreateYourOfferComponent = () => {
                             placeholder="Type required skill of vacancy" />
                         <FormImage src={Draw} alt="form picture" />
                     </InputCreateOfferWrapper>
-                    <AddSkillBtn
-                        type="button"
+                    <AddSkillBtn   
+                    type="button"          
                         onClick={(event) => handleAddSkill(event)}
                     >Add skill</AddSkillBtn>
                 </InputBlockWrapper>
@@ -110,7 +110,7 @@ const CreateYourOfferComponent = () => {
                 <InputCreateOfferWrapper>
                 <InputCreateOffer
 type="file"
-name="my-file"
+name="my-files"
 accept="image/*"
  placeholder="drag some photos here"
  onChange={(event)=>handleFileChange(event)}
@@ -122,8 +122,8 @@ multiple
                         <FormImage src={Draw} alt="form picture" />
                     </InputCreateOfferWrapper>
                 </InputBlockWrapper>
-                <SaveButton type="button"
-                onClick={handleSave}
+                <SaveButton 
+                 type="submit"
                 >
                     Save
                 </SaveButton>

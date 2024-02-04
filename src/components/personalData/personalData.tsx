@@ -18,7 +18,6 @@ const PersonalData = () => {
   const [isClickedEducation, setIsClickedEducation] =useState<boolean>(false)
   const [isClickedAboutYourself, setIsClickedAboutYourself] =useState<boolean>(false)
   const logo = useRef(null)
- 
 const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -42,7 +41,6 @@ const [avatarSrc, setAvatarSrc] = useState('');
             if (response.ok) {
                 setAvatarSrc(`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}`);
             } else {
-                // Если изображение не найдено, установите другой путь или используйте изображение по умолчанию.
                 setAvatarSrc("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgifiMlmwUfmgW5vpgz7_YA73mu7KFNiVsolT-sm8_7A&s");
             }
             } catch(e) {
@@ -72,9 +70,7 @@ const [avatarSrc, setAvatarSrc] = useState('');
                 />
                 <AvatarPersonal 
                  src={avatarSrc}
-            /*  src={`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}` ?
-              `http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}` : Draw
-            } */
+        
 
  
              //   alt="logo" 

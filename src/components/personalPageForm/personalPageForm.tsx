@@ -7,6 +7,7 @@ import { fetchPersonalInformationFunction } from "../../store/slices/person.slic
 import usePersonalInformation from "../../hooks/usePersonalInformation";
 import PersonalData from "../personalData/personalData";
 import CreateYourOfferComponent from "../createYourOffer/createYourOffer";
+import ChatComponent from "../ChatComponent/ChatComponent";
 const PersonalPageForm = () => {
   const dispatch = useDispatch()
   const {jwtToken} = useJwt()
@@ -40,9 +41,10 @@ setCurrentPagePersonal((event.target as HTMLElement).dataset.name)
 { currentPagePersonal=="job" && (
   <CreateYourOfferComponent />
 )
-
 }
-
+{currentPagePersonal=="chats" && (
+  <ChatComponent />
+)}
       </PersonalFormWrapper>
       <PersonalFormBackground />
     </PersonalForm>
