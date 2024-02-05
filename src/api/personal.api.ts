@@ -24,7 +24,16 @@ interface AvatarProps {
 
     formData: any
 }
-
+interface CreateOfferProps {
+    title: string,
+    describtion: string,
+    skills: String[], 
+    workingPerDay: string,
+    location: string,
+       salary: string,
+       token: string,
+       formData: FormData
+}
 export const personalApi = {
     PersonalInformationAction(regData: RegProps) {
         console.log("REEEEEEEEEE" + JSON.stringify(regData))
@@ -54,19 +63,27 @@ export const personalApi = {
         }
         )
     },
- CreateOfferAction(EditData: EditDataProps){
-    return serverApiInstance.post(`/getPersonalInformation/editPersonalData?token=${EditData.token}`, {
-        education: EditData.token,
-        about: EditData.about,
-        experience: EditData.experience,
-        email: EditData.email,
-        password: EditData.password,
-        telephone: EditData.telephone,
-        country: EditData.country,
-        city: EditData.city,
-        document: EditData.document,
-        token: EditData.token,
-    })
+ CreateOfferAction(EditData: CreateOfferProps){
+    return serverApiInstance.post(`/createOffer?token=${EditData.token}`, {
+
+            title: EditData.title,
+            describtion: EditData.describtion,
+            skills: EditData.skills,
+            workingPerDay: EditData.workingPerDay,
+            location: EditData.location,
+            FormData: EditData.formData,
+            salary: EditData.salary,
+          
+    },
+    {
+
+        headers: {
+            'Content-Type': 'multipart/form-data',
+         //   'Content-Type': 'application/json',
+        },
+        
+    }
+        )
  },
    setAvatar(EditData: AvatarProps) {
     console.log("EDIT DATA" +JSON.stringify(EditData))

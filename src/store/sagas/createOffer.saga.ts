@@ -5,7 +5,15 @@ import { setCreateOfferLoadingStatus, setCreateOfferResult, fetchCreateOfferFunc
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 interface AuthProps {
+    title: string,
+    describtion: string,
+    skills: String[], 
+    workingPerDay: string,
+    location: string,
+       salary: string
     token: string,
+    formData: FormData
+
 }
 interface AuthResponse {
     username: string,
@@ -23,10 +31,10 @@ interface AuthResponse {
     describtion: string,
 }
 function* fetchCreateOffer(action: PayloadAction<AuthProps>) {
-    console.log("fetch authResponse" + JSON.stringify(action.payload))
+    console.log("fetch authResponseeee" + JSON.stringify(action.payload))
     yield put(setCreateOfferLoadingStatus(LOADING_STATUS.LOADING));
     try {
-        const finalRegisterMessage: AuthResponse = yield call(personalApi.PersonalInformationAction, action.payload);
+        const finalRegisterMessage: AuthResponse = yield call(personalApi.CreateOfferAction, action.payload);
         console.log("PERSONAL" + JSON.stringify(finalRegisterMessage))
         yield put(setCreateOfferResult(finalRegisterMessage));
         yield put(setCreateOfferLoadingStatus(LOADING_STATUS.IDLE));

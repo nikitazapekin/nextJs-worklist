@@ -1,14 +1,21 @@
 import { AddSkillBtn, CreateYourOffer, CreateYourOfferForm, CreateYourOfferTitle, FormError, FormImage, InputBlockTitle, InputBlockWrapper, InputCreateOffer, InputCreateOfferWrapper, ListOfSkills, SaveButton, SelectOption, SelectOptionElement, SkillElement, SkillElementButtonTrash, SkillElementButtonWrapper, SkillElementTitle } from "./createYourFormStyles";
 import Draw from "../../assets/draw.png"
 import useCreateOffer from "../../hooks/useCreateOffer";
-import { useState } from "react";
+import { useState, memo } from "react";
 import TrashSkill from "../../assets/trashSkill.png"
 import axios from "axios";
 import useJwt from "../../hooks/useJwt";
-const CreateYourOfferComponent = () => {
+const CreateYourOfferComponent = memo(() => {
     const {jwtToken} =useJwt()
-   
-    const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange, handleSubmit,
+   /*
+ title: string,
+ describtion: string,
+ skills: String[], 
+ workingPerDay: string,
+ location: string,
+    salary: string
+   */
+    const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange, handleSubmit, handleChangeSelect,
         skillInput, stateOfOffer, handleRemove,   stateOfOfferError, selectedFiles} = useCreateOffer()        
     return (
         <CreateYourOffer>
@@ -71,9 +78,8 @@ const CreateYourOfferComponent = () => {
                 </InputBlockWrapper>
                 <InputBlockWrapper>
                     <InputBlockTitle>Working time per day</InputBlockTitle>
-                   
                     <InputCreateOfferWrapper>
-                        <SelectOption >
+                        <SelectOption  name="workingPerDay" onChange={(event)=>handleChangeSelect(event)} >
                             <SelectOptionElement value="0-2 hours">0-2 hours</SelectOptionElement>
                             <SelectOptionElement value="0-4 hours">0-4 hours</SelectOptionElement>
                             <SelectOptionElement value="0-8 hours">0-8 hours</SelectOptionElement>
@@ -96,7 +102,7 @@ const CreateYourOfferComponent = () => {
                 <InputBlockWrapper>
                     <InputBlockTitle>Salary (BYN)</InputBlockTitle>
                     <InputCreateOfferWrapper>
-                        <SelectOption>
+                        <SelectOption name="salary" onChange={(event)=>handleChangeSelect(event)}>
                             <SelectOptionElement value="0-1000">0-1000</SelectOptionElement>
                             <SelectOptionElement value="1000-2000">1000-2000</SelectOptionElement>
                             <SelectOptionElement value="2000-3000">2000-3000</SelectOptionElement>
@@ -130,6 +136,6 @@ multiple
             </CreateYourOfferForm>
         </CreateYourOffer>
     );
-}
+})
 
 export default CreateYourOfferComponent;

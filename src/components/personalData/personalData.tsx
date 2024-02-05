@@ -1,13 +1,13 @@
 import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper, PersonalFormSubmit, AvatarPersonalDefault } from "./personalStyles";
 import usePersonalInformation from "../../hooks/usePersonalInformation";
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, memo } from "react";
 import Draw from "../../assets/draw.png"
 import Trash from "../../assets/trash.png"
 import useJwt from "../../hooks/useJwt";
 import axios from "axios";
 import { fetchAvatarFunction } from "../../store/slices/setAvatar.slice";
-const PersonalData = () => {
+const PersonalData = memo(() => {
     const dispatch = useDispatch()
     const {jwtToken} =useJwt()
     const {handleChange, handleClearDocument, handleRemoveDocument, fileUploader, username, email, country, city, 
@@ -217,6 +217,6 @@ ref={logo}
                     </PersonalFormSubmit>
         </>
     );
-}
+})
 export default PersonalData;
 

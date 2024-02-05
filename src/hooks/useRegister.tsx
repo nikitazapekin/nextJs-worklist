@@ -1,7 +1,7 @@
 
 
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState , useMemo} from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import useCaptcha from "./useCaptcha";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const [isErrorInput, setIsErrorInput] =useState({
     passwordInput: ""
 
 })
-const handleRegister = (event:  React.ChangeEvent<HTMLInputElement>) => {
+const handleRegister =(event:  React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setRegisterState((prev) => ({
         ...prev,

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { AboutPersonal, AboutPersonalAvatarDraw, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume } from "./personalPageFormStyles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import useJwt from "../../hooks/useJwt";
 import { fetchPersonalInformationFunction } from "../../store/slices/person.slice";

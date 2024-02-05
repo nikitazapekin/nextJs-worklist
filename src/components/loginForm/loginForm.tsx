@@ -6,8 +6,8 @@ import Eye from "../../assets/eye.png"
 import EyeCrossed from "../../assets/eye-crossed.png"
 import { useSelector } from 'react-redux';
 import { loginLoadingStatusSelector } from "../../store/selectors/login.selector";
-import { useState } from "react";
-const LoginForm = () => {
+import { memo, useState } from "react";
+const LoginForm = memo(() => {
     const { handleClick, handleRegister, loginForm, passwordForm, isErrorInput } = useLogin()
     const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false)
     const handlePassword = () => {
@@ -76,5 +76,5 @@ const LoginForm = () => {
             <RegisterFormBaccground />
         </RegisterFormComponent>
     );
-}
+})
 export default LoginForm;

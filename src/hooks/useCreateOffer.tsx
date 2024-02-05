@@ -2,6 +2,8 @@
 import { useEffect, useState, useRef } from "react"
 import axios from "axios"
 import useJwt from "./useJwt"
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCreateOfferFunction } from "../store/slices/createOffer.slice";
 interface TypesOfStateOfOffer {
  title: string,
  describtion: string,
@@ -11,6 +13,7 @@ interface TypesOfStateOfOffer {
     salary: string
 }
 const useCreateOffer = () => {
+    const dispatch = useDispatch()
     const {jwtToken} = useJwt()
     const skillInput = useRef(null)
     const removeElement= useRef(null)
@@ -31,11 +34,15 @@ const [stateOfOfferError, setStateOfOfferError] =useState({
     location: "",
 }) 
 const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
 setStateOfOffer(prev=> ({
     ...prev, [event.target.name]: event.target.value
 }))
 }
+const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setStateOfOffer(prev=> ({
+        ...prev, [event.target.name]: event.target.value
+    }))
+    }
 const handleAddSkill = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if(skillInput.current.value){
         setStateOfOffer(prev=> ({
@@ -94,6 +101,18 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const formData = new FormData(event.currentTarget);
       formData.append('jwtToken', jwtToken);
+      const data = {
+        title: stateOfOffer.title,
+        describtion:stateOfOffer.describtion,
+        skills: stateOfOffer.skills, 
+        workingPerDay: stateOfOffer.workingPerDay,
+        location: stateOfOffer.location,
+           salary: stateOfOffer.salary,
+           token: jwtToken,
+           formData: formData
+          // formData: formData
+      }
+//dispatch(fetchCreateOfferFunction(data))
       const response = await axios.post("http://localhost:5000/testMultiple", formData);
       console.log(response.data);
     } catch (error) {
@@ -103,7 +122,7 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 return {handleChange, handleAddSkill, skillInput, stateOfOffer,
      handleRemove, removeElement, stateOfOfferError,
     handleSave,  handleFileChange, selectedFiles,
-    isClickedFirst, handleSubmit
+    isClickedFirst, handleSubmit, handleChangeSelect
     }
 }
 export default useCreateOffer
