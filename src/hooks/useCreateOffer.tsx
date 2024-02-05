@@ -57,8 +57,9 @@ const handleRemove =(removeItem: String) => {
 }
 const handleSave = () => {
 setIsClickedFirst(true)
- 
+ let isError= false
 if(!stateOfOffer.title) {
+    isError=true
     setStateOfOfferError((prev) => ({
         ...prev,
         ["titleError"]: "This field cannot be empty"
@@ -66,6 +67,7 @@ if(!stateOfOffer.title) {
  
 }
 if(!stateOfOffer.describtion) {
+    isError=true
     setStateOfOfferError((prev) => ({
         ...prev,
         ["describtionError"]: "This field cannot be empty"
@@ -73,11 +75,26 @@ if(!stateOfOffer.describtion) {
  
 }
 if(!stateOfOffer.location) {
+    isError=true
     setStateOfOfferError((prev) => ({
         ...prev,
         ["location"]: "This field cannot be empty"
     }))
  
+}
+if(isError==false){
+    const data = {
+        title: stateOfOffer.title,
+        describtion:stateOfOffer.describtion,
+        skills: stateOfOffer.skills, 
+        workingPerDay: stateOfOffer.workingPerDay,
+        location: stateOfOffer.location,
+           salary: stateOfOffer.salary,
+           token: jwtToken,
+         
+      } 
+      console.log("Is correct "+JSON.stringify(data))
+dispatch(fetchCreateOfferFunction(data))
 }
 }
 useEffect(()=> {
@@ -96,33 +113,35 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelectedFiles([...selectedFiles, ...Array.from(files)]);
     }
   };    
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+ /* const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const formData = new FormData(event.currentTarget);
       formData.append('jwtToken', jwtToken);
-      const data = {
-        title: stateOfOffer.title,
-        describtion:stateOfOffer.describtion,
-        skills: stateOfOffer.skills, 
-        workingPerDay: stateOfOffer.workingPerDay,
-        location: stateOfOffer.location,
-           salary: stateOfOffer.salary,
-           token: jwtToken,
-           formData: formData
-          // formData: formData
-      }
-//dispatch(fetchCreateOfferFunction(data))
+      console.log("FORM DARA" + JSON.stringify(formData))
       const response = await axios.post("http://localhost:5000/testMultiple", formData);
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+  }; */
 return {handleChange, handleAddSkill, skillInput, stateOfOffer,
      handleRemove, removeElement, stateOfOfferError,
     handleSave,  handleFileChange, selectedFiles,
-    isClickedFirst, handleSubmit, handleChangeSelect
+    isClickedFirst, //handleSubmit, 
+    handleChangeSelect
     }
 }
 export default useCreateOffer
+      /*   const data = {
+           title: stateOfOffer.title,
+           describtion:stateOfOffer.describtion,
+           skills: stateOfOffer.skills, 
+           workingPerDay: stateOfOffer.workingPerDay,
+           location: stateOfOffer.location,
+              salary: stateOfOffer.salary,
+              token: jwtToken,
+              formData: formData
+             // formData: formData
+         } */
+   //dispatch(fetchCreateOfferFunction(data))

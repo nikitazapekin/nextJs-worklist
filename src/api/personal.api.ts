@@ -32,7 +32,7 @@ interface CreateOfferProps {
     location: string,
        salary: string,
        token: string,
-       formData: FormData
+     
 }
 export const personalApi = {
     PersonalInformationAction(regData: RegProps) {
@@ -65,24 +65,15 @@ export const personalApi = {
     },
  CreateOfferAction(EditData: CreateOfferProps){
     return serverApiInstance.post(`/createOffer?token=${EditData.token}`, {
-
             title: EditData.title,
             describtion: EditData.describtion,
             skills: EditData.skills,
             workingPerDay: EditData.workingPerDay,
             location: EditData.location,
-            FormData: EditData.formData,
-            salary: EditData.salary,
-          
+           
+            salary: EditData.salary,   
     },
-    {
 
-        headers: {
-            'Content-Type': 'multipart/form-data',
-         //   'Content-Type': 'application/json',
-        },
-        
-    }
         )
  },
    setAvatar(EditData: AvatarProps) {

@@ -5,6 +5,7 @@ import { useState, memo } from "react";
 import TrashSkill from "../../assets/trashSkill.png"
 import axios from "axios";
 import useJwt from "../../hooks/useJwt";
+import handleSubmit from "../../api/uploadFile";
 const CreateYourOfferComponent = memo(() => {
     const {jwtToken} =useJwt()
    /*
@@ -15,7 +16,9 @@ const CreateYourOfferComponent = memo(() => {
  location: string,
     salary: string
    */
-    const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange, handleSubmit, handleChangeSelect,
+  
+    const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange,// handleSubmit,
+         handleChangeSelect,
         skillInput, stateOfOffer, handleRemove,   stateOfOfferError, selectedFiles} = useCreateOffer()        
     return (
         <CreateYourOffer>
@@ -23,7 +26,7 @@ const CreateYourOfferComponent = memo(() => {
                 Create your offer
             </CreateYourOfferTitle>
             <CreateYourOfferForm
-             onSubmit={handleSubmit}
+             onSubmit={(event)=>handleSubmit(event, jwtToken)}
              method="POST" encType="multipart/form-data" 
             >
                 <InputBlockWrapper>
@@ -129,6 +132,7 @@ multiple
                     </InputCreateOfferWrapper>
                 </InputBlockWrapper>
                 <SaveButton 
+                onClick={handleSave}
                  type="submit"
                 >
                     Save
