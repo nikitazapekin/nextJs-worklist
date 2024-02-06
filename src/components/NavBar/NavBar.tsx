@@ -1,7 +1,10 @@
 import { useEffect } from "react";
-import useJwt from "../../hooks/useJwt";
-import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems} from "./styles.NavBar";
+
 import { Link } from "react-router-dom";
+
+import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems} from "./styles.NavBar";
+
+import useJwt from "../../hooks/useJwt";
 const NavBar = () => {
     const {jwtToken} =useJwt()
     useEffect(()=> {

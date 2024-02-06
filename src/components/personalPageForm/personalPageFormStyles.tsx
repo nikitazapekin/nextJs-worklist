@@ -16,7 +16,7 @@ background-color: rgba(83, 87, 84);
 width: 100%;
 height: 100%;
 `
-//height: auto;
+// height: auto;
 
 export const PersonalFormWrapper = styled.div`
 position: relative;
@@ -89,8 +89,8 @@ flex-direction: column;
 margin-left: 10px;
 width: auto;
 `
-//background-color: orange
-//gap: 10px;
+// background-color: orange
+// gap: 10px;
 export const PersonalNavBarItem =styled.div`
 font-size: 32px;
 cursor: pointer;
@@ -141,7 +141,7 @@ margin-bottom: 20px;
 export const AboutPersonalFormTitle = styled.h1`
 color: #fff;
 ` 
-//background-color: transparent;
+// background-color: transparent;
 export const AboutPersonalFormInput = styled.input`
 background-color: rgba(66, 65, 65);
 width: 90%;
@@ -185,4 +185,4 @@ font-size: 60px;
 export const DragYourResume = styled.h1`
 color: #fff;
 `
-//text-align: center;
+// text-align: center;

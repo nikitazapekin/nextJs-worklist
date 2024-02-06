@@ -2,9 +2,12 @@
 
 
 import { useEffect, useRef, useState , useMemo} from "react"
+
 import { useSelector, useDispatch } from 'react-redux';
-import useCaptcha from "./useCaptcha";
 import { useNavigate } from "react-router-dom";
+
+import useCaptcha from "./useCaptcha";
+
 import { emailCodeSelector } from "../store/selectors/emailCode.selector";
 const useRegister = ()=> {
     const emailCode= useSelector(emailCodeSelector)
@@ -39,7 +42,7 @@ useEffect(()=> {
     setIsClickedFirst(false)
     }, [registerState])
 useEffect(()=> {
-    if(isClickedFirst==true){
+    if(isClickedFirst){
         for(let i=1; i<7; i++){
         if(registerForm.current.children[i].children[3].value==0){
              setIsErrorInput((prev) => ({
@@ -57,13 +60,13 @@ useEffect(()=> {
     if(emailCode.includes("password")) {
         setIsErrorInput((prev) => ({
             ...prev,
-            ["passwordInput"]: emailCode,
+            "passwordInput": emailCode,
         }))
     }
     if(emailCode.includes("email")) {
         setIsErrorInput((prev) => ({
             ...prev,
-            ["emailInput"]: emailCode,
+            "emailInput": emailCode,
         }));
     }
    

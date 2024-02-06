@@ -1,10 +1,13 @@
 
 import { useState, useRef, useEffect } from "react"
-import { fetchAuthFunction } from "../store/slices/auth.slice";
+
 import { useSelector, useDispatch } from 'react-redux';
-import useRegister from "./useRegister";
-import { authSelector } from "../store";
 import { useNavigate } from "react-router-dom";
+
+import useRegister from "./useRegister";
+
+import { fetchAuthFunction } from "../store/slices/auth.slice";
+import { authSelector } from "../store";
 import { fetchFinalRegisterFunction } from "../store/slices/finalRegister.slice";
 import { finalRegisterMessageSelector } from "../store/selectors/finalRegisterMessage.selector";
 interface CodeState {
@@ -53,12 +56,12 @@ console.log(JSON.stringify(registerState))
    if (areAllFieldsFilled()) {
     const typedCode= codeState.firstForm+ codeState.secondForm+codeState.thirdForm+codeState.fourthForm+codeState.fifthForm+codeState.sixthForm
     const obj = {
-        username: username,
-        email: email,
-        password: password, 
-        city: city,
-        country: country,
-         telephone: telephone,
+        username,
+        email,
+        password, 
+        city,
+        country,
+         telephone,
          code: typedCode
     }
 console.log("OBj" +JSON.stringify(obj))
@@ -76,7 +79,7 @@ console.log("OBj" +JSON.stringify(obj))
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputName = event.target.name; 
         const inputValue = event.target.value;
-        let index=0;
+        const index: number=0;
         if(event.target.value.length<2){
             setCodeState(prevState => ({
                 ...prevState,

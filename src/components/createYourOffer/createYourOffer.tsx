@@ -1,22 +1,17 @@
+import { useState, memo } from "react";
+
+import axios from "axios";
+
 import { AddSkillBtn, CreateYourOffer, CreateYourOfferForm, CreateYourOfferTitle, FormError, FormImage, InputBlockTitle, InputBlockWrapper, InputCreateOffer, InputCreateOfferWrapper, ListOfSkills, SaveButton, SelectOption, SelectOptionElement, SkillElement, SkillElementButtonTrash, SkillElementButtonWrapper, SkillElementTitle } from "./createYourFormStyles";
+
 import Draw from "../../assets/draw.png"
 import useCreateOffer from "../../hooks/useCreateOffer";
-import { useState, memo } from "react";
 import TrashSkill from "../../assets/trashSkill.png"
-import axios from "axios";
 import useJwt from "../../hooks/useJwt";
 import handleSubmit from "../../api/uploadFile";
 const CreateYourOfferComponent = memo(() => {
     const {jwtToken} =useJwt()
-   /*
- title: string,
- describtion: string,
- skills: String[], 
- workingPerDay: string,
- location: string,
-    salary: string
-   */
-  
+
     const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange,// handleSubmit,
          handleChangeSelect,
         skillInput, stateOfOffer, handleRemove,   stateOfOfferError, selectedFiles} = useCreateOffer()        
@@ -26,7 +21,7 @@ const CreateYourOfferComponent = memo(() => {
                 Create your offer
             </CreateYourOfferTitle>
             <CreateYourOfferForm
-             onSubmit={(event)=>handleSubmit(event, jwtToken)}
+             onSubmit={async (event)=>{ await handleSubmit(event, jwtToken); }}
              method="POST" encType="multipart/form-data" 
             >
                 <InputBlockWrapper>
@@ -61,7 +56,7 @@ const CreateYourOfferComponent = memo(() => {
                                 </SkillElementTitle>
                                 <SkillElementButtonWrapper>
                                     <SkillElementButtonTrash src={TrashSkill} alt="trash"
-                                    onClick={()=> handleRemove(item)}
+                                    onClick={()=> { handleRemove(item); }}
                                     />
                                 </SkillElementButtonWrapper>
                             </SkillElement>
@@ -74,15 +69,16 @@ const CreateYourOfferComponent = memo(() => {
                             placeholder="Type required skill of vacancy" />
                         <FormImage src={Draw} alt="form picture" />
                     </InputCreateOfferWrapper>
+                    
                     <AddSkillBtn   
                     type="button"          
-                        onClick={(event) => handleAddSkill(event)}
+                        onClick={(event) => { handleAddSkill(event); }}
                     >Add skill</AddSkillBtn>
                 </InputBlockWrapper>
                 <InputBlockWrapper>
                     <InputBlockTitle>Working time per day</InputBlockTitle>
                     <InputCreateOfferWrapper>
-                        <SelectOption  name="workingPerDay" onChange={(event)=>handleChangeSelect(event)} >
+                        <SelectOption  name="workingPerDay" onChange={(event)=>{ handleChangeSelect(event); }} >
                             <SelectOptionElement value="0-2 hours">0-2 hours</SelectOptionElement>
                             <SelectOptionElement value="0-4 hours">0-4 hours</SelectOptionElement>
                             <SelectOptionElement value="0-8 hours">0-8 hours</SelectOptionElement>
@@ -105,7 +101,7 @@ const CreateYourOfferComponent = memo(() => {
                 <InputBlockWrapper>
                     <InputBlockTitle>Salary (BYN)</InputBlockTitle>
                     <InputCreateOfferWrapper>
-                        <SelectOption name="salary" onChange={(event)=>handleChangeSelect(event)}>
+                        <SelectOption name="salary" onChange={(event)=>{ handleChangeSelect(event); }}>
                             <SelectOptionElement value="0-1000">0-1000</SelectOptionElement>
                             <SelectOptionElement value="1000-2000">1000-2000</SelectOptionElement>
                             <SelectOptionElement value="2000-3000">2000-3000</SelectOptionElement>
@@ -122,7 +118,7 @@ type="file"
 name="my-files"
 accept="image/*"
  placeholder="drag some photos here"
- onChange={(event)=>handleFileChange(event)}
+ onChange={(event)=>{ handleFileChange(event); }}
 multiple
                 />
                  {selectedFiles.map((file, index) => (

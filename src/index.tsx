@@ -1,23 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+
 import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider , Navigate , BrowserRouter , Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import { App } from './components/App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Suspense } from 'react';
  import { ErrorBoundary } from './components/errorBoundary/errorBoundary';
-import AppRoutes from './utils/routes';
-import { Navigate } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { publicRoutes } from './utils/routes';
+import AppRoutes, { publicRoutes } from './utils/routes';
 import { HOMEPAGE_ROUTE, SIGN_IN_ROUTE } from './utils/consts';
-import { Routes, Route } from 'react-router-dom';
 import { Global } from './components/globalStyles';
 import Homepage from './pages/homepage/homepage';
 import LoginPage from './pages/loginPage/loginPage';
-
-
-
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './store';
 
 const root = document.getElementById('root');

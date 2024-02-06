@@ -1,4 +1,4 @@
-/*import useRegister from "../../hooks/useRegister";
+/* import useRegister from "../../hooks/useRegister";
 import { useSelector, useDispatch } from 'react-redux';
 import { ErrorRegisterInformation, OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper, RegisterIcon } from "./registerFormStyles";
 import { Link, useNavigate } from "react-router-dom";
@@ -178,11 +178,14 @@ Or have an account
 export default RegisterForm; */
 
 
-import useRegister from "../../hooks/useRegister";
-import { useSelector, useDispatch } from 'react-redux';
-import { ErrorRegisterInformation, OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper, RegisterIcon } from "./registerFormStyles";
-import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
+
+import { ErrorRegisterInformation, OrHaveAnAccount, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper, RegisterIcon } from "./registerFormStyles";
+
+import useRegister from "../../hooks/useRegister";
 import useCaptcha from "../../hooks/useCaptcha";
 import Captcha from "../capcha/capcha";
 import Users from "../../assets/users.png"
@@ -195,8 +198,8 @@ import EyeCrossed from "../../assets/eye-crossed.png"
 import { fetchEmailCodeFunction, setClearCode } from "../../store/slices/emailCode.slice";
 import { emailCodeSelector } from "../../store/selectors/emailCode.selector";
 const RegisterForm = () => {
-    const { captchaCode, regenerateCaptcha, isCorrectCaptcha, setIsCorrectCaptcha } = useCaptcha()
-    const [enteredCaptchaCode, setEnteredCaptchaCode] = useState<string>("")
+ //   const { captchaCode, regenerateCaptcha, isCorrectCaptcha, setIsCorrectCaptcha } = useCaptcha()
+ //   const [enteredCaptchaCode, setEnteredCaptchaCode] = useState<string>("")
     const { registerState, isVisiblePassword, setIsVisiblePassword, handleRegister, registerForm, isErrorInput, setIsClickedFirst, isClickedFirst } = useRegister()
     const dispatch = useDispatch();
     const emailCode = useSelector(emailCodeSelector)
@@ -237,7 +240,7 @@ const RegisterForm = () => {
                     <RegisterIcon src={Users} alt="users" />
                     <RegisterFormInputUsername
                         name="username"
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         placeholder="Type username" required />
                 </RegisterFormInputWrapper>
                 <RegisterFormInputWrapper>
@@ -250,7 +253,7 @@ const RegisterForm = () => {
                     <RegisterIcon src={Country} alt="users" />
                     <RegisterFormInputUsername
                         name="country"
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         placeholder="Type country" required
                         list="countriesList"
                     />
@@ -283,7 +286,7 @@ const RegisterForm = () => {
                     <RegisterIcon src={City} alt="users" />
                     <RegisterFormInputUsername
                         name="city"
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         type="city" placeholder="Type city" required />
                 </RegisterFormInputWrapper>
                 <RegisterFormInputWrapper>
@@ -297,7 +300,7 @@ const RegisterForm = () => {
                     <RegisterIcon src={Tel} alt="users" />
                     <RegisterFormInputUsername
                         name="telephone"
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         type="tel" placeholder="Type mobile phone" required />
                 </RegisterFormInputWrapper>
                 <RegisterFormInputWrapper>
@@ -310,7 +313,7 @@ const RegisterForm = () => {
                     <RegisterIcon src={Email} alt="users" />
                     <RegisterFormInputUsername
                         name="email"
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         type="email" placeholder="Type email" required />
                 </RegisterFormInputWrapper>
                 <RegisterFormInputWrapper>
@@ -321,10 +324,10 @@ const RegisterForm = () => {
                         {isErrorInput.passwordInput}
                     </ErrorRegisterInformation>
                     <RegisterIcon
-                        onClick={() => handlePassword()}
+                        onClick={() => { handlePassword(); }}
                         src={isVisiblePassword ? Eye : EyeCrossed} alt="users" />
                     <RegisterFormInputUsername
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         name="password"
                         type="password"
                         ref={passwordForm}

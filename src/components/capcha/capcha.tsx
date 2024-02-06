@@ -1,9 +1,11 @@
+import type {Dispatch, SetStateAction} from "react";
+
 import { CaptchaCode, CaptchaCodeForm, CaptchaComponent, CaptchaError, CaptchaInput, CaptchaRefresh, CaptchaSymbol, RefreshWrapper } from "./capchaStyles";
+
 import Refresh from "../../assets/refresh-page-option.png"
-import {  Dispatch, SetStateAction } from "react";
 import useCaptcha from "../../hooks/useCaptcha";
 interface CaptchaProps {
-captchaCode: String[],
+captchaCode: string[],
 enteredCaptchaCode: string,
 setEnteredCaptchaCode:Dispatch<SetStateAction<string>>,
 setIsCorrectCaptcha: Dispatch<SetStateAction<boolean>>,
@@ -11,7 +13,7 @@ isCorrectCaptcha: boolean,
 regenerateCaptcha: ()=> void,
 }
 const Captcha = ({captchaCode, regenerateCaptcha, enteredCaptchaCode, setEnteredCaptchaCode, isCorrectCaptcha, setIsCorrectCaptcha}: CaptchaProps) => {
-  //const {captcha} =useCaptcha()
+  // const {captcha} =useCaptcha()
    const handleChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
     setEnteredCaptchaCode(event.target.value)
    }
@@ -39,7 +41,7 @@ const Captcha = ({captchaCode, regenerateCaptcha, enteredCaptchaCode, setEntered
         type="text" 
         placeholder="Type code"
         value={enteredCaptchaCode}
-        onChange={(event)=>handleChange(event)}
+        onChange={(event)=>{ handleChange(event); }}
         />
         <CaptchaError display={isCorrectCaptcha ? "none" : "block"}>
             Type code 

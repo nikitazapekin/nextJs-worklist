@@ -51,7 +51,7 @@ interface CaptchaProps  {
     fontWeight: string, 
     transformX: string;
 } 
-//font-size: ${props=>props.fontSize};
+// font-size: ${props=>props.fontSize};
 export const CaptchaSymbol = styled.div<CaptchaProps>`
 transform: rotateZ(${props=>props.transformX});
 font-weight: ${props=>props.fontWeight}; 
@@ -83,4 +83,4 @@ right: 0;
 top: 0;
    `
 /*
-`${Math.floor((Math.random()*1000000))%360}deg`*/
+`${Math.floor((Math.random()*1000000))%360}deg` */

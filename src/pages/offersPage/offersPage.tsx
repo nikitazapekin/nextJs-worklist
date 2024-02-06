@@ -1,4 +1,5 @@
 import NavBar from "../../components/NavBar/NavBar";
+import OffersLeftSidePanel from "../../components/OffersLeftSidePanel/OffersLeftSidePanel";
 import { Global } from "../../components/globalStyles";
 import useWebSocket from "../../hooks/useWebSocket";
 
@@ -9,7 +10,9 @@ const OffersPage = () => {
 <>
 <NavBar />
 <Global />
+<OffersLeftSidePanel />
 Online {amountOfOnlineUsers} 
+
 </>
      );
 }

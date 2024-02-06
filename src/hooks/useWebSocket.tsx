@@ -1,4 +1,4 @@
-/*import { useState } from "react";
+/* import { useState } from "react";
 function displayMessage(message: string) {
     console.log(message)
  
@@ -39,13 +39,13 @@ const useWebSocket  = ({socket}: { socket: WebSocket }) => {
  
 }
 const users = ["Alex202", "NEkit", "Shrek2004", "Bob", "feefef"]
-//function useWebSocket({ socket }: { socket: WebSocket }) {
+// function useWebSocket({ socket }: { socket: WebSocket }) {
     function useWebSocket() {
   const [amountOfOnlineUsers, setAmountOfOnlineUsers] = useState("");
  const [isConnected, setIsConnected] =useState(false)
  useEffect(()=>{
      const socket = new WebSocket("ws://localhost:5000/ws")
-if(isConnected==false){
+if(!isConnected){
     socket.onopen = function (event) {
         setIsConnected(true)
         console.log("Connected to WebSocket server");

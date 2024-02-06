@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { buildWebpack } from "./config/build/buildWebpack";
 import { BuildMode, BuildPaths, BuildPlatform } from "./config/build/types/types";
-import Dotenv from 'dotenv-webpack'; // Импортируем Dotenv
+import Dotenv from 'dotenv-webpack'; 
 
 interface EnvVariables {
     mode?: BuildMode;
@@ -28,8 +28,6 @@ export default (env: EnvVariables) => {
         analyzer: env.analyzer,
         platform: env.platform ?? 'desktop',
     });
-
-    // Добавление загрузчиков и плагинов для обработки файлов CSS и SCSS
     if(config.module!.rules!=undefined){
 
         config.module!.rules.push(
@@ -50,8 +48,6 @@ export default (env: EnvVariables) => {
         },
         );
     }
-
-    // Добавление плагина Dotenv
     config.plugins!.push(
         new Dotenv(),
         new MiniCssExtractPlugin({
@@ -63,7 +59,7 @@ export default (env: EnvVariables) => {
    
 
     return config;
-};
+}; 
 
 
 //npm i --save-dev @types/dotenv-webpack

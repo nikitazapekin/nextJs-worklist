@@ -1,11 +1,14 @@
-import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper, PersonalFormSubmit, AvatarPersonalDefault } from "./personalStyles";
-import usePersonalInformation from "../../hooks/usePersonalInformation";
-import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef, memo } from "react";
+
+import { useSelector, useDispatch } from 'react-redux';
+import axios from "axios";
+
+import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper, PersonalFormSubmit, AvatarPersonalDefault } from "./personalStyles";
+
+import usePersonalInformation from "../../hooks/usePersonalInformation";
 import Draw from "../../assets/draw.png"
 import Trash from "../../assets/trash.png"
 import useJwt from "../../hooks/useJwt";
-import axios from "axios";
 import { fetchAvatarFunction } from "../../store/slices/setAvatar.slice";
 const PersonalData = memo(() => {
     const dispatch = useDispatch()
@@ -59,7 +62,7 @@ const [avatarSrc, setAvatarSrc] = useState('');
         >
             <SaveButton 
              type="submit"
-            onClick={(event)=>handleSave(event)}>
+            onClick={(event)=>{ handleSave(event); }}>
                 Save
             </SaveButton>
             <AboutPersonal>
@@ -92,24 +95,24 @@ ref={logo}
                         {isClickedEducation ? (
                             <AboutPersonalEducationInput placeholder="Type education" 
                             name="education"
-                            onChange={(event)=>handleChange(event)}
+                            onChange={(event)=>{ handleChange(event); }}
                             />
                         ) : (
                             <AboutPersonalEducatiom>Education: {education}</AboutPersonalEducatiom> 
                             )
                     }
-                        <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"20px"}  onClick={()=>setIsClickedEducation(prev=>!prev)}/>
+                        <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"20px"}  onClick={()=>{ setIsClickedEducation(prev=>!prev); }}/>
                     </AboutPersonalAvatarWrapper>
                     <AboutPersonalAvatarWrapper>
                     {isClickedAboutYourself ? (
                             <AboutPersonalEducationInput name="about" placeholder="Type about yourself" 
-                            onChange={(event)=>handleChange(event)}/>
+                            onChange={(event)=>{ handleChange(event); }}/>
                             ) : (
                             <AboutPersonalEducatiom>About: {describtion}</AboutPersonalEducatiom>  
                             
                             )
                     }
-                        <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"20px"} onClick={()=>setIsClickedAboutYourself(prev=>!prev)}/>
+                        <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"20px"} onClick={()=>{ setIsClickedAboutYourself(prev=>!prev); }}/>
                     </AboutPersonalAvatarWrapper>
                 </AboutPersonalBlock>
             </AboutPersonal>
@@ -123,7 +126,7 @@ ref={logo}
                         <AboutPersonalFormInput placeholder="Type experience"
                         name="experience"
                         defaultValue={experience}
-                        onChange={(event)=>handleChange(event)}
+                        onChange={(event)=>{ handleChange(event); }}
                         />
                         <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"40px"} />
                     </AboutPersonalFormSubWrapper>
@@ -136,7 +139,7 @@ ref={logo}
                     <AboutPersonalFormSubWrapper>
                         <AboutPersonalFormInput defaultValue={email} placeholder="Type email"
                         name="email"
-                        onChange={(event)=>handleChange(event)}
+                        onChange={(event)=>{ handleChange(event); }}
                         />
                         <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"40px"} />
                     </AboutPersonalFormSubWrapper>
@@ -149,7 +152,7 @@ ref={logo}
                     <AboutPersonalFormSubWrapper>
                         <AboutPersonalFormInput defaultValue={""} placeholder="Type password" 
                         name="password"
-                        onChange={(event)=>handleChange(event)}
+                        onChange={(event)=>{ handleChange(event); }}
                         />
                         <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"40px"} />
                     </AboutPersonalFormSubWrapper>
@@ -161,7 +164,7 @@ ref={logo}
                     <AboutPersonalFormSubWrapper>
                         <AboutPersonalFormInput defaultValue={telephone} placeholder="Type telephone"
                         name="telephone"
-                        onChange={(event)=>handleChange(event)}
+                        onChange={(event)=>{ handleChange(event); }}
                         />
                         <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"40px"} />
                     </AboutPersonalFormSubWrapper>
@@ -173,7 +176,7 @@ ref={logo}
                     <AboutPersonalFormSubWrapper>
                         <AboutPersonalFormInput defaultValue={country} placeholder="Type country" 
                         name="country"
-                        onChange={(event)=>handleChange(event)}
+                        onChange={(event)=>{ handleChange(event); }}
                         />
                         <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"40px"} />
                     </AboutPersonalFormSubWrapper>
@@ -185,7 +188,7 @@ ref={logo}
                     <AboutPersonalFormSubWrapper>
                         <AboutPersonalFormInput defaultValue={city} placeholder="Type city"
                         name="city"
-                        onChange={(event)=>handleChange(event)}
+                        onChange={(event)=>{ handleChange(event); }}
                         />
                         <AboutPersonalAvatarDraw src={Draw} alt="draw" size={"40px"} />
                     </AboutPersonalFormSubWrapper>

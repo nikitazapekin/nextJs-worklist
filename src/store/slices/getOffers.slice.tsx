@@ -2,9 +2,21 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type {LOADING_STATUS} from '../../constants/loadingStatus';
 import type { PayloadAction } from '@reduxjs/toolkit';
+ 
 
-interface yourInfornationState {
-	username: string ,
+interface getOffersState {
+    data: Array<
+{
+    id: number, 
+    title: string,
+    describtion: string,
+    location: string,
+    salary: string,
+    skills: String[],
+    workingPerDay: string,
+}
+    >
+	/*username: string ,
 	country: string , 
 	city: string ,
 	telephone: string ,
@@ -16,11 +28,11 @@ interface yourInfornationState {
 	experience: string ,
 	lastTimeAtNetwork: string ,
 	education: string ,
-	describtion:  string,
-	errorMessage:  string
+	describtion:  string, */
 }
-const initialState: yourInfornationState = {
-	username: "" ,
+
+const initialState: getOffersState = {
+	/*username: "" ,
 	country: "" , 
 	city: "" ,
 	telephone: "" ,
@@ -32,14 +44,14 @@ const initialState: yourInfornationState = {
 	experience: "" ,
 	lastTimeAtNetwork: "" ,
 	education: "" ,
-	describtion:  "",
-	errorMessage: ""
+	describtion:  "", */
+    data: []
 };
-interface yourInformationProps {
+interface getOffersProps {
 	token: string
  }
- interface yourInformationResponse {
-	username: string ,
+ interface getOffersResponse {
+/*	username: string ,
 	country: string , 
 	city: string ,
 	telephone: string ,
@@ -51,18 +63,29 @@ interface yourInformationProps {
 	experience: string ,
 	lastTimeAtNetwork: string ,
 	education: string ,
-	describtion:  string,
-	errorMessage: string
+	describtion:  string, */
+    data: Array<
+    {
+        id: number, 
+        title: string,
+        describtion: string,
+        location: string,
+        salary: string,
+        skills: String[],
+        workingPerDay: string,
+    }
+        >
   }
-  interface YourInformationErrorMessage {
-	errorMessage: string 
-  }
-export const yourInformationSlice = createSlice({
+export const getOffersSlice = createSlice({
 	name: 'pesr',
 	initialState,
 	reducers: {
-		setYourInformationResult: (state, action: PayloadAction<yourInformationResponse>) => {
-			state.username= action.payload.username
+		setGetOffersResult: (state, action: PayloadAction<getOffersResponse>) => {
+            console.log("SLIXE" +JSON.stringify(action.payload))
+
+            state.data = action.payload.data
+            console.log("NEW STATE" +state.data)
+			/*state.username= action.payload.username
 			state.country= action.payload.country
 			state.city= action.payload.city
 			state.telephone= action.payload.telephone
@@ -74,29 +97,22 @@ export const yourInformationSlice = createSlice({
 			state.experience= action.payload.experience
 			state.lastTimeAtNetwork= action.payload.lastTimeAtNetwork
 			state.education= action.payload.education
-			state.describtion= action.payload.describtion
-		//	state.errorMessage=action.payload.errorMessage
+			state.describtion= action.payload.describtion */
 		},
-		setYourInformationLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
+		setGetOffersLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
 			// state.emailCodeLoadingStatus = action.payload;
 		},
-		setYourInformationErrorMessage: (state, action: PayloadAction<YourInformationErrorMessage>) => {
-			console.log("ERRR SLICE" + action.payload)
-			if(typeof action.payload==="string" ){
-
-				state.errorMessage= action.payload
-			}
-			console.log("Errr state" +JSON.stringify(state))
-			console.log("Errr msg" +state)
+		setClearDocument: (state)=> {
+			//state.document=""
 		},
-		fetchYourInformationFunction: (state, action: PayloadAction<yourInformationProps>) => {}, 
+		fetchGetOffersFunction: (state, action: PayloadAction<getOffersProps>) => {}, 
 	},
 });
 
 export const { 
-	setYourInformationErrorMessage,
-setYourInformationResult,
- setYourInformationLoadingStatus, fetchYourInformationFunction
+setGetOffersResult,
+setClearDocument,
+ setGetOffersLoadingStatus, fetchGetOffersFunction
 } =
-	yourInformationSlice.actions;
-export default yourInformationSlice.reducer;
+	getOffersSlice.actions;
+export default getOffersSlice.reducer;

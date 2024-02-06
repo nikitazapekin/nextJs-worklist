@@ -16,7 +16,7 @@ background-color: rgba(83, 87, 84);
 width: 100%;
 height: 100%;
 `
-//height: auto;
+// height: auto;
 
 export const PersonalFormWrapper = styled.div`
 position: relative;

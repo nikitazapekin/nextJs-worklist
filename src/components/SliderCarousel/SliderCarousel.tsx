@@ -1,10 +1,5 @@
-import React, { useEffect } from 'react';
-import useSlide from '../../hooks/useSlide';
-import SliderCarouselItemComponent from '../SliderCarouselItem/SliderCarouselItem';
-import { useRef } from 'react';
-import Slider1 from "../../assets/slider1.jpg"
-import Slider2 from "../../assets/slider2.jpg"
-import Slider3 from "../../assets/slider3.png"
+import React, { useEffect , useRef } from 'react';
+
 import {
   SliderCarousel,
   SliderCarouselLeft,
@@ -13,6 +8,13 @@ import {
   SliderDots,
   SliderDot
 } from './SliderCarouselStyles';
+
+import useSlide from '../../hooks/useSlide';
+import SliderCarouselItemComponent from '../SliderCarouselItem/SliderCarouselItem';
+import Slider1 from "../../assets/slider1.jpg"
+import Slider2 from "../../assets/slider2.jpg"
+import Slider3 from "../../assets/slider3.png"
+
 const imgs = [Slider1, Slider2, Slider3]
 const SliderCarouselComponent = () => {
   const { currentPosition, setCurrentPosition, currentSlide, setCurrentSlide, handleClick, handleDot, slider } = useSlide();
@@ -45,12 +47,12 @@ const sld=useRef(null)
       const walk = (x - startX) * SCROLL_SPEED;
       sld.current.scrollLeft = scrollLeft - walk;
     };
-//if(sld.current!=undefined){
+// if(sld.current!=undefined){
     sld.current.addEventListener('mousedown', handleMouseDown);
     sld.current.addEventListener('mouseleave', handleMouseLeave);
     sld.current.addEventListener('mouseup', handleMouseUp);
     sld.current.addEventListener('mousemove', handleMouseMove);
-//}
+// }
     return () => {
        // if(sld.current!=undefined){
     /*  sld.current.removeEventListener('mousedown', handleMouseDown);
@@ -73,13 +75,13 @@ const sld=useRef(null)
             key={index} imageLink={item} />
         ))}
       </SliderCarouselWrapper>
-      <SliderCarouselLeft onClick={() => handleClick('left')}>←</SliderCarouselLeft>
-      <SliderCarouselRight onClick={() => handleClick('right')}>→</SliderCarouselRight>
+      <SliderCarouselLeft onClick={() => { handleClick('left'); }}>←</SliderCarouselLeft>
+      <SliderCarouselRight onClick={() => { handleClick('right'); }}>→</SliderCarouselRight>
       <SliderDots>
         {imgs.map((item, index) => (
           <SliderDot key={index}
             background={currentSlide == index ? "yellow" : "brown"}
-            onClick={() => handleDot(index)}
+            onClick={() => { handleDot(index); }}
           >{index + 1}</SliderDot>
         ))}
       </SliderDots>

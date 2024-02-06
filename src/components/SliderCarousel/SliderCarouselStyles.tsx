@@ -66,5 +66,5 @@ border: none;
 border-radius: 20px;
 background-color: ${(props) => props.background};
 `
-//background-color: brown;
-//${(props) => props.currentPosition}
+// background-color: brown;
+// ${(props) => props.currentPosition}

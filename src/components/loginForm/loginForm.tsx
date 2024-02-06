@@ -1,12 +1,16 @@
-import { useLogin } from "../../hooks/useLogin";
-import { ErrorLogin, RegisterIcon, OrHaveAnAccount, ErrorRegisterInformation, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper } from "./loginFormStyles";
+import { memo, useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
+import { ErrorLogin, RegisterIcon, OrHaveAnAccount, ErrorRegisterInformation, RegisterComponentTitle, RegisterFormBaccground, RegisterFormComponent, RegisterFormInputMarkdown, RegisterFormInputUsername, RegisterFormInputWrapper, RegisterFormSubmit, RegisterFormWrapper } from "./loginFormStyles";
+
+import { useLogin } from "../../hooks/useLogin";
 import Email from "../../assets/email.png"
 import Eye from "../../assets/eye.png"
 import EyeCrossed from "../../assets/eye-crossed.png"
-import { useSelector } from 'react-redux';
 import { loginLoadingStatusSelector } from "../../store/selectors/login.selector";
-import { memo, useState } from "react";
+
 const LoginForm = memo(() => {
     const { handleClick, handleRegister, loginForm, passwordForm, isErrorInput } = useLogin()
     const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false)
@@ -36,7 +40,7 @@ const LoginForm = memo(() => {
                     <RegisterFormInputUsername
                         ref={loginForm}
                         name="email"
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         type="email" placeholder="Type email" required />
                 </RegisterFormInputWrapper>
                 <RegisterFormInputWrapper>
@@ -47,10 +51,10 @@ const LoginForm = memo(() => {
                         {isErrorInput.passwordInput}
                     </ErrorRegisterInformation>
                     <RegisterIcon
-                        onClick={() => handlePassword()}
+                        onClick={() => { handlePassword(); }}
                         src={isVisiblePassword ? Eye : EyeCrossed} alt="users" />
                     <RegisterFormInputUsername
-                        onChange={(event) => handleRegister(event)}
+                        onChange={(event) => { handleRegister(event); }}
                         name="password"
                         ref={passwordForm}
                         type="password"

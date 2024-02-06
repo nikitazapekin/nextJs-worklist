@@ -10,11 +10,11 @@ const useSlide  =  () => {
 
               if (currentSlide == 0) {
                 setCurrentSlide(2)
-              setCurrentPosition(prev => prev - slider.current.offsetWidth * 2) //350
+              setCurrentPosition(prev => prev - slider.current.offsetWidth * 2) // 350
             }
             else {
               setCurrentSlide(prev => prev - 1)
-              setCurrentPosition(prev => prev + slider.current.offsetWidth) //350
+              setCurrentPosition(prev => prev + slider.current.offsetWidth) // 350
             }
           } else {
             if (currentSlide != 2) {
@@ -48,7 +48,7 @@ const useSlide  =  () => {
       }
     }, 5000);
 
-    return () => clearInterval(intervalId);
+    return () => { clearInterval(intervalId); };
   }, [setCurrentSlide, setCurrentPosition, currentSlide]);
     return {currentPosition, setCurrentPosition, currentSlide, setCurrentSlide, handleClick, handleDot, slider}
 }

@@ -12,6 +12,7 @@ import finalRegisterSlice from './slices/finalRegister.slice';
 import personalInformationSlice from './slices/person.slice';
 import yourInformationSlice from './slices/yourInformation.slice';
 import setAvatarSlice from './slices/setAvatar.slice';
+import getOffersSlice from './slices/getOffers.slice';
 const rootReducer = combineReducers({
     authSlice: authSlice,
 	loginSlice: loginSlice,
@@ -19,9 +20,9 @@ const rootReducer = combineReducers({
 	finalRegisterSlice: finalRegisterSlice,
 	personalInformationSlice: personalInformationSlice,
 	yourInformation: yourInformationSlice,
-	setAvatarSlice: setAvatarSlice
+	setAvatarSlice: setAvatarSlice, 
+	getOffersSlice: getOffersSlice
 });
-
 const persistConfig = getPersistConfig({
 	key: 'root',
 	storage,

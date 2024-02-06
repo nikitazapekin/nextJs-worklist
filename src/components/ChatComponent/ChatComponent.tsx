@@ -1,4 +1,5 @@
 import { Chat, ChatNavBar, ChatNavBarItem, ChatNavBarSearch, ChatNavBarSearchWrapper, ChatWrapper, SearchImage, SearchWrapper } from "./ChatComponentStyles";
+
 import Search from "../../assets/search.png"
 import UsersOfChatComponent from "../usersOfChatComponent/usersOfChatComponent";
 const ChatComponent = () => {

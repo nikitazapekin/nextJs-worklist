@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { AboutPersonal, AboutPersonalAvatarDraw, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume } from "./personalPageFormStyles";
 import { useEffect, useState, memo } from "react";
+
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
+
+import { AboutPersonal, AboutPersonalAvatarDraw, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume } from "./personalPageFormStyles";
+
 import useJwt from "../../hooks/useJwt";
 import { fetchPersonalInformationFunction } from "../../store/slices/person.slice";
 import usePersonalInformation from "../../hooks/usePersonalInformation";
@@ -26,9 +29,9 @@ setCurrentPagePersonal((event.target as HTMLElement).dataset.name)
     <PersonalForm>
       <PersonalFormWrapper>
 <PersonalNaBar> 
-<PersonalNavBarItem onClick={(event)=> handleNavigate(event)} data-name="data">Your data</PersonalNavBarItem>
-<PersonalNavBarItem onClick={(event)=> handleNavigate(event)} data-name="job">Your job offers</PersonalNavBarItem>
-<PersonalNavBarItem onClick={(event)=> handleNavigate(event)} data-name="chats">Chats</PersonalNavBarItem>
+<PersonalNavBarItem onClick={(event)=> { handleNavigate(event); }} data-name="data">Your data</PersonalNavBarItem>
+<PersonalNavBarItem onClick={(event)=> { handleNavigate(event); }} data-name="job">Your job offers</PersonalNavBarItem>
+<PersonalNavBarItem onClick={(event)=> { handleNavigate(event); }} data-name="chats">Chats</PersonalNavBarItem>
 <PersonalNavBarItem
  onClick={handleLogout}
 >Log out</PersonalNavBarItem>

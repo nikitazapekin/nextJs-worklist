@@ -1,10 +1,12 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef } from "react";
+
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { personalInfSelector } from "../store/selectors/person.selector";
-import { useRef } from "react";
+
 import useJwt from "./useJwt";
+
+import { personalInfSelector } from "../store/selectors/person.selector";
 import { fetchYourInformationFunction } from "../store/slices/yourInformation.slice";
 import { yourInformationSelector } from "../store/selectors/yourInformation.selector";
 import { setClearDocument } from "../store/slices/person.slice";
@@ -54,22 +56,22 @@ const usePersonalInformation = () => {
   useEffect(() => {
     setPersonalDataState((prev) => ({
       ...prev,
-      ["token"]: jwtToken,
+      "token": jwtToken,
     }))
   }, [jwtToken])
   const { username, email, country, city, telephone, RegistrationData, avatar, document, favouriteOffers, experience, lastTimeAtNetwork, education, describtion } = useSelector(personalInfSelector)
   const navigate = useNavigate()
   useEffect(() => {
     setPersonalDataState({
-      education: education,
+      education,
       about: describtion,
-      experience: experience,
-      email: email,
+      experience,
+      email,
       password: "",
-      telephone: telephone,
-      country: country,
-      city: city,
-      document: document,
+      telephone,
+      country,
+      city,
+      document,
       token: jwtToken,
       errorMessage: "",
     })
@@ -89,7 +91,7 @@ const usePersonalInformation = () => {
     })
     setPersonalDataState((prev) => ({
       ...prev,
-      ["document"]: URL.createObjectURL(fileUploader.current.files[0]),
+      "document": URL.createObjectURL(fileUploader.current.files[0]),
     }))
   }
   const handleClearDocument = () => {
@@ -107,13 +109,12 @@ const usePersonalInformation = () => {
   const handleRemoveDocument = () => {
     setPersonalDataState((prev) => ({
       ...prev,
-      ["document"]: ""
+      "document": ""
     }))
     dispatch(setClearDocument());
   }
   const handleSave = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     dispatch(fetchYourInformationFunction(personalInformationState))
-
   }
   return {
     handleLogout, handleSave, handleChangeFile,// handleAvatar, 

@@ -1,9 +1,10 @@
 
 import { useEffect, useState } from "react";
+
 import useRegister from "./useRegister";
 const useCaptcha = () => {
   const generateRandomCode = () => {
-    let codeArray: string[] = [];  
+    const codeArray: string[] = [];  
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (let i = 0; i < 8; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
@@ -22,7 +23,7 @@ useEffect(()=> {
 console.log(captchaCode)
 }, [captchaCode])
 useEffect(()=> {
-  //if(isClickedFirst==false){
+  // if(isClickedFirst==false){
 console.log(enteredCaptchaCode)
     if(enteredCaptchaCode==captchaCode.join('')){
       setIsCorrectCaptcha(true)
