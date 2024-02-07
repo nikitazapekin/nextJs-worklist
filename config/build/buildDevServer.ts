@@ -6,7 +6,9 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration {
         port: options.port ?? 3000,
         open: true,
         // если раздавать статику через nginx То надо делать проксирование на Index.html
-        historyApiFallback: true,
-        hot: true
+       historyApiFallback: true,
+       hot: true
     }
 }
+
+//https://github.com/rafgraph/spa-github-pages

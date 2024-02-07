@@ -55,6 +55,8 @@ gap: 20px
 interface DotsProps {
    background: string
 }
+
+
 export const SliderDot = styled.button<DotsProps>`
 border: 2px solid black;
 cursor: pointer;
@@ -66,5 +68,3 @@ border: none;
 border-radius: 20px;
 background-color: ${(props) => props.background};
 `
-// background-color: brown;
-// ${(props) => props.currentPosition}

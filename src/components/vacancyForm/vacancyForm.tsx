@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useAllOffers from "../../hooks/useAllOffers";
+import useWebSocket from "../../hooks/useWebSocket";
 interface SelectedOfferProps {
     id: number,
     title: string,
@@ -15,41 +16,54 @@ interface SelectedOfferProps {
     salary: string,
 }
 const VacancyForm = () => {
-  //  const { id } = useParams()
-    const [currentElement, setCurrentElement] = useState<SelectedOfferProps>({
-        id: 0,
-        title: "",
-        description: "",
-        skills: [],
-        workingPerDay: "",
-        location: "",
-        salary: "",
-    })
-    const { data } = useSelector(GetOffersSelector)
-    useEffect(() => {
-   //     const elems = data.filter(item => String(item.id) == id)
-     
-    }, [data])
-    useEffect(()=> {
-console.log("EL" +JSON.stringify(currentElement))
-console.log(currentElement.description)
-    }, [currentElement])
+const {getClickedElementFromLocalStorage} = useAllOffers()
+const {amountOfOnlineUsers} = useWebSocket()
+const [currentElement, setCurrentElement] =useState<SelectedOfferProps | null>(getClickedElementFromLocalStorage)
+console.log("EL"+JSON.stringify(getClickedElementFromLocalStorage()))
     return (
         <>
+        {currentElement && (
+
+            <VacancyFormWrapper>
+            <VacancyFormOfOffer>
+                <VacancyTitle>
+        {currentElement.title} Online {amountOfOnlineUsers} 
+                </VacancyTitle>
+                <VacancyDescribtion>
+                {currentElement.description}
+                </VacancyDescribtion>
+            </VacancyFormOfOffer>
+        </VacancyFormWrapper> 
         
+        )}
         </>
     );
 }
 
 export default VacancyForm;
+
 /*
-        <VacancyFormWrapper>
-            <VacancyFormOfOffer>
-                <VacancyTitle>
-                {currentElement.title}
-                    {currentElement.description}
-                </VacancyTitle>
-                <VacancyDescribtion>
-                </VacancyDescribtion>
-            </VacancyFormOfOffer>
-        </VacancyFormWrapper> */
+
+import NavBar from "../../components/NavBar/NavBar";
+import OffersLeftSidePanel from "../../components/OffersLeftSidePanel/OffersLeftSidePanel";
+import Footer from "../../components/footer/footer";
+import { Global } from "../../components/globalStyles";
+import useWebSocket from "../../hooks/useWebSocket";
+
+const OffersPage = () => {
+  //  const { amountOfOnlineUsers } = useWebSocket({ socket: new WebSocket("ws://localhost:5000/ws") });
+  const { amountOfOnlineUsers } = useWebSocket( );
+    return ( 
+<>
+<NavBar />
+<Global />
+<OffersLeftSidePanel />
+<Footer />
+
+</>
+     );
+    }
+    
+    export default OffersPage
+    //Online {amountOfOnlineUsers} 
+    */

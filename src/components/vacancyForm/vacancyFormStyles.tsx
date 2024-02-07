@@ -27,5 +27,20 @@ color: #fff;
 export const VacancyDescribtion = styled.h2`
 color: #fff;
 font-size: 30px;
+max-width: 60%;
+`
+export const SkillsBlock = styled.div`
+width: 100%;
+height: auto;
+flex-wrap: wrap;
+display: flex;
+`
+export const SkillElement = styled.div`
+min-width: 100px;
+width: auto;
+height: auto;
+padding: 10px;
+background-color: black;
+color: #fff;
 
 `

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
 import { GetOffersSelector } from "../store/selectors/getOffer.selector";
 interface SelectedOfferProps {
@@ -18,25 +18,28 @@ interface SelectedOfferProps {
     }
 const useAllOffers = () => {
     const navigate = useNavigate()
+    const {id} =useParams()
+    console.log("ID"+id)
     const { data } = useSelector(GetOffersSelector)
     const [selectedElement, setSelectedElement] = useState([]) 
-    // useState<SelectedOfferProps>([]) 
     const handleNavigate = (id: string) => {
+        const filteredElement = data.find(item => String(item.id) === id)
+        if (filteredElement) {
+            localStorage.setItem("clickedElement", JSON.stringify(filteredElement))
+        }
         console.log(data.filter(item=> String(item.id)==id))
-        navigate(`/vacancy/${id}`)
-        //setSelectedElement(data.filter(item=> String(item.id)==id))
+       // navigate(`/vacancy`)
+       navigate(`/offers/${id}`)
     }
-    return { handleNavigate, selectedElement }
+    const getClickedElementFromLocalStorage = () => {
+        const clickedElementJSON = localStorage.getItem("clickedElement")
+        if (clickedElementJSON) {
+            return JSON.parse(clickedElementJSON)
+        } else {
+            return null
+        }
+    }
+    
+    return { handleNavigate, selectedElement, getClickedElementFromLocalStorage }
 }
 export default useAllOffers
-/*
-
-import { useEffect, useState, memo } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { GetOffersSelector } from "../../store/selectors/getOffer.selector";
-import { fetchGetOffersFunction } from "../../store/slices/getOffers.slice";
-import { ContactButton, ExistingOffers, LocationOfJob, OfferHeader, OfferSalary, OfferTitle, OffersTitle, OffersTitleBlock, OffersWrapper, RequeredSkill, SkillsBlock } from "./AllOffersStyles";
-import useAllOffers from "../../hooks/useAllOffers";
-const AllOffers = () => {
-    const { data } = useSelector(GetOffersSelector)
-*/

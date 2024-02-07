@@ -13,6 +13,7 @@ import personalInformationSlice from './slices/person.slice';
 import yourInformationSlice from './slices/yourInformation.slice';
 import setAvatarSlice from './slices/setAvatar.slice';
 import getOffersSlice from './slices/getOffers.slice';
+//import { addToLocalStorageClickedOfferSlice } from './slices/addToLocalStorageClikedOffer';
 const rootReducer = combineReducers({
     authSlice: authSlice,
 	loginSlice: loginSlice,
@@ -21,12 +22,13 @@ const rootReducer = combineReducers({
 	personalInformationSlice: personalInformationSlice,
 	yourInformation: yourInformationSlice,
 	setAvatarSlice: setAvatarSlice, 
-	getOffersSlice: getOffersSlice
+	getOffersSlice: getOffersSlice,
+	//addToLocalStorageSlice: addToLocalStorageClickedOfferSlice
 });
 const persistConfig = getPersistConfig({
 	key: 'root',
 	storage,
-	blacklist: ['loginSlice', 'emailCodeSlice', 'finalRegisterSlice'],
+	blacklist: ['loginSlice', 'emailCodeSlice', 'finalRegisterSlice', 'getOffersSlice'],
 	rootReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);

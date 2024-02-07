@@ -1,18 +1,19 @@
 
+import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import SliderCarouselComponent from "../../components/SliderCarousel/SliderCarousel";
+import Footer from "../../components/footer/footer";
 import { Global } from "../../components/globalStyles";
 
 const Homepage = () => {
+	const navigate = useNavigate()
     return ( 
         <>
             <NavBar />
             <Global />
             <SliderCarouselComponent />
-            <form method="POST" encType="multipart/form-data" action="http://localhost:5000/test">
-                <input type="file" name="my-file" accept="image/*" />
-                <input type="submit" value="Upload" />
-            </form>
+           <Footer />
+		   <button onClick={()=> navigate("/vacancy/1")}>dsdfssf</button>
         </>
      );
 }

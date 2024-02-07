@@ -8,6 +8,7 @@ background-color: rgba(230, 232, 235);
  gap: 10px;
  flex-direction: column;
  background-color: rgba(46, 46, 46);
+ overflow-y: scroll
 
 `
 export const OffersWrapper = styled.div`
@@ -15,6 +16,7 @@ width: 100%;
 min-height: 100px;
 padding: 20px;
 color: #fff;
+height: auto;
 background-color: rgba(98, 99, 99);
 display: flex; 
 flex-direction: column;
