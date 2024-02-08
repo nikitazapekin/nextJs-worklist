@@ -9,7 +9,6 @@ background-color: rgba(230, 232, 235);
  flex-direction: column;
  background-color: rgba(46, 46, 46);
  overflow-y: scroll
-
 `
 export const OffersWrapper = styled.div`
 width: 100%;
@@ -42,12 +41,10 @@ export const OfferHeader = styled.div`
 width: 100%;
 display: flex;
 justify-content: space-between;
-
 `
 export const OfferTitle = styled.h2`
 color: #fff;
 font-size: 32px;
-
 `
 export const OfferSalary = styled.h2`
 color: #fff;

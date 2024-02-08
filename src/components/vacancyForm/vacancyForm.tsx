@@ -1,11 +1,15 @@
-import { VacancyFormWrapper, VacancyFormOfOffer, VacancyTitle, VacancyDescribtion } from "./vacancyFormStyles";
+import { VacancyFormWrapper,  VacancyFormOfOffer, VacancyTitle, VacancyDescribtion, SkillsBlock, SkillElement, VacancyTitleWrapepr, VacancyWatchersContainer, EyeWatchers, EyeTitle, RequiredSkills, RequiredSkillsTitle, WorkingPerDayElement, SalaryOfOffer, ChatOfVacancy, ApplyForJobButton, ChatKeypad, ChatInput, ChatSmiley, ChatSmileyImage, ChatSendImage } from "./vacancyFormStyles";
 import { useSelector, useDispatch } from 'react-redux';
 import { GetOffersSelector } from "../../store/selectors/getOffer.selector";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import Watcher from "../../assets/Watcher.png"
 import useAllOffers from "../../hooks/useAllOffers";
 import useWebSocket from "../../hooks/useWebSocket";
+import Smiley from  "../../assets/smiley.png"
+import Send from "../../assets/send.png"
+import ChatKeypadComponent from "../ChatKeypadComponent/ChatKeypadComponent";
 interface SelectedOfferProps {
     id: number,
     title: string,
@@ -16,26 +20,65 @@ interface SelectedOfferProps {
     salary: string,
 }
 const VacancyForm = () => {
-const {getClickedElementFromLocalStorage} = useAllOffers()
-const {amountOfOnlineUsers} = useWebSocket()
-const [currentElement, setCurrentElement] =useState<SelectedOfferProps | null>(getClickedElementFromLocalStorage)
-console.log("EL"+JSON.stringify(getClickedElementFromLocalStorage()))
+    const { getClickedElementFromLocalStorage } = useAllOffers()
+    
+    const { amountOfOnlineUsers } = useWebSocket()
+    const [currentElement, setCurrentElement] = useState<SelectedOfferProps | null>(getClickedElementFromLocalStorage)
+    console.log("EL" + JSON.stringify(getClickedElementFromLocalStorage()))
     return (
         <>
-        {currentElement && (
+            {currentElement && (
+                <VacancyFormWrapper>
+                    <VacancyFormOfOffer>
+                        <VacancyTitleWrapepr>
+                            <VacancyTitle>
+                                {currentElement.title}
+                            </VacancyTitle>
+                            <VacancyWatchersContainer>
+                                <EyeWatchers src={Watcher} alt="watcher" />
+                                <EyeTitle>
+                                    {amountOfOnlineUsers}
+                                </EyeTitle>
+                            </VacancyWatchersContainer>
+                        </VacancyTitleWrapepr>
+                        <RequiredSkills>
+                            <RequiredSkillsTitle>
+                                Required skills:
+                            </RequiredSkillsTitle>
+                            <SkillsBlock>
+                                {currentElement.skills.map((item) => (
+                                    <SkillElement>{item}</SkillElement>
+                                ))}
+                            </SkillsBlock>
+                        </RequiredSkills>
+                        <WorkingPerDayElement>
+                            Working time: {currentElement.workingPerDay}
+                        </WorkingPerDayElement>
+                        <VacancyDescribtion>
+                            About:   {currentElement.description}
+                        </VacancyDescribtion>
+                        <SalaryOfOffer>
+                            Salary:  {currentElement.salary} (BYN)
+                        </SalaryOfOffer>
+                        <ApplyForJobButton>
+                            Apply for job
+                        </ApplyForJobButton>
+                        <ChatKeypadComponent />
+                       {/* <ChatOfVacancy>
+                            <ChatKeypad>
+                                <ChatInput placeholder="Type message"/>
+                                <ChatSmiley>
+                                    <ChatSmileyImage src={Smiley} alt="smiley" />
+                                </ChatSmiley>
+                                <ChatSmiley>
+                           <ChatSendImage src={Send} alt="smiley"/>
+                                </ChatSmiley>
+                            </ChatKeypad>
+                                </ChatOfVacancy>  */}
+                    </VacancyFormOfOffer>
+                </VacancyFormWrapper>
 
-            <VacancyFormWrapper>
-            <VacancyFormOfOffer>
-                <VacancyTitle>
-        {currentElement.title} Online {amountOfOnlineUsers} 
-                </VacancyTitle>
-                <VacancyDescribtion>
-                {currentElement.description}
-                </VacancyDescribtion>
-            </VacancyFormOfOffer>
-        </VacancyFormWrapper> 
-        
-        )}
+            )}
         </>
     );
 }

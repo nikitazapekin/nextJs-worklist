@@ -1,32 +1,4 @@
-/* import { useState } from "react";
-function displayMessage(message: string) {
-    console.log(message)
- 
-}
-interface SocketMessageTypes  { 
-    user: string,
 
-}
-const useWebSocket  = ({socket}: { socket: WebSocket }) => {
-    const [amountOfOnlineUsers, setAmountOfOnlineUsers] = useState(0)
-  //  const socket = new WebSocket("ws://localhost:5000/ws");
-    socket.onopen = function(event) {
-      //  setAmountOfOnlineUsers(prev=> prev+1)
-        displayMessage("Connected to WebSocket server");
-        const el:SocketMessageTypes = { user: `Alex${Math.random()}` };
-        console.log(el)
-        socket.send(JSON.stringify(el));
-     //   socket.send("mess")
-    };
-
-    socket.onmessage = function(event) {
-        const message = event.data;
-        displayMessage("Server: " + message);
-    };
-
-    return {amountOfOnlineUsers}
-}
- export default useWebSocket  */
 
 
  import { useEffect, useState } from "react";
@@ -59,9 +31,9 @@ if(!isConnected){
     console.log("MESS" +message)
     console.log("ONLINE"+message)
     console.log("tip" + typeof message)
-   setAmountOfOnlineUsers(String(Math.floor(Number(message)/2)))
+  // setAmountOfOnlineUsers(String(Math.floor(Number(message)/2)))
+  setAmountOfOnlineUsers(message)
       displayMessage("Server: " + event.data);
-
 };
 socket.onerror = function(error) {
     console.error("WebSocket Error: ", error);
@@ -80,8 +52,50 @@ socket.onclose = function(event) {
 
 export default useWebSocket;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  /*
- 
     <script>
         const socket = new WebSocket("ws://localhost:5000/ws");
         const messageContainer = document.getElementById("message-container");

@@ -48,8 +48,6 @@ width: 100%;
 padding 30px;
 height: 50px;
 padding-left: 20px;
-
-
 border: none;
 outline: none;
 cursor: pointer;

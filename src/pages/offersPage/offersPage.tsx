@@ -14,6 +14,8 @@ const OffersPage = () => {
 <OffersLeftSidePanel />
 <Footer />
 <Outlet />
+ 
+
 </>
      );
     }

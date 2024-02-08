@@ -28,8 +28,7 @@ const useAllOffers = () => {
             localStorage.setItem("clickedElement", JSON.stringify(filteredElement))
         }
         console.log(data.filter(item=> String(item.id)==id))
-       // navigate(`/vacancy`)
-       navigate(`/offers/${id}`)
+        navigate(`/offer`)
     }
     const getClickedElementFromLocalStorage = () => {
         const clickedElementJSON = localStorage.getItem("clickedElement")

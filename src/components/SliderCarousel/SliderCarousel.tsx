@@ -92,8 +92,6 @@ const sld=useRef(null)
 export default SliderCarouselComponent;
 
 
-
-
 /*
 
  useEffect(() => {
