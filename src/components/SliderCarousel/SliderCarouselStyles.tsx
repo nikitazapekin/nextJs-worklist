@@ -16,7 +16,6 @@ display: flex;
 position: absolute;
 transition: 0.6s;
 left: ${(props) => props.currentPosition}px
- 
 `
 export const SliderCarouselLeft = styled.button`
 height: 100vh;
@@ -41,7 +40,6 @@ right: 0;
 top: 0;
 font-weight: 900;
 font-size: 70px
-
 `
 export const SliderDots = styled.div`
 display: flex;
@@ -55,16 +53,22 @@ gap: 20px
 interface DotsProps {
    background: string
 }
-
-
 export const SliderDot = styled.button<DotsProps>`
 border: 2px solid black;
 cursor: pointer;
 color: #fff;
-padding: 20px;
-font-size:40px;
 font-weight: 900;
 border: none;
 border-radius: 20px;
 background-color: ${(props) => props.background};
+width: 50px;
+height: 30px;
 `
+export const SliderContentBlock = styled.div`
+width: 60%;
+heigth: auto;
+padding: 20px;
+background-color: rgba(40, 41, 40)
+`
+//padding: 20px;
+//font-size:40px;

@@ -14,6 +14,7 @@ const users = ["Alex202", "NEkit", "Shrek2004", "Bob", "feefef"]
 // function useWebSocket({ socket }: { socket: WebSocket }) {
     function useWebSocket() {
   const [amountOfOnlineUsers, setAmountOfOnlineUsers] = useState("");
+  /*
  const [isConnected, setIsConnected] =useState(false)
  useEffect(()=>{
      const socket = new WebSocket("ws://localhost:5000/ws")
@@ -45,7 +46,7 @@ socket.onclose = function(event) {
         displayMessage('Connection died');
     }
 };
-}, [isConnected])
+}, [isConnected]) */
 
   return { amountOfOnlineUsers };
 }

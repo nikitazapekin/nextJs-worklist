@@ -56,12 +56,52 @@ export default usePublicChat;
 
 
 import { useEffect, useState } from "react";
+import useJwt from "./useJwt";
+import { useSelector, useDispatch } from 'react-redux';
+import { personalInfSelector } from "../store/selectors/person.selector";
+import { fetchGetUsernameFunction } from "../store/slices/getUsername.slice";
+import { GetUsersSelector } from "../store/selectors/getUsers.selector";
+//interface ChatMessageTypes  {
+  /*  type ChatMessageTypes = Array<{
 
+        username: string,
+        message: string,
+        data: string
+    }> */
+    interface ChatMessage {
+        username: string;
+        message: string;
+        data: string;
+        avatar: string,
+    }
+    
+//}
 function usePublicChat() {
-    const [chatHistory, setChatHistory] = useState<String[]>([]);
+  //  const {username} = useSelector(personalInfSelector)
+  const username = useSelector(GetUsersSelector)
+  console.log("USERNAMEEEEEEEEEEEEE" +JSON.stringify(username))
+  console.log("TEST" +username)
+   // const dispatch = useDispatch()
+   const dispatch = useDispatch()
+  //  const [chatHistory, setChatHistory] = useState<String[]>([]);
+  
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
     const [message, setMessage] = useState<string>("");
     const [isConnected, setIsConnected] = useState(false);
     const [currentMessage, setCurrentMessage] =useState<string>("")
+    const {jwtToken} =useJwt()
+    useEffect(()=> {
+        const token = jwtToken
+        console.log("DISPATCHING "+jwtToken)
+dispatch(fetchGetUsernameFunction({token}))
+//dispatch(fetchGetUsernameFunction(token))
+    }, [jwtToken, currentMessage])
+    useEffect(()=>  {
+console.log("HIST" +JSON.stringify(chatHistory))
+for(let i=0; i< chatHistory.length; i++){
+    console.log("EL"+JSON.stringify(chatHistory[i]))
+}
+    }, [chatHistory])
     const handleChangeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentMessage(event.target.value)
     }
@@ -76,7 +116,12 @@ function usePublicChat() {
         }
 
         socket.onmessage = function (event) {
-            const message = event.data;
+            let message = event.data;
+            console.log("Парсинг")
+            message = JSON.parse(message)
+            console.log(message.username)
+        //     console.log(JSON.parse(message))
+       //      console.log()
             setChatHistory(prev => [...prev, message]);
         };
 
@@ -91,21 +136,25 @@ function usePublicChat() {
                 console.log('Connection died');
             }
         };
-
         return () => {
             socket.close();
         };
     }, [isConnected]);
 
     const sendMessageToServer = () => {
-        if (currentMessage.trim() !== "") {
+        const messageObject= {
+            username: username,
+            token: jwtToken,
+            message: currentMessage
+                }
+                const messageString = JSON.stringify(messageObject);
             const socket = new WebSocket("ws://localhost:5000/publicMessages");
             socket.onopen = function () {
-                socket.send(currentMessage);
+          socket.send(messageString);
                 setCurrentMessage("");
                 socket.close();
             };
-        }
+      //  }
     };
 
     return { chatHistory, message, setMessage, sendMessageToServer, handleChangeMessage };

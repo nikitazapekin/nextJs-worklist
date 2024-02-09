@@ -26,6 +26,9 @@ interface ReggProps {
     password: string,
    
 }
+interface GetUsernameTypes {
+    token: string
+}
 export const serverApi = {
     signUpAction(regData: RegProps) {
         console.log("REEEEEEEEEE"+JSON.stringify(regData))
@@ -110,6 +113,10 @@ export const serverApi = {
             console.log("full" +fullURL)
             throw error; 
         });
+    },
+   getUsernameAction(regData: GetUsernameTypes) {
+        console.log("REEEEEEEEEE"+JSON.stringify(regData))
+        return serverApiInstance.get(`/getUsername?token=${regData.token}`)
     }
 };
  

@@ -1,4 +1,4 @@
-import { SliderCarouselItem, SliderImage } from "./SliderCarouselItemStyles";
+import { SliderCarouselItem, SliderContentBlock, SliderContentBlockTitle, SliderImage } from "./SliderCarouselItemStyles";
 interface SliderCarouselItemComponentProps {
     imageLink: string,
   //  isActive: boolean
@@ -8,27 +8,15 @@ const SliderCarouselItemComponent = ({imageLink}: SliderCarouselItemComponentPro
     return (
         <SliderCarouselItem>   
 <SliderImage  src={imageLink} /> 
+
+<SliderContentBlock>
+  <SliderContentBlockTitle>
+    Titleeeee
+  </SliderContentBlockTitle>
+</SliderContentBlock>
         </SliderCarouselItem>
      );
 }
  
 export default SliderCarouselItemComponent; 
 
-/*
-
-import { SliderCarouselItem, SliderImage } from "./SliderCarouselItemStyles";
-interface SliderCarouselItemComponentProps {
-    imageLink: string;
-  }
-  import { forwardRef } from "react";
-  const SliderCarouselItemComponent =  forwardRef<HTMLDivElement, SliderCarouselItemComponentProps>(
-    ({ imageLink }, ref) => {
-      return (
-        <SliderCarouselItem ref={ref}>
-          <SliderImage src={imageLink} />
-        </SliderCarouselItem>
-      );
-    }
-  );
-  
-  export default SliderCarouselItemComponent; */

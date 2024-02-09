@@ -54,12 +54,7 @@ const sld=useRef(null)
     sld.current.addEventListener('mousemove', handleMouseMove);
 // }
     return () => {
-       // if(sld.current!=undefined){
-    /*  sld.current.removeEventListener('mousedown', handleMouseDown);
-      sld.current.removeEventListener('mouseleave', handleMouseLeave);
-      sld.current.removeEventListener('mouseup', handleMouseUp);
-      sld.current.removeEventListener('mousemove', handleMouseMove); */
-      //  }
+      
     }; 
   }, []);
 
@@ -75,14 +70,17 @@ const sld=useRef(null)
             key={index} imageLink={item} />
         ))}
       </SliderCarouselWrapper>
-      <SliderCarouselLeft onClick={() => { handleClick('left'); }}>←</SliderCarouselLeft>
-      <SliderCarouselRight onClick={() => { handleClick('right'); }}>→</SliderCarouselRight>
+  {/*    <SliderCarouselLeft onClick={() => { handleClick('left'); }}>←</SliderCarouselLeft>
+      <SliderCarouselRight onClick={() => { handleClick('right'); }}>→</SliderCarouselRight> */}
       <SliderDots>
         {imgs.map((item, index) => (
           <SliderDot key={index}
-            background={currentSlide == index ? "yellow" : "brown"}
+            background={currentSlide == index ? "#fff" : "black"}
             onClick={() => { handleDot(index); }}
-          >{index + 1}</SliderDot>
+          >
+          {/*{index + 1} */}
+          
+          </SliderDot>
         ))}
       </SliderDots>
     </SliderCarousel>

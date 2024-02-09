@@ -3,7 +3,7 @@ export const FooterWrapper = styled.footer`
 width: 100%;
 height: auto;
 position: relative;
-background-color: rgba(85, 90, 99);
+background-color: rgba(33, 33, 32);
 padding: 30px;
 display: flex;
 justify-content: center;

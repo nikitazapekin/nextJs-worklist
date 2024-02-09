@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 export const ExistingOffers = styled.div`
 position: relative;
 width: 100%;
+max-width: 100%;
 height: 100vh;
 background-color: rgba(230, 232, 235);
  display: flex;

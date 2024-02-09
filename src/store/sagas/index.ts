@@ -8,6 +8,7 @@ import { yourInformationWatcher } from './yourInformation.saga';
 import { setAvatarWatcher } from './setAvatar.saga';
 import { createOfferWatcher } from './createOffer.saga';
 import { GetOfferWatcher } from './getOffers.saga';
+import { GetUsernameWatcher } from './getUsername.saga';
 export function* rootSaga() {
 	yield all([
          authWatcher(), 
@@ -18,6 +19,7 @@ export function* rootSaga() {
           yourInformationWatcher(),
           setAvatarWatcher(),
           createOfferWatcher(),
-          GetOfferWatcher()    
+          GetOfferWatcher(), 
+          GetUsernameWatcher()
     ]);
 }

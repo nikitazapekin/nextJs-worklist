@@ -19,7 +19,7 @@ justify-content: center;
 gap: 10px;
 align-items: center; 
 `
- export const ChatInput = styled.input`
+export const ChatInput = styled.input`
  width: 80%;
  height: 50px;
  border: none;
@@ -29,7 +29,7 @@ align-items: center;
  border-radius: 20px;
  font-size: 32px;
  `
- export const ChatSmiley = styled.div`
+export const ChatSmiley = styled.div`
  width: 50px;
  height: 50px;
  cursor: pointer;
@@ -40,29 +40,55 @@ align-items: center;
  align-items: center;
  background-color: #fff;
  `
- export const ChatSmileyImage = styled.img`
+export const ChatSmileyImage = styled.img`
  width: 50px;
  height: 50px;
-
  `
- 
- export const ChatSendImage = styled.img`
+export const ChatSendImage = styled.img`
  width: 30px;
  height: 30px;
 margin-right:  5px;
  `
- export const ChatMessage = styled.div`
+export const ChatMessage = styled.div`
  width: 100%;
  height: auto;
  padding: 20px;
- background-color: orange;
+ background-color: rgba(117, 117, 117);
+ border-bottom: 2px solid black;
+ position: relative;
+ display: flex;
+ gap: 10px;
+ align-items: center;
  `
- export const ChatWrapper =styled.div`
+export const ChatWrapper = styled.div`
  width: 100%;
  height: 100%;
- background-color: blue; 
+ background-color: rgba(133, 132, 130); 
  position: absolute;
  border-radius: 0 0 20px 20px; 
  overflow-y: scroll;
-
+ `
+export const UserAvatar = styled.div`
+ width: 70px;
+ height: 70px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+ `
+export const UserAvatarImage = styled.img`
+ width: 100%;
+ height: 100%;
+ border-radius: 50%;
+ `
+export const ChatBlock = styled.div`
+ display: flex;
+ position: relative;
+ flex-direction: column;
+ `
+export const ChatUsername = styled.h1`
+ color: #fff;
+ `
+export const ChatMessageText = styled.h2`
+ color: #fff;
  `

@@ -22,7 +22,7 @@ interface SelectedOfferProps {
 const VacancyForm = () => {
     const { getClickedElementFromLocalStorage } = useAllOffers()
     
-    const { amountOfOnlineUsers } = useWebSocket()
+  //  const { amountOfOnlineUsers } = useWebSocket()
     const [currentElement, setCurrentElement] = useState<SelectedOfferProps | null>(getClickedElementFromLocalStorage)
     console.log("EL" + JSON.stringify(getClickedElementFromLocalStorage()))
     return (
@@ -37,7 +37,7 @@ const VacancyForm = () => {
                             <VacancyWatchersContainer>
                                 <EyeWatchers src={Watcher} alt="watcher" />
                                 <EyeTitle>
-                                    {amountOfOnlineUsers}
+                           {/*         {amountOfOnlineUsers} */}
                                 </EyeTitle>
                             </VacancyWatchersContainer>
                         </VacancyTitleWrapepr>

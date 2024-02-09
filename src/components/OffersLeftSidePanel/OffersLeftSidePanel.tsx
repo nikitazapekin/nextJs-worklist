@@ -1,22 +1,43 @@
 
-import { useEffect, useState, memo } from "react";
-
-import { useSelector, useDispatch } from 'react-redux';
-
-import { ExistingOffers, RangeSlider, OffersNavigation, OffersPanelBlock, OffersPanelBlockTitle, OffersSearchNavigationItemInput, OffersSearchNavigationItemTitle, OffersSearchNavigationWrapper, OffersWrapper, RangeSliderValue, AddSkillBtn, SkillsList, SkillListItem, SkillListItemWrapper, SkillListItemImage, SkillListItemTitle } from "./OffersLeftSidePanelStyles";
+import { useEffect, useState, memo, useRef } from "react";
+import { ExistingOffers, RangeSlider, OffersNavigation, OffersPanelBlock, OffersPanelBlockTitle, OffersSearchNavigationItemInput, OffersSearchNavigationItemTitle, OffersSearchNavigationWrapper, OffersWrapper, RangeSliderValue, AddSkillBtn, SkillsList, SkillListItem, SkillListItemWrapper, SkillListItemImage, SkillListItemTitle, IsHideSideBar, IsHideSideBarLineFirst, IsHideSideBarLineSecond, IsHideSideBarLineThird } from "./OffersLeftSidePanelStyles";
 import useSearchJob from "../../hooks/useSearchJob";
 import Trash from "../../assets/trashSkill.png"
-import { fetchGetOffersFunction } from "../../store/slices/getOffers.slice";
-import { GetOffersSelector } from "../../store/selectors/getOffer.selector";
 import AllOffers from "../AllOffers/AllOffers";
 const OffersLeftSidePanel = memo(() => {
-    const { data } = useSelector(GetOffersSelector)
+    const sidebar = useRef(null)
+    const sidebarButton = useRef(null)
+    const [isHide, setIsHide] = useState(false)
+    const [currentPosition, setCurrentPosition] = useState(0)
+    const [currentPositionOfHideButton, setCurrentPositionOfHideButton] = useState(0)
     const { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill } = useSearchJob()
-    const dispatch = useDispatch()
-
+    const onHide = () => {
+        if (isHide == false) {
+            setCurrentPosition(sidebar.current.offsetWidth)
+            setCurrentPositionOfHideButton(sidebarButton.current.offsetWidth)
+            setIsHide(true)
+        }
+        else {
+            setCurrentPosition(0)
+            setCurrentPositionOfHideButton(0)
+            setIsHide(false)
+        }
+    }
     return (
         <OffersWrapper>
-            <OffersNavigation>
+            <OffersNavigation
+                ref={sidebar}
+                right={currentPosition}
+            >
+                <IsHideSideBar
+                    ref={sidebarButton}
+                    onClick={onHide}
+                    left={currentPositionOfHideButton}
+                >
+                    <IsHideSideBarLineFirst  isHide={isHide} />
+                    <IsHideSideBarLineSecond  isHide={isHide} />
+                    <IsHideSideBarLineThird  isHide={isHide} />
+                </IsHideSideBar>
                 <OffersPanelBlock>
                     <OffersPanelBlockTitle>
                         Search job
@@ -75,9 +96,6 @@ const OffersLeftSidePanel = memo(() => {
                 </OffersPanelBlock>
             </OffersNavigation>
             <AllOffers />
-         {/*   <ExistingOffers>
-                dw
-                        </ExistingOffers> */}
         </OffersWrapper>
     );
 })

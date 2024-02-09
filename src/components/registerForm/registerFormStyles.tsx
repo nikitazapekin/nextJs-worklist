@@ -68,6 +68,14 @@ justify-content: center;
 align-items: center;
 font-size: 32px;
 font-weight: 900;
+transition: 1s ease-in-out;
+&:hover{
+  letter-spacing: 2px;
+background-color: rgba(133, 11, 3);
+color: #fff;
+transform: scale(1.01);
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
 `
 export const OrHaveAnAccount = styled.h2`
 color: #fff;

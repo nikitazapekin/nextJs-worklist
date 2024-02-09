@@ -2,20 +2,74 @@ import styled from "styled-components";
 export const OffersWrapper = styled.div`
 width: 100%;
 display: flex;
+position: relative;
 flex-direction: row;
 `
-export const OffersNavigation = styled.div`
-position: relative;
+interface OffersNavigationTypes {
+    right: number
+}
+
+export const OffersNavigation = styled.div<OffersNavigationTypes>`
+transition: 1.7s;
 width: 400px;
 height: 100vh;
 background-color: rgba(63, 63, 64);
+position: absolute;
+z-index: 111;
+left: ${props => -props.right}px;
+`
+interface IsHideSideBarTypes {
+    left: number
+}
+export const IsHideSideBar = styled.div<IsHideSideBarTypes>`
+width: 50px;
+position:absolute;
+height: 50px;
+background-color: ${props=>props.left==0 ? "red" : "#fff"};
+border: 3px solid black;
+border-radius: 5px;
+z-index: 1111;
+top: 0;
+transition: 0.7s;
+right:${props => -props.left}px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+padding: 5px;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+`
+interface SidebarLines  {
+    isHide: boolean
+}
+export const IsHideSideBarLineFirst = styled.div<SidebarLines>`
+width: 30px;
+height: 4px;
+background-color: black;
+transition: 1.7s;
+transform: ${props=>props.isHide != true ? `rotate(45deg) translateY(10px) translateX(10px)` : `rotate(0deg)`}
+`
+export const IsHideSideBarLineSecond = styled.div<SidebarLines>`
+width: 30px;
+height: 4px;
+background-color: black;
+transition: 1.7s;
+opacity: ${props=>props.isHide != true ? `0` : `100`}%;
+transform: ${props=>props.isHide != true ? `rotate(20deg)` : `rotate(0deg)`}
+`
+export const IsHideSideBarLineThird = styled.div<SidebarLines>`
+width: 30px;
+height: 4px;
+background-color: black;
+transition: 1.7s;
+transform: ${props=>props.isHide != true ? `rotate(135deg) translateY(10px) translateX(-10px)` : `rotate(0deg)`}
 `
 export const ExistingOffers = styled.div`
 position: relative;
 width: 100%;
 height: 100vh;
 background-color: rgba(230, 232, 235);
- 
 `
 export const OffersPanelBlock = styled.div`
 display: flex;
@@ -30,7 +84,7 @@ font-size: 36px;
 color: #fff;
 border-bottom: 2px solid #fff;
 `
-export const OffersNavigationBtn  = styled.div`
+export const OffersNavigationBtn = styled.div`
 cursor: pointer;
 `
 export const OffersSearchNavigationWrapper = styled.div`
@@ -38,10 +92,9 @@ width: 100%;
 height: auto;
  padding: 10px;
 `
- 
+
 export const OffersSearchNavigationItemTitle = styled.h2`
 color: #fff;
-
 `
 export const OffersSearchNavigationItemInput = styled.input`
 font-size: 22px;
@@ -73,8 +126,15 @@ font-size: 22px;
 cursor: pointer;
 position: relative; 
 top: 20px;
+transition: 1s ease-in-out;
+&:hover{
+    letter-spacing: 2px;
+background-color: red;
+transform: scale(1.01);
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
 `
-export const SkillsList= styled.div`
+export const SkillsList = styled.div`
 width: 100%;
 height: auto;
 position: relative;
