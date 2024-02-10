@@ -14,6 +14,7 @@ import yourInformationSlice from './slices/yourInformation.slice';
 import setAvatarSlice from './slices/setAvatar.slice';
 import getOffersSlice from './slices/getOffers.slice';
 import getUsernameSlice from './slices/getUsername.slice';
+import getAmountOfOffersSlice from './slices/getAmountOfOffers.slice';
 //import { addToLocalStorageClickedOfferSlice } from './slices/addToLocalStorageClikedOffer';
 const rootReducer = combineReducers({
     authSlice: authSlice,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
 	yourInformation: yourInformationSlice,
 	setAvatarSlice: setAvatarSlice, 
 	getOffersSlice: getOffersSlice,
-	getUsernameSlice: getUsernameSlice
+	getUsernameSlice: getUsernameSlice,
+	getAmountOfOffers: getAmountOfOffersSlice
 	//addToLocalStorageSlice: addToLocalStorageClickedOfferSlice
 });
 const persistConfig = getPersistConfig({

@@ -8,9 +8,10 @@ const OffersLeftSidePanel = memo(() => {
     const sidebar = useRef(null)
     const sidebarButton = useRef(null)
     const [isHide, setIsHide] = useState(false)
-    const [currentPosition, setCurrentPosition] = useState(0)
-    const [currentPositionOfHideButton, setCurrentPositionOfHideButton] = useState(0)
+    const [currentPosition, setCurrentPosition] = useState( 0)
+    const [currentPositionOfHideButton, setCurrentPositionOfHideButton] = useState( 0 )
     const { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill } = useSearchJob()
+ 
     const onHide = () => {
         if (isHide == false) {
             setCurrentPosition(sidebar.current.offsetWidth)

@@ -11,10 +11,10 @@ interface OffersNavigationTypes {
 
 export const OffersNavigation = styled.div<OffersNavigationTypes>`
 transition: 1.7s;
+position: absolute;
 width: 400px;
 height: 100vh;
 background-color: rgba(63, 63, 64);
-position: absolute;
 z-index: 111;
 left: ${props => -props.right}px;
 `

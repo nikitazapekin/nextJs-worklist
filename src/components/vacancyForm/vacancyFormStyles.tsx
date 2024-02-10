@@ -4,11 +4,9 @@ export const VacancyFormWrapper  = styled.div`
 width: 100%;
 min-height: 100vh;
 position: relative;
- 
 display: flex;
 align-items: center;
 justify-content: center;
- 
 `
 export const VacancyFormOfOffer = styled.div`
 width: 80%;
@@ -37,6 +35,7 @@ width: 100%;
 height: auto;
 flex-wrap: wrap;
 display: flex;
+gap: 20px;
 `
 export const SkillElement = styled.div`
 min-width: 100px;

@@ -4,9 +4,7 @@ import Send from "../../assets/send.png"
 import useChat from "../../hooks/useChat";
 import usePublicChat from "../../hooks/usePublicChat";
 const ChatKeypadComponent = () => {
-    //  const {handleChangeMessage} =useChat()
-    const { sendMessageToServer, handleChangeMessage, chatHistory } = usePublicChat()
-    //   const {chatHistory} =usePublicChat()
+    const { sendMessageToServer, handleChangeMessage, chatHistory, currentMessage} = usePublicChat()
     console.log("HIST" + chatHistory)
     console.log("CUR" + JSON.stringify(chatHistory))
     return (
@@ -33,7 +31,9 @@ const ChatKeypadComponent = () => {
                     ))}
                 </ChatWrapper>
                 <ChatKeypad>
-                    <ChatInput placeholder="Type message" onChange={(event) => handleChangeMessage(event)} />
+                    <ChatInput placeholder="Type message" onChange={(event) => handleChangeMessage(event)} 
+                    value={currentMessage}
+                    />
                     <ChatSmiley>
                         <ChatSmileyImage src={Smiley} alt="smiley" />
                     </ChatSmiley>

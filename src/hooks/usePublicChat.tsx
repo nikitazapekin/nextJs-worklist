@@ -77,14 +77,10 @@ import { GetUsersSelector } from "../store/selectors/getUsers.selector";
     
 //}
 function usePublicChat() {
-  //  const {username} = useSelector(personalInfSelector)
   const username = useSelector(GetUsersSelector)
   console.log("USERNAMEEEEEEEEEEEEE" +JSON.stringify(username))
   console.log("TEST" +username)
-   // const dispatch = useDispatch()
    const dispatch = useDispatch()
-  //  const [chatHistory, setChatHistory] = useState<String[]>([]);
-  
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
     const [message, setMessage] = useState<string>("");
     const [isConnected, setIsConnected] = useState(false);
@@ -94,34 +90,24 @@ function usePublicChat() {
         const token = jwtToken
         console.log("DISPATCHING "+jwtToken)
 dispatch(fetchGetUsernameFunction({token}))
-//dispatch(fetchGetUsernameFunction(token))
-    }, [jwtToken, currentMessage])
-    useEffect(()=>  {
-console.log("HIST" +JSON.stringify(chatHistory))
-for(let i=0; i< chatHistory.length; i++){
-    console.log("EL"+JSON.stringify(chatHistory[i]))
-}
-    }, [chatHistory])
+}, [jwtToken ])
+  //  }, [jwtToken, currentMessage])
     const handleChangeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentMessage(event.target.value)
     }
     useEffect(() => {
         const socket = new WebSocket("ws://localhost:5000/publicMessages");
-
         if (!isConnected) {
             socket.onopen = function (event) {
                 setIsConnected(true);
                 console.log("Connected to WebSocket server");
             };
         }
-
         socket.onmessage = function (event) {
             let message = event.data;
             console.log("Парсинг")
             message = JSON.parse(message)
             console.log(message.username)
-        //     console.log(JSON.parse(message))
-       //      console.log()
             setChatHistory(prev => [...prev, message]);
         };
 
@@ -140,7 +126,6 @@ for(let i=0; i< chatHistory.length; i++){
             socket.close();
         };
     }, [isConnected]);
-
     const sendMessageToServer = () => {
         const messageObject= {
             username: username,
@@ -154,10 +139,8 @@ for(let i=0; i< chatHistory.length; i++){
                 setCurrentMessage("");
                 socket.close();
             };
-      //  }
     };
-
-    return { chatHistory, message, setMessage, sendMessageToServer, handleChangeMessage };
+    return { chatHistory, message, setMessage, sendMessageToServer, handleChangeMessage, currentMessage };
 }
 
 export default usePublicChat;

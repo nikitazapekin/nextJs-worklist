@@ -18,13 +18,12 @@ interface getOffersState {
     >
 	 
 }
-
 const initialState: getOffersState = {
- 
     data: []
 };
 interface getOffersProps {
-	token: string
+    limit: number, 
+    page: number
  }
  interface getOffersResponse {
  

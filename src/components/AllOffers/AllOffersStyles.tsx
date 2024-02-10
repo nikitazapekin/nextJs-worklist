@@ -1,15 +1,17 @@
 import styled, { keyframes } from "styled-components";
+//min-height: 100vh;
 export const ExistingOffers = styled.div`
 position: relative;
 width: 100%;
 max-width: 100%;
-height: 100vh;
 background-color: rgba(230, 232, 235);
  display: flex;
  gap: 10px;
  flex-direction: column;
  background-color: rgba(46, 46, 46);
- overflow-y: scroll
+ overflow-y: scroll;
+ height: auto;
+ max-height: 100vh;
 `
 export const OffersWrapper = styled.div`
 width: 100%;
@@ -17,24 +19,33 @@ min-height: 100px;
 padding: 20px;
 color: #fff;
 height: auto;
+position: relative;
 background-color: rgba(98, 99, 99);
 display: flex; 
 flex-direction: column;
 gap: 10px;
+border-bottom: 5px solid black;
+`
+export const ContentOfOffers = styled.div`
+position: relative;
+width: 100%;
+height: auto;
+overflow-y: scroll;
 `
 export const OffersTitleBlock = styled.div`
 width: 100%;
 height: 200px;
-position: relative;
 border-bottom: 3px solid black;
 background-color: #fff;
+position: relative;
+padding: 100px;
 `
 export const OffersTitle = styled.h1`
 color: black;
 position: absolute;
 left: 50%;
 transform: translateX(-50%) translateY(-50%);
-top: 50%;
+top: 50%; 
 font-size: 44px;
 font-weight: 900;
 `
@@ -111,5 +122,23 @@ border-radius: 10px;
 position: absolute;
 bottom: ${props=>props.bottom};
 animation: ${pulseAnimation} 5s infinite;
-
+`
+export const PageNumbers = styled.div`
+position: relative;
+display: flex;
+justify-content: center;
+gap: 20px;
+margin-bottom: 10px;
+`
+export const PageNumber = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: rgba(87, 87, 87);
+color: #fff;
+padding: 20px;
+font-size: 32px;
+border: 2px solid black;
+cursor: pointer;
+border-radius: 10px;
 `

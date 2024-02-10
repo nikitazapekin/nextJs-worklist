@@ -10,7 +10,6 @@
     console.log(message)
  
 }
-const users = ["Alex202", "NEkit", "Shrek2004", "Bob", "feefef"]
 // function useWebSocket({ socket }: { socket: WebSocket }) {
     function useWebSocket() {
   const [amountOfOnlineUsers, setAmountOfOnlineUsers] = useState("");

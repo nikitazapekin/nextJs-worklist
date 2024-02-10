@@ -3,7 +3,7 @@ import { useState, memo } from "react";
 import axios from "axios";
 
 import { AddSkillBtn, CreateYourOffer, CreateYourOfferForm, CreateYourOfferTitle, FormError, FormImage, InputBlockTitle, InputBlockWrapper, InputCreateOffer, InputCreateOfferWrapper, ListOfSkills, SaveButton, SelectOption, SelectOptionElement, SkillElement, SkillElementButtonTrash, SkillElementButtonWrapper, SkillElementTitle } from "./createYourFormStyles";
-
+import ModalWindow from "../modal/modal";
 import Draw from "../../assets/draw.png"
 import useCreateOffer from "../../hooks/useCreateOffer";
 import TrashSkill from "../../assets/trashSkill.png"
@@ -14,7 +14,8 @@ const CreateYourOfferComponent = memo(() => {
 
     const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange,// handleSubmit,
          handleChangeSelect,
-        skillInput, stateOfOffer, handleRemove,   stateOfOfferError, selectedFiles} = useCreateOffer()        
+        skillInput, stateOfOffer, handleRemove,   stateOfOfferError, selectedFiles} = useCreateOffer()     
+        const [isOpen, setIsOpen] = useState(false)   
     return (
         <CreateYourOffer>
             <CreateYourOfferTitle>
@@ -128,12 +129,21 @@ multiple
                     </InputCreateOfferWrapper>
                 </InputBlockWrapper>
                 <SaveButton 
-                onClick={handleSave}
+                onClick={()=>{
+                    
+                    handleSave()
+                    setIsOpen(true) 
+                
+                }}
                  type="submit"
                 >
                     Save
                 </SaveButton>
             </CreateYourOfferForm>
+            <ModalWindow  open={isOpen} //setIsOpen={setIsOpen} 
+        onClose={() => setIsOpen(false)}>
+        Contragulation! You have successfully changed your personal data!
+                    </ModalWindow>
         </CreateYourOffer>
     );
 })

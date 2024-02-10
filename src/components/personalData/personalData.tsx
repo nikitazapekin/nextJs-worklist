@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, memo } from "react";
 
 import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios";
-
+import Modal from "../modal/modal";
 import { AboutPersonal, AboutPersonalAvatarDraw, AvatarPersonalInput, AboutPersonalAvatarWrapper, AboutPersonalBlock, AboutPersonalDateOfRegister, AboutPersonalEducatiom, AboutPersonalForm, AboutPersonalFormInput, AboutPersonalFormSubWrapper, AboutPersonalFormTitle, AboutPersonalFormWrapper, AboutPersonalUsername, AvatarPersonal, SaveButton, PersonalForm, PersonalFormBackground, PersonalFormWrapper, PersonalNaBar, PersonalNavBarItem, YourPersonalData, ResumeWrapper, FileUploader, DragYourResume, ResumeDocumentElement, ResumeDocumentElementButtonWrapper, ResumeDocumentElementButton, ResumeDocumentElementTitle, AboutPersonalEducationInput, ErrorLog, AvatarPersonalWrapper, PersonalFormSubmit, AvatarPersonalDefault } from "./personalStyles";
 
 import usePersonalInformation from "../../hooks/usePersonalInformation";
@@ -10,6 +10,7 @@ import Draw from "../../assets/draw.png"
 import Trash from "../../assets/trash.png"
 import useJwt from "../../hooks/useJwt";
 import { fetchAvatarFunction } from "../../store/slices/setAvatar.slice";
+import ModalWindow from "../modal/modal";
 const PersonalData = memo(() => {
     const dispatch = useDispatch()
     const {jwtToken} =useJwt()
@@ -35,11 +36,9 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
 
 const [avatarSrc, setAvatarSrc] = useState('');
-
   useEffect(() => {
     const checkImageExists = async () => {
         try{
-
             const response = await fetch(`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}`);
             if (response.ok) {
                 setAvatarSrc(`http://localhost:5000/worklist.com/getPersonalInformation/getAvatar?token=${jwtToken}`);
@@ -53,7 +52,7 @@ const [avatarSrc, setAvatarSrc] = useState('');
 
     checkImageExists();
   }, [jwtToken]);
-
+  const [isOpen, setIsOpen] = useState(false)
     return (
         <>
         <PersonalFormSubmit
@@ -62,7 +61,10 @@ const [avatarSrc, setAvatarSrc] = useState('');
         >
             <SaveButton 
              type="submit"
-            onClick={(event)=>{ handleSave(event); }}>
+            onClick={(event)=>{
+              //  setIsOpen(true) 
+                 handleSave(event);
+                 }}>
                 Save
             </SaveButton>
             <AboutPersonal>
@@ -73,10 +75,6 @@ const [avatarSrc, setAvatarSrc] = useState('');
                 />
                 <AvatarPersonal 
                  src={avatarSrc}
-        
-
- 
-             //   alt="logo" 
                 />
                 
                 <AvatarPersonalInput 
@@ -217,6 +215,12 @@ ref={logo}
                     )}
                 </ResumeWrapper>
             </AboutPersonalForm>
+
+
+      {/*  <ModalWindow  open={isOpen} //setIsOpen={setIsOpen} 
+        onClose={() => setIsOpen(false)}>
+        Contragulation! You have successfully changed your personal data!
+                    </ModalWindow> */}
                     </PersonalFormSubmit>
         </>
     );
