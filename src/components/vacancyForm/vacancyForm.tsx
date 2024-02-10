@@ -1,6 +1,6 @@
 import { VacancyFormWrapper,  VacancyFormOfOffer, VacancyTitle, VacancyDescribtion, SkillsBlock, SkillElement, VacancyTitleWrapepr, VacancyWatchersContainer, EyeWatchers, EyeTitle, RequiredSkills, RequiredSkillsTitle, WorkingPerDayElement, SalaryOfOffer, ChatOfVacancy, ApplyForJobButton, ChatKeypad, ChatInput, ChatSmiley, ChatSmileyImage, ChatSendImage } from "./vacancyFormStyles";
 import { useSelector, useDispatch } from 'react-redux';
-import { GetOffersSelector } from "../../store/selectors/getOffer.selector";
+import { GetOffersSelector } from "../../store/selectors/getOffers.selector";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -10,6 +10,8 @@ import useWebSocket from "../../hooks/useWebSocket";
 import Smiley from  "../../assets/smiley.png"
 import Send from "../../assets/send.png"
 import ChatKeypadComponent from "../ChatKeypadComponent/ChatKeypadComponent";
+import { fetchGetOfferFunction } from "../../store/slices/getOffer.slice";
+import { GetOfferSelector } from "../../store/selectors/getOffer.selector";
 interface SelectedOfferProps {
     id: number,
     title: string,
@@ -20,11 +22,18 @@ interface SelectedOfferProps {
     salary: string,
 }
 const VacancyForm = () => {
+    const {workingPerDay}=useSelector(GetOfferSelector)
     const { getClickedElementFromLocalStorage } = useAllOffers()
-    
-  //  const { amountOfOnlineUsers } = useWebSocket()
+    const dispatch =useDispatch()
+    const {id} =useParams()
     const [currentElement, setCurrentElement] = useState<SelectedOfferProps | null>(getClickedElementFromLocalStorage)
-    console.log("EL" + JSON.stringify(getClickedElementFromLocalStorage()))
+ useEffect(()=> {
+    console.log("IDDDDDDDDDDDDDDDDDDDDDDD"+id)
+dispatch(fetchGetOfferFunction({id}))
+ }, [id])
+ useEffect(()=> {
+console.log("WOWKKKKKKKKKKKKKKKKKKKKKKKKING" +workingPerDay)
+ }, [workingPerDay])
     return (
         <>
             {currentElement && (
@@ -37,6 +46,7 @@ const VacancyForm = () => {
                             <VacancyWatchersContainer>
                                 <EyeWatchers src={Watcher} alt="watcher" />
                                 <EyeTitle>
+                                   VALUE {workingPerDay}
                            {/*         {amountOfOnlineUsers} */}
                                 </EyeTitle>
                             </VacancyWatchersContainer>

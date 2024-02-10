@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
-import { GetOffersSelector } from "../store/selectors/getOffer.selector";
+import { GetOffersSelector } from "../store/selectors/getOffers.selector";
 interface SelectedOfferProps {
   
 //data: Array<{

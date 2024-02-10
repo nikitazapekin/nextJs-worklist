@@ -32,6 +32,6 @@ function* fetchGetOffers(action: PayloadAction<AuthProps>) {
         yield put(setGetOffersLoadingStatus(LOADING_STATUS.ERROR));
     }
 }
-export function* GetOfferWatcher() {
+export function* GetOffersWatcher() {
     yield takeLatest(fetchGetOffersFunction.type, fetchGetOffers);
 }

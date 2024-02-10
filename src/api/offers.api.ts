@@ -39,14 +39,19 @@ interface PaginationProps {
     limit: number, 
     page: number
 }
+interface OfferTypes {
+    id: string
+}
 export const offersApi = {
 getOffersAction(PagProps: PaginationProps){
     console.log("Limit "+PagProps.limit +":" +PagProps.page)
     return offersApiInstance.get(`/getOffers?limit=${PagProps.limit}&page=${PagProps.page}`);
  },
+ getOfferAction(OfferProps: OfferTypes ){
+    return offersApiInstance.get(`/getOffer?id=${OfferProps.id}`)
+ },
  getAmountOfOffersAction( ){
     return offersApiInstance.get(`/getAmountOfOffers`)
-   // return offersApiInstance.get(`/getOffers?limit=${PagProps.limit}&page=${PagProps.page}`);
  },
    setAvatar(EditData: AvatarProps) {
     console.log("EDIT DATA" +JSON.stringify(EditData))

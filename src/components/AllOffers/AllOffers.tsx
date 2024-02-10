@@ -1,7 +1,7 @@
 
 import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { GetOffersSelector } from "../../store/selectors/getOffer.selector";
+import { GetOffersSelector } from "../../store/selectors/getOffers.selector";
 import { fetchGetOffersFunction } from "../../store/slices/getOffers.slice";
 import { ContactButton, ContentOfOffers, ExistingOffers, LocationOfJob, OfferHeader, OfferSalary, OfferTitle, OffersTitle, OffersTitleBlock, OffersWrapper, PageNumber, PageNumbers, RequeredSkill, SkillsBlock, TransparentCude } from "./AllOffersStyles";
 import useAllOffers from "../../hooks/useAllOffers";
