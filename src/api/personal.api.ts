@@ -32,6 +32,7 @@ interface CreateOfferProps {
     location: string,
        salary: string,
        token: string,
+       arrayOfPictures: string
      
 }
 export const personalApi = {
@@ -64,6 +65,7 @@ export const personalApi = {
         )
     },
  CreateOfferAction(EditData: CreateOfferProps){
+    console.log("ARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+ JSON.stringify(EditData.arrayOfPictures) )
     return serverApiInstance.post(`/createOffer?token=${EditData.token}`, {
             title: EditData.title,
             describtion: EditData.describtion,
@@ -71,7 +73,8 @@ export const personalApi = {
             workingPerDay: EditData.workingPerDay,
             location: EditData.location,
            
-            salary: EditData.salary,   
+            salary: EditData.salary,  
+            arrayOfPictures: EditData.arrayOfPictures 
     },
 
         )

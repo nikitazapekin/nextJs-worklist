@@ -13,7 +13,7 @@ const Homepage = () => {
             <Global />
             <SliderCarouselComponent />
            <Footer />
-		   <button onClick={()=> navigate("/vacancy/1")}>dsdfssf</button>
+		   <button onClick={()=> navigate("/test/1")}>dsdfssf</button>
         </>
      );
 }

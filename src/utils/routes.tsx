@@ -7,7 +7,8 @@ import {
    TYPE_CODE_ROUTE,
    PERSONAL_PAGE_ROUTE,
    OFFERS_PAGE_ROUTE,
-   VACANCY_ROUTE
+   VACANCY_ROUTE,
+   TEST_ROUTE
 } from "./consts"
 
 import Homepage from "../pages/homepage/homepage"
@@ -17,6 +18,7 @@ import TypeCodePage from "../pages/tydeCodePage/typeCodePage"
  import PersonalPage from "../pages/PersonalPage/PersonalPage"
 import OffersPage from "../pages/offersPage/offersPage"
 import VacancyPage from "../pages/vacancyPage/vacancyPage"
+import TestPage from "../pages/test"
 export const publicRoutes = [
     {
         path: HOMEPAGE_ROUTE,
@@ -48,6 +50,10 @@ export const publicRoutes = [
  {
    path: VACANCY_ROUTE,
    Component: VacancyPage
+ }, 
+ {
+   path: TEST_ROUTE,
+   Component: TestPage
  }
 
 ]

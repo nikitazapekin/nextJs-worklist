@@ -12,8 +12,8 @@ interface AuthProps {
     location: string,
        salary: string
     token: string,
-    formData: FormData
-
+    formData: FormData,
+arrayOfPictures: string
 }
 interface AuthResponse {
     username: string,
@@ -31,7 +31,7 @@ interface AuthResponse {
     describtion: string,
 }
 function* fetchCreateOffer(action: PayloadAction<AuthProps>) {
-    console.log("fetch authResponseeee" + JSON.stringify(action.payload))
+    console.log("PICTURESSSSSSSSSSSSSSSSSSSSSSSS" + JSON.stringify(action.payload))
     yield put(setCreateOfferLoadingStatus(LOADING_STATUS.LOADING));
     try {
         const finalRegisterMessage: AuthResponse = yield call(personalApi.CreateOfferAction, action.payload);

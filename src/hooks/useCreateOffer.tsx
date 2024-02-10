@@ -7,13 +7,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import useJwt from "./useJwt"
 
 import { fetchCreateOfferFunction } from "../store/slices/createOffer.slice";
+import { stat } from "fs/promises";
 interface TypesOfStateOfOffer {
     title: string,
     describtion: string,
     skills: string[],
     workingPerDay: string,
     location: string,
-    salary: string
+    salary: string,
+    arrayOfPictures: string[]
 }
 const useCreateOffer = () => {
     const dispatch = useDispatch()
@@ -28,7 +30,8 @@ const useCreateOffer = () => {
         skills: [],
         workingPerDay: "",
         location: "",
-        salary: ""
+        salary: "",
+        arrayOfPictures: []
     }
     )
     const [stateOfOfferError, setStateOfOfferError] = useState({
@@ -83,7 +86,6 @@ const useCreateOffer = () => {
                 ...prev,
                 "location": "This field cannot be empty"
             }))
-
         }
         if (!isError) {
             const data = {
@@ -94,7 +96,7 @@ const useCreateOffer = () => {
                 location: stateOfOffer.location,
                 salary: stateOfOffer.salary,
                 token: jwtToken,
-
+                arrayOfPictures:stateOfOffer.arrayOfPictures
             }
             console.log("Is correct " + JSON.stringify(data))
             dispatch(fetchCreateOfferFunction(data))
@@ -108,6 +110,7 @@ const useCreateOffer = () => {
     }, [stateOfOffer])
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
+        console.log("CURRR FILES" + JSON.stringify(files))
         if (files) {
             const formData = new FormData();
             Array.from(files).forEach((file) => {
@@ -116,18 +119,19 @@ const useCreateOffer = () => {
             setSelectedFiles([...selectedFiles, ...Array.from(files)]);
         }
     };
-    /* const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-       event.preventDefault();
-       try {
-         const formData = new FormData(event.currentTarget);
-         formData.append('jwtToken', jwtToken);
-         console.log("FORM DARA" + JSON.stringify(formData))
-         const response = await axios.post("http://localhost:5000/testMultiple", formData);
-         console.log(response.data);
-       } catch (error) {
-         console.error('Error:', error);
-       }
-     }; */
+    useEffect(() => {
+        console.log("SELECTEEEEEEEEEEEEEED FILESSS" + JSON.stringify(selectedFiles))
+        selectedFiles.forEach(item => {
+            setStateOfOffer(prev => ({
+                ...prev, "arrayOfPictures": [...prev.arrayOfPictures, item.name]
+            }))
+        }
+        )
+    }, [selectedFiles])
+    useEffect(() => {
+        console.log("currentSTATE" + JSON.stringify(stateOfOffer))
+    }, [stateOfOffer])
+
     return {
         handleChange, handleAddSkill, skillInput, stateOfOffer,
         handleRemove, removeElement, stateOfOfferError,

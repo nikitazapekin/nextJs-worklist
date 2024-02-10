@@ -10,7 +10,7 @@ background-color: rgba(230, 232, 235);
  flex-direction: column;
  background-color: rgba(46, 46, 46);
  overflow-y: scroll;
- height: auto;
+ height: 100%;
  max-height: 100vh;
 `
 export const OffersWrapper = styled.div`
