@@ -47,7 +47,7 @@ interface AuthResponse {
             id: number,
             title: string,
         description: string,
-        skills: String[],
+        skills: string[],
         workingPerDay: string,
         location: string,
         salary: string,

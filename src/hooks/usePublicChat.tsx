@@ -62,36 +62,35 @@ import { personalInfSelector } from "../store/selectors/person.selector";
 import { fetchGetUsernameFunction } from "../store/slices/getUsername.slice";
 import { GetUsersSelector } from "../store/selectors/getUsers.selector";
 //interface ChatMessageTypes  {
-  /*  type ChatMessageTypes = Array<{
+/*  type ChatMessageTypes = Array<{
 
-        username: string,
-        message: string,
-        data: string
-    }> */
-    interface ChatMessage {
-        username: string;
-        message: string;
-        data: string;
-        avatar: string,
-    }
-    
+      username: string,
+      message: string,
+      data: string
+  }> */
+interface ChatMessage {
+    username: string;
+    message: string;
+    data: string;
+    avatar: string,
+}
+
 //}
 function usePublicChat() {
-  const username = useSelector(GetUsersSelector)
-  console.log("USERNAMEEEEEEEEEEEEE" +JSON.stringify(username))
-  console.log("TEST" +username)
-   const dispatch = useDispatch()
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+    const username = useSelector(GetUsersSelector)
+    console.log("USERNAMEEEEEEEEEEEEE" + JSON.stringify(username))
+    console.log("TEST" + username)
+    const dispatch = useDispatch()
+    const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
     const [message, setMessage] = useState<string>("");
     const [isConnected, setIsConnected] = useState(false);
-    const [currentMessage, setCurrentMessage] =useState<string>("")
-    const {jwtToken} =useJwt()
-    useEffect(()=> {
+    const [currentMessage, setCurrentMessage] = useState<string>("")
+    const { jwtToken } = useJwt()
+    useEffect(() => {
         const token = jwtToken
-        console.log("DISPATCHING "+jwtToken)
-dispatch(fetchGetUsernameFunction({token}))
-}, [jwtToken ])
-  //  }, [jwtToken, currentMessage])
+        console.log("DISPATCHING " + jwtToken)
+        dispatch(fetchGetUsernameFunction({ token }))
+    }, [jwtToken])
     const handleChangeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentMessage(event.target.value)
     }
@@ -127,18 +126,18 @@ dispatch(fetchGetUsernameFunction({token}))
         };
     }, [isConnected]);
     const sendMessageToServer = () => {
-        const messageObject= {
+        const messageObject = {
             username: username,
             token: jwtToken,
             message: currentMessage
-                }
-                const messageString = JSON.stringify(messageObject);
-            const socket = new WebSocket("ws://localhost:5000/publicMessages");
-            socket.onopen = function () {
-          socket.send(messageString);
-                setCurrentMessage("");
-                socket.close();
-            };
+        }
+        const messageString = JSON.stringify(messageObject);
+        const socket = new WebSocket("ws://localhost:5000/publicMessages");
+        socket.onopen = function () {
+            socket.send(messageString);
+            setCurrentMessage("");
+            socket.close();
+        };
     };
     return { chatHistory, message, setMessage, sendMessageToServer, handleChangeMessage, currentMessage };
 }

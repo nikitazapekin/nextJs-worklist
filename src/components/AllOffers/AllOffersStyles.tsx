@@ -125,6 +125,7 @@ animation: ${pulseAnimation} 5s infinite;
 `
 export const PageNumbers = styled.div`
 position: relative;
+top: 100%;
 display: flex;
 justify-content: center;
 gap: 20px;

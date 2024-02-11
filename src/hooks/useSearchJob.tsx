@@ -5,15 +5,41 @@ const useSearchJob = () => {
         skills: [],
         workingPerDay: 0,
         location: "",
-        salary: 0
+      salary: {
+        from: "",
+        to: ""
+      }
     })
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setSearchJobState((prev) => ({
             ...prev,
             [name]: value,
         }));
+        console.log("Change")
     }
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        console.log("CHANGEEEE" + name);
+        if (name === "from" && typeof value=="string") {
+            setSearchJobState((prev) => ({
+                ...prev,
+                salary: {
+                    ...prev.salary,
+                    from: value
+                }
+            })); 
+        }
+        if (name === "to" && typeof value=="string") {
+            setSearchJobState((prev) => ({
+                ...prev,
+                salary: {
+                    ...prev.salary,
+                    to: value
+                }
+            })); 
+        }
+    };
     const [handleChangeValue, setHandleChangeValue] = useState("")
     const handleAdd = () => {
         if (handleChangeValue.length > 0) {
@@ -38,6 +64,6 @@ const useSearchJob = () => {
     useEffect(() => {
         console.log("STATE" + JSON.stringify(searchJobState))
     }, [searchJobState])
-    return { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill }
+    return { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill, handleOnChange }
 }
 export default useSearchJob

@@ -5,18 +5,6 @@ import type { PayloadAction } from '@reduxjs/toolkit';
  
 
 interface getOfferState {
- /*   data: Array<
-{
-    id: number, 
-    title: string,
-    describtion: string,
-    location: string,
-    salary: string,
-    skills: String[],
-    workingPerDay: string,
-}
-    >
-	  */
      data: {
 
          id: number,
@@ -47,35 +35,17 @@ const initialState: getOfferState = {
     data_of_publication:  "",
     last_time_of_rise: ""
 }
-   // data: []
 };
 interface getOfferProps {
   id: string
  }
-
- /*
- interface getOfferResponse {
- 
-    data: Array<
-    {
-        id: number, 
-        title: string,
-        describtion: string,
-        location: string,
-        salary: string,
-        skills: String[],
-        workingPerDay: string,
-    }
-        >
-  } */
-
   interface  getOfferResponse  {
     data: {
 
         id: number,
         title: string,
     description: string,
-    skills: String[],
+    skills: string[],
     workingPerDay: string,
     location: string,
     salary: string,
@@ -93,8 +63,12 @@ export const getOfferSlice = createSlice({
 		setGetOfferResult: (state, action: PayloadAction<getOfferResponse>) => {
             console.log("OFFFFFFFFFFFFFFFFFFFFEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRR" +JSON.stringify(action.payload))
             console.log("WORKK" +action.payload.data.workingPerDay)
-            state.data.data_of_publication = action.payload.data.data_of_publication
-          //  state.data = action.payload.data
+          //  state.data=action.payload.data
+          state.data = {
+            ...action.payload.data,
+            skills: action.payload.data.skills.map(skill => skill.replace(/[{}]/g, '')),
+            image_set: action.payload.data.image_set.map(image => image.replace(/[{}]/g, ''))
+        };
             
 		},
 		setGetOfferLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {

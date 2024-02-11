@@ -10,8 +10,8 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 gap: 20px;
-margin-top: 30px;
 `
+//margin-top: 30px;
 export const TemplateFooter = styled.h2`
 color: #fff;
 border-bottom: 3px solid rgba(219, 2, 227)

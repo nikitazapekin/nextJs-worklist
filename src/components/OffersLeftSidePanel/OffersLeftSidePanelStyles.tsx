@@ -4,6 +4,7 @@ width: 100%;
 display: flex;
 position: relative;
 flex-direction: row;
+max-height: 100vh;
 `
 interface OffersNavigationTypes {
     right: number
@@ -79,6 +80,19 @@ align-items: center;
 flex-direction: column;
 gap: 10px;
 `
+export const  OffersPanelBlockTitleWrapper = styled.div`
+position: relative;
+width: 100%;
+height: 60px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 20px;
+`
+export const OffersPanelBlockTitleImage = styled.img`
+width: 40px;
+height: 40px;
+`
 export const OffersPanelBlockTitle = styled.h1`
 font-size: 36px;
 color: #fff;
@@ -92,7 +106,6 @@ width: 100%;
 height: auto;
  padding: 10px;
 `
-
 export const OffersSearchNavigationItemTitle = styled.h2`
 color: #fff;
 `
@@ -112,7 +125,6 @@ export const RangeSlider = styled.input`
 `
 export const RangeSliderValue = styled.h3`
 color: #fff;
-
 `
 export const AddSkillBtn = styled.button`
 width: 100%;
@@ -145,6 +157,7 @@ justify-content: center;
 `
 export const SkillListItem = styled.div`
 min-width: 100px;
+padding: 5px;
 width: auto; 
 height: 60px;
 background-color: rgba(71, 69, 69);
@@ -171,5 +184,36 @@ export const SkillListItemImage = styled.img`
 width: 30px;
 height: 30px;
 cursor: pointer;
+`
+export const LeftSidePanelSearchButton = styled.button`
+width: 90%;
+height: 60px;
+color: #fff;
+padding: 5px;
+background-color: rgba(45, 46, 46);
+cursor: pointer;
+border: none;
+outline: none;
+border-radius: 20px;
+font-size: 32px;
+transition: 1s ease-in-out;
+&:hover{
+    letter-spacing: 2px;
+background-color: red;
+transform: scale(1.01);
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+`
+export const LeftSidePanelSearchButtonWrapper  = styled.div`
+width: 90%;
+position: relative;
+height: 60px;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+export const LeftSidePanelSearchButtonImage = styled.div`
+wifth: 60px;
+height: 60px;
 
 `

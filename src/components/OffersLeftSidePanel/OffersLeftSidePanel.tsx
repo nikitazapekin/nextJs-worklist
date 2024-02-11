@@ -1,17 +1,18 @@
 
 import { useEffect, useState, memo, useRef } from "react";
-import { ExistingOffers, RangeSlider, OffersNavigation, OffersPanelBlock, OffersPanelBlockTitle, OffersSearchNavigationItemInput, OffersSearchNavigationItemTitle, OffersSearchNavigationWrapper, OffersWrapper, RangeSliderValue, AddSkillBtn, SkillsList, SkillListItem, SkillListItemWrapper, SkillListItemImage, SkillListItemTitle, IsHideSideBar, IsHideSideBarLineFirst, IsHideSideBarLineSecond, IsHideSideBarLineThird } from "./OffersLeftSidePanelStyles";
+import { ExistingOffers, RangeSlider, OffersNavigation, OffersPanelBlock, OffersPanelBlockTitle, OffersSearchNavigationItemInput, OffersSearchNavigationItemTitle, OffersSearchNavigationWrapper, OffersWrapper, RangeSliderValue, AddSkillBtn, SkillsList, SkillListItem, SkillListItemWrapper, SkillListItemImage, SkillListItemTitle, IsHideSideBar, IsHideSideBarLineFirst, IsHideSideBarLineSecond, IsHideSideBarLineThird, LeftSidePanelSearchButton, LeftSidePanelSearchButtonWrapper, OffersPanelBlockTitleWrapper, OffersPanelBlockTitleImage } from "./OffersLeftSidePanelStyles";
 import useSearchJob from "../../hooks/useSearchJob";
 import Trash from "../../assets/trashSkill.png"
 import AllOffers from "../AllOffers/AllOffers";
+import Search from "../../assets/search.png"
 const OffersLeftSidePanel = memo(() => {
     const sidebar = useRef(null)
     const sidebarButton = useRef(null)
     const [isHide, setIsHide] = useState(false)
     const [currentPosition, setCurrentPosition] = useState( 0)
     const [currentPositionOfHideButton, setCurrentPositionOfHideButton] = useState( 0 )
-    const { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill } = useSearchJob()
- 
+    const { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill , handleOnChange} = useSearchJob()
+
     const onHide = () => {
         if (isHide == false) {
             setCurrentPosition(sidebar.current.offsetWidth)
@@ -40,14 +41,21 @@ const OffersLeftSidePanel = memo(() => {
                     <IsHideSideBarLineThird  isHide={isHide} />
                 </IsHideSideBar>
                 <OffersPanelBlock>
+                    <OffersPanelBlockTitleWrapper>
+
                     <OffersPanelBlockTitle>
                         Search job
                     </OffersPanelBlockTitle>
+                    <OffersPanelBlockTitleImage  src={Search}  alt="search"/>
+                    </OffersPanelBlockTitleWrapper>
                     <OffersSearchNavigationWrapper>
                         <OffersSearchNavigationItemTitle>
                             By title
                         </OffersSearchNavigationItemTitle>
-                        <OffersSearchNavigationItemInput placeholder="Type title" />
+                        <OffersSearchNavigationItemInput placeholder="Type title" 
+                        name="title"
+                        onChange={(event)=>handleOnChange(event)}
+                        />
                     </OffersSearchNavigationWrapper>
                     <OffersSearchNavigationWrapper>
                         <OffersSearchNavigationItemTitle>
@@ -83,22 +91,32 @@ const OffersLeftSidePanel = memo(() => {
                         <OffersSearchNavigationItemTitle>
                             By location
                         </OffersSearchNavigationItemTitle>
-                        <OffersSearchNavigationItemInput placeholder="Type location" />
+                        <OffersSearchNavigationItemInput placeholder="Type location"
+                            name="location"
+                            onChange={(event)=>handleOnChange(event)}
+                        />
                     </OffersSearchNavigationWrapper>
                     <OffersSearchNavigationWrapper>
                         <OffersSearchNavigationItemTitle>
                             By salary
                         </OffersSearchNavigationItemTitle>
                         <RangeSlider
-                            name="salary"
-                            type="range" min="0" max="10000" defaultValue={searchJobState.salary} onChange={(event) => { handleChange(event); }} />
-                        <RangeSliderValue>{searchJobState.salary} salary (BYN)</RangeSliderValue>
+                            name="from"
+                            type="range" min="0" max="10000" defaultValue={0} 
+                            onChange={(event) => { handleChange(event); }} />
+                        <RangeSlider
+                            name="to"
+                            type="range" min="0" max="10000" defaultValue={0}
+                             onChange={(event) => { handleChange(event); }} />
+                        <RangeSliderValue>{searchJobState.salary.from ? searchJobState.salary.from : "0"}-{searchJobState.salary.to ? searchJobState.salary.to : "0"} salary (BYN)</RangeSliderValue>
                     </OffersSearchNavigationWrapper>
+                  <LeftSidePanelSearchButton>
+                    Search
+                    </LeftSidePanelSearchButton>  
                 </OffersPanelBlock>
             </OffersNavigation>
             <AllOffers />
         </OffersWrapper>
     );
 })
-
 export default OffersLeftSidePanel;

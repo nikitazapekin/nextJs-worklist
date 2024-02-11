@@ -1,4 +1,4 @@
-import { VacancyFormWrapper,  VacancyFormOfOffer, VacancyTitle, VacancyDescribtion, SkillsBlock, SkillElement, VacancyTitleWrapepr, VacancyWatchersContainer, EyeWatchers, EyeTitle, RequiredSkills, RequiredSkillsTitle, WorkingPerDayElement, SalaryOfOffer, ChatOfVacancy, ApplyForJobButton, ChatKeypad, ChatInput, ChatSmiley, ChatSmileyImage, ChatSendImage } from "./vacancyFormStyles";
+/*import { VacancyFormWrapper,  VacancyFormOfOffer, VacancyTitle, VacancyDescribtion, SkillsBlock, SkillElement, VacancyTitleWrapepr, VacancyWatchersContainer, EyeWatchers, EyeTitle, RequiredSkills, RequiredSkillsTitle, WorkingPerDayElement, SalaryOfOffer, ChatOfVacancy, ApplyForJobButton, ChatKeypad, ChatInput, ChatSmiley, ChatSmileyImage, ChatSendImage } from "./vacancyFormStyles";
 import { useSelector, useDispatch } from 'react-redux';
 import { GetOffersSelector } from "../../store/selectors/getOffers.selector";
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ interface SelectedOfferProps {
     salary: string,
 }
 const VacancyForm = () => {
-    const {workingPerDay}=useSelector(GetOfferSelector)
+    const {data}=useSelector(GetOfferSelector)
     const { getClickedElementFromLocalStorage } = useAllOffers()
     const dispatch =useDispatch()
     const {id} =useParams()
@@ -31,9 +31,11 @@ const VacancyForm = () => {
     console.log("IDDDDDDDDDDDDDDDDDDDDDDD"+id)
 dispatch(fetchGetOfferFunction({id}))
  }, [id])
+
+
  useEffect(()=> {
-console.log("WOWKKKKKKKKKKKKKKKKKKKKKKKKING" +workingPerDay)
- }, [workingPerDay])
+console.log("VACANCY DATA"+JSON.stringify(data))
+ }, [data])
     return (
         <>
             {currentElement && (
@@ -46,8 +48,8 @@ console.log("WOWKKKKKKKKKKKKKKKKKKKKKKKKING" +workingPerDay)
                             <VacancyWatchersContainer>
                                 <EyeWatchers src={Watcher} alt="watcher" />
                                 <EyeTitle>
-                                   VALUE {workingPerDay}
-                           {/*         {amountOfOnlineUsers} */}
+                                   VALUE {data.workingPerDay}
+              
                                 </EyeTitle>
                             </VacancyWatchersContainer>
                         </VacancyTitleWrapepr>
@@ -74,17 +76,7 @@ console.log("WOWKKKKKKKKKKKKKKKKKKKKKKKKING" +workingPerDay)
                             Apply for job
                         </ApplyForJobButton>
                         <ChatKeypadComponent />
-                       {/* <ChatOfVacancy>
-                            <ChatKeypad>
-                                <ChatInput placeholder="Type message"/>
-                                <ChatSmiley>
-                                    <ChatSmileyImage src={Smiley} alt="smiley" />
-                                </ChatSmiley>
-                                <ChatSmiley>
-                           <ChatSendImage src={Send} alt="smiley"/>
-                                </ChatSmiley>
-                            </ChatKeypad>
-                                </ChatOfVacancy>  */}
+                     
                     </VacancyFormOfOffer>
                 </VacancyFormWrapper>
 
@@ -94,6 +86,106 @@ console.log("WOWKKKKKKKKKKKKKKKKKKKKKKKKING" +workingPerDay)
 }
 
 export default VacancyForm;
+*/
+
+
+import { VacancyFormWrapper, VacancyFormOfOffer, VacancyTitle, VacancyDescribtion, SkillsBlock, SkillElement, VacancyTitleWrapepr, VacancyWatchersContainer, EyeWatchers, EyeTitle, RequiredSkills, RequiredSkillsTitle, WorkingPerDayElement, SalaryOfOffer, ChatOfVacancy, ApplyForJobButton, ChatKeypad, ChatInput, ChatSmiley, ChatSmileyImage, ChatSendImage } from "./vacancyFormStyles";
+import { useSelector, useDispatch } from 'react-redux';
+import { GetOffersSelector } from "../../store/selectors/getOffers.selector";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import Watcher from "../../assets/Watcher.png"
+import useAllOffers from "../../hooks/useAllOffers";
+import useWebSocket from "../../hooks/useWebSocket";
+import Smiley from "../../assets/smiley.png"
+import Send from "../../assets/send.png"
+import ChatKeypadComponent from "../ChatKeypadComponent/ChatKeypadComponent";
+import { fetchGetOfferFunction } from "../../store/slices/getOffer.slice";
+import { GetOfferSelector } from "../../store/selectors/getOffer.selector";
+import VacancySlider from "../vacancySlider/vacancySlider";
+interface SelectedOfferProps {
+    id: number,
+    title: string,
+    description: string,
+    skills: String[],
+    workingPerDay: string,
+    location: string,
+    salary: string,
+}
+const VacancyForm = () => {
+    const { data } = useSelector(GetOfferSelector)
+    const { getClickedElementFromLocalStorage } = useAllOffers()
+    const dispatch = useDispatch()
+    const { id } = useParams()
+    const [currentElement, setCurrentElement] = useState<SelectedOfferProps | null>(getClickedElementFromLocalStorage)
+    useEffect(() => {
+        console.log("IDDDDDDDDDDDDDDDDDDDDDDD" + id)
+        dispatch(fetchGetOfferFunction({ id }))
+    }, [id])
+    useEffect(() => {
+        console.log("VACANCY DATA" + JSON.stringify(data))
+    }, [data])
+    return (
+        <>
+            {currentElement && (
+                <VacancyFormWrapper>
+                    <VacancyFormOfOffer>
+                        <VacancyTitleWrapepr>
+                            <VacancyTitle>
+                                {currentElement.title}
+                            </VacancyTitle>
+                            <VacancyWatchersContainer>
+                                <EyeWatchers src={Watcher} alt="watcher" />
+                                <EyeTitle>
+                                    VALUE {data.workingPerDay}
+                                </EyeTitle>
+                            </VacancyWatchersContainer>
+                        </VacancyTitleWrapepr>
+                        <RequiredSkills>
+                            <RequiredSkillsTitle>
+                                Required skills:
+                            </RequiredSkillsTitle>
+                            <SkillsBlock>
+                                {data.skills.map((item: string) => (
+                                    <SkillElement>{item}</SkillElement>
+                                ))}
+                            </SkillsBlock>
+                        </RequiredSkills>
+                        <WorkingPerDayElement>
+                            Working time: {data.workingPerDay}
+                        </WorkingPerDayElement>
+                        <VacancyDescribtion>
+                            About:   {data.description}
+                        </VacancyDescribtion>
+                        <SalaryOfOffer>
+                            Salary:  {data.salary} (BYN)
+                        </SalaryOfOffer>
+                        <ApplyForJobButton>
+                            Apply for job
+                        </ApplyForJobButton>
+
+                        <VacancySlider  images={data.image_set} />
+                     {/*   {data.image_set.map((item=> (
+                          <img src={`http://localhost:5000/worklist.com/image?title=${item}`}  />
+                     )))} */}
+                        <ChatKeypadComponent />
+                    </VacancyFormOfOffer>
+                </VacancyFormWrapper>
+
+            )}
+        </>
+    );
+}
+
+export default VacancyForm;
+
+
+
+
+
+
+
 
 /*
 
