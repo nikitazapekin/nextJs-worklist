@@ -37,6 +37,8 @@ import React, { useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { publicRoutes } from '../utils/routes';
 import "./styles.css";
+//import '@testing-library/jest-dom/extend-expect';
+
 
 export const App = () => {
     const [count, setCount] = useState<number>(0);
@@ -52,8 +54,9 @@ export const App = () => {
                     ))}
                 </Routes>
             </HashRouter>
-            <p>hello world</p>
-            <button>scdsc</button>
+            <h1>Hello world</h1>
+      <button>Click me</button>
+      <input type="text" placeholder="Input value" />
         </div>
     );
 };
