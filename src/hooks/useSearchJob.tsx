@@ -1,5 +1,6 @@
 import { useEffect, useState, memo } from "react"
 const useSearchJob = () => {
+    //const [isChanged, setIsChanged] 
     const [searchJobState, setSearchJobState] = useState({
         title: "",
         skills: [],
@@ -20,7 +21,6 @@ const useSearchJob = () => {
     }
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log("CHANGEEEE" + name);
         if (name === "from" && typeof value=="string") {
             setSearchJobState((prev) => ({
                 ...prev,
@@ -58,12 +58,8 @@ const useSearchJob = () => {
         const { value } = event.target
         setHandleChangeValue(value)
     }
-    useEffect(() => {
-        console.log(handleChangeValue)
-    }, [handleAddChange])
-    useEffect(() => {
-        console.log("STATE" + JSON.stringify(searchJobState))
-    }, [searchJobState])
+
+  
     return { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill, handleOnChange }
 }
 export default useSearchJob

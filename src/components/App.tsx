@@ -52,6 +52,8 @@ export const App = () => {
                     ))}
                 </Routes>
             </HashRouter>
+            <p>hello world</p>
+            <button>scdsc</button>
         </div>
     );
 };

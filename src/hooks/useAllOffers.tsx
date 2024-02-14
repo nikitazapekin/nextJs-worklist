@@ -12,14 +12,13 @@ interface SelectedOfferProps {
     workingPerDay: string,
     location: string,
        salary: string,
-      // token: string,
+
       
   //  }>
     }
 const useAllOffers = () => {
     const navigate = useNavigate()
     const {id} =useParams()
-    console.log("ID"+id)
     const { data } = useSelector(GetOffersSelector)
     const [selectedElement, setSelectedElement] = useState([]) 
     const handleNavigate = (id: string) => {

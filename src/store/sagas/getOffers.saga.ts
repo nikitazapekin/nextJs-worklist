@@ -7,6 +7,15 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 interface AuthProps {
     limit: number;
     page: number
+        title: string,
+        skills: String[],
+        workingPerDay: number,
+        location: string,
+      salary: {
+        from: string,
+        to: string
+      }
+    
 }
 interface AuthResponse {
     data: Array<
@@ -35,3 +44,16 @@ function* fetchGetOffers(action: PayloadAction<AuthProps>) {
 export function* GetOffersWatcher() {
     yield takeLatest(fetchGetOffersFunction.type, fetchGetOffers);
 }
+
+/*
+   const [searchJobState, setSearchJobState] = useState({
+        title: "",
+        skills: [],
+        workingPerDay: 0,
+        location: "",
+      salary: {
+        from: "",
+        to: ""
+      }
+    })
+*/

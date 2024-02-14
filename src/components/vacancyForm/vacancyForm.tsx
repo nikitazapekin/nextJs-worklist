@@ -166,9 +166,9 @@ const VacancyForm = () => {
                         </ApplyForJobButton>
 
                         <VacancySlider  images={data.image_set} />
-                     {/*   {data.image_set.map((item=> (
-                          <img src={`http://localhost:5000/worklist.com/image?title=${item}`}  />
-                     )))} */}
+         
+
+              
                         <ChatKeypadComponent />
                     </VacancyFormOfOffer>
                 </VacancyFormWrapper>

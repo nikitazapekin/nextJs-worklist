@@ -30,14 +30,7 @@ container.render(
 		<PersistGate loading={null} persistor={persistor}>
     <ErrorBoundary>
 <App />
-  {/*   
-<BrowserRouter>
-<Routes>
-
-            
-
-</Routes> 
-</BrowserRouter> */}
+   
 
             </ErrorBoundary>
         </PersistGate>

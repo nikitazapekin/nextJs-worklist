@@ -7,6 +7,7 @@ import { ContactButton, ContentOfOffers, ExistingOffers, LocationOfJob, OfferHea
 import useAllOffers from "../../hooks/useAllOffers";
 import { fetchGetAmountOfOffersFunction } from "../../store/slices/getAmountOfOffers.slice";
 import { GetAmountOfOffersSelector } from "../../store/selectors/getAmountOfOffers.selector";
+import useSearchJob from "../../hooks/useSearchJob";
 interface DorsTypes {
     firstDot: number,
     secondDot: number,
@@ -45,8 +46,6 @@ const AllOffers = () => {
         } */
     }
     const handleDecrement = () => {
-       // if (page != 1) {
-
             setPage(prev => prev - 1)
            // setDots()
            setDots(prevDots => ({
@@ -57,14 +56,33 @@ const AllOffers = () => {
       //  }
     }
     const dispatch = useDispatch()
+    const {searchJobState} = useSearchJob()
     useEffect(() => {
-        dispatch(fetchGetOffersFunction({ page, limit }))
+        console.log("CURRRRR   JB STATE" +JSON.stringify(searchJobState) )
+     //   dispatch(fetchGetOffersFunction({ page, limit }))
+     dispatch(fetchGetOffersFunction({page: 1, limit, title: searchJobState.title , skills: searchJobState.skills, workingPerDay:searchJobState.workingPerDay,
+        location: searchJobState.location,  salary: searchJobState.salary
+        }))
+    
     }, [])
+    /*
+      title: string,
+        skills: String[],
+        workingPerDay: number,
+        location: string,
+      salary: {
+        from: string,
+        to: string
+        */
     const handlePageIndexClick = (index: number) => {
        // if(limit*)
        console.log("CLICKED INDEX"+index)
-       dispatch(fetchGetOffersFunction({page: index, limit }))
-     //   dispatch(fetchGetOffersFunction({page: page+index-1, limit }))
+       console.log("CURRRR JOBBB" + JSON.stringify(searchJobState))
+    //   dispatch(fetchGetOffersFunction({page: index, limit }))
+    dispatch(fetchGetOffersFunction({page: index, limit, title: searchJobState.title , skills: searchJobState.skills, workingPerDay:searchJobState.workingPerDay,
+    location: searchJobState.location,  salary: searchJobState.salary
+    }))
+
     };
     useEffect(()=> {
 dispatch(fetchGetAmountOfOffersFunction())

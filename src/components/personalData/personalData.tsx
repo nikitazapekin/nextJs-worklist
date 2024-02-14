@@ -62,7 +62,7 @@ const [avatarSrc, setAvatarSrc] = useState('');
             <SaveButton 
              type="submit"
             onClick={(event)=>{
-              //  setIsOpen(true) 
+              
                  handleSave(event);
                  }}>
                 Save

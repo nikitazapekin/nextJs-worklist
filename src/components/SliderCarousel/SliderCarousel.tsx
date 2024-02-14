@@ -70,16 +70,12 @@ const sld=useRef(null)
             key={index} imageLink={item} />
         ))}
       </SliderCarouselWrapper>
-  {/*    <SliderCarouselLeft onClick={() => { handleClick('left'); }}>←</SliderCarouselLeft>
-      <SliderCarouselRight onClick={() => { handleClick('right'); }}>→</SliderCarouselRight> */}
       <SliderDots>
         {imgs.map((item, index) => (
           <SliderDot key={index}
             background={currentSlide == index ? "#fff" : "black"}
             onClick={() => { handleDot(index); }}
           >
-          {/*{index + 1} */}
-          
           </SliderDot>
         ))}
       </SliderDots>

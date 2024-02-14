@@ -3,28 +3,28 @@ import { Chat, ChatNavBar, ChatNavBarItem, ChatNavBarSearch, ChatNavBarSearchWra
 import Search from "../../assets/search.png"
 import UsersOfChatComponent from "../usersOfChatComponent/usersOfChatComponent";
 const ChatComponent = () => {
-    return ( 
+  return (
 
-   <Chat>
-    <ChatNavBar>
+    <Chat>
+      <ChatNavBar>
         <ChatNavBarSearchWrapper>
-        <ChatNavBarItem>Your chats</ChatNavBarItem>
-            <ChatNavBarSearch placeholder="Search user" />
-            <SearchWrapper>
-              <SearchImage  src={Search} alt="search" /> 
-            </SearchWrapper>
+          <ChatNavBarItem>Your chats</ChatNavBarItem>
+          <ChatNavBarSearch placeholder="Search user" />
+          <SearchWrapper>
+            <SearchImage src={Search} alt="search" />
+          </SearchWrapper>
         </ChatNavBarSearchWrapper>
-<ChatNavBarItem>Create group</ChatNavBarItem>
-    </ChatNavBar>
-<ChatWrapper>
+        <ChatNavBarItem>Create group</ChatNavBarItem>
+      </ChatNavBar>
+      <ChatWrapper>
 
-   <UsersOfChatComponent>
-    
-   </UsersOfChatComponent>
-</ChatWrapper>
+        <UsersOfChatComponent>
 
-   </Chat>
-     );
+        </UsersOfChatComponent>
+      </ChatWrapper>
+
+    </Chat>
+  );
 }
- 
+
 export default ChatComponent;

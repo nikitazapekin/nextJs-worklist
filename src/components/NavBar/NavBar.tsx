@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems} from "./styles.NavBar";
+import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems, NavBarItemSearch} from "./styles.NavBar";
 
 import useJwt from "../../hooks/useJwt";
 const NavBar = () => {
@@ -23,7 +23,12 @@ console.log("jwt"+jwtToken)
                 Offers
             </Link>
                 </NavBarItem>
-            <NavBarItem>CV</NavBarItem>       
+
+                {/*
+            <NavBarItem>CV</NavBarItem>   */}
+                 <NavBarItem>
+                    <NavBarItemSearch placeholder="Type username" />
+                 </NavBarItem>
             <NavBarItems>
 {jwtToken==null ? (
 <>
@@ -46,7 +51,7 @@ console.log("jwt"+jwtToken)
                           </SubNavBarItem>
                     )}
             </NavBarItems>
-            </NavBarWrapper>
+                    </NavBarWrapper>
 <NavBarBackground />
         </Navbar>
       );

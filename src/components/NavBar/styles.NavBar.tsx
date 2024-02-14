@@ -5,6 +5,7 @@ interface StyledNavBarProps {
 export const  Navbar = styled.nav<StyledNavBarProps>`
 width: 100%;
 height: 70px;
+flex-shrink: 0;
 position: relative;
 `;
 export const NavBarWrapper =styled.div`
@@ -24,28 +25,46 @@ opacity: 0.8;
 width: 100%;
 height: 100%;
 z-index: -1
-
 `
  export const  NavBarItem =styled.div`
- line-height: 70px;
+ display: flex;
+ align-items: center;
+ width: 100%;
  color: #fff;
- width: 200px;
  cursor:pointer;
  font-weight: 800;
  font-size: 22px;
+ max-width: 700px;
+ `
+ export const NavBarItemSearch = styled.input`
+ width: 100%;
+ max-width: 700px;
+ height: 40px;
+ border: none;
+ outline: none;
+ cursor: pointer;
+background-color: rgba(62, 63, 64);
+border-radius: 10px;
+padding: 4px;
+padding-left: 10px;
+color: #fff;
+font-size: 23px;
  `
  export const  NavBarItems =styled.div`
  width:auto;
+ height: 70px;
  display: flex;
- gap: 100px;
+ gap: 50px;
+ margin-left: 20px;
+ align-items: center;
  justify-content: space-between;
  `
+ //line-height: 70px;
  export const SubNavBarItem =styled.div`
- 
- line-height: 70px;
  color: #fff;
- width: auto;
  cursor:pointer;
  font-weight: 800;
  font-size: 22px;
+ white-space: nowrap;
  `
+ //width: auto;

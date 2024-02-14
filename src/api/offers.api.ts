@@ -37,7 +37,16 @@ interface CreateOfferProps {
 }
 interface PaginationProps {
     limit: number, 
-    page: number
+    page: number,
+
+    title: string,
+    skills: String[],
+    workingPerDay: number,
+    location: string,
+  salary: {
+    from: string,
+    to: string
+  }
 }
 interface OfferTypes {
     id: string
@@ -45,7 +54,15 @@ interface OfferTypes {
 export const offersApi = {
 getOffersAction(PagProps: PaginationProps){
     console.log("Limit "+PagProps.limit +":" +PagProps.page)
-    return offersApiInstance.get(`/getOffers?limit=${PagProps.limit}&page=${PagProps.page}`);
+//    return offersApiInstance.get(`/getOffers?limit=${PagProps.limit}&page=${PagProps.page}`);
+return offersApiInstance.post(`/getOffers?limit=${PagProps.limit}&page=${PagProps.page}`, {
+    title: PagProps.title,
+    skills: PagProps.skills,
+    workingPerDay: String(PagProps.workingPerDay),
+    location: PagProps.location,
+    from:  PagProps.salary.from,
+    to: PagProps.salary.to
+}); 
  },
  getOfferAction(OfferProps: OfferTypes ){
     return offersApiInstance.get(`/getOffer?id=${OfferProps.id}`)

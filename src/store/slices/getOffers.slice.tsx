@@ -14,19 +14,56 @@ interface getOffersState {
     salary: string,
     skills: String[],
     workingPerDay: string,
+}> /*,
+payloadParams: {
+    title: string,
+    skills: String[],
+    workingPerDay: number,
+    location: string,
+  salary: {
+    from: string,
+    to: string
+} */
+   
 }
-    >
-	 
-}
+/*interface searchProps {
+    payloadParams: {
+        title: string,
+        skills: String[],
+        workingPerDay: number,
+        location: string,
+      salary: {
+        from: string,
+        to: string
+    }
+       
+    }
+} */
 const initialState: getOffersState = {
-    data: []
+    data: [],
+ /*   payloadParams: {
+        title: "",
+        skills:  [],
+        workingPerDay: 0,
+        location: "",
+      salary: {
+        from: "",
+        to: ""
+    } */
 };
 interface getOffersProps {
     limit: number, 
     page: number
+    title: string,
+    skills: String[],
+    workingPerDay: number,
+    location: string,
+  salary: {
+    from: string,
+    to: string
+  }
  }
  interface getOffersResponse {
- 
     data: Array<
     {
         id: number, 
@@ -52,7 +89,7 @@ export const getOffersSlice = createSlice({
 		setGetOffersLoadingStatus: (state, action: PayloadAction<LOADING_STATUS>) => {
 			// state.emailCodeLoadingStatus = action.payload;
 		},
-		setClearDocument: (state)=> {
+		setSearchParams: (state)=> {
 			//state.document=""
 		},
 		fetchGetOffersFunction: (state, action: PayloadAction<getOffersProps>) => {}, 
@@ -61,7 +98,7 @@ export const getOffersSlice = createSlice({
 
 export const { 
 setGetOffersResult,
-setClearDocument,
+//setClearDocument,
  setGetOffersLoadingStatus, fetchGetOffersFunction
 } =
 	getOffersSlice.actions;

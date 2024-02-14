@@ -5,8 +5,11 @@ import useSearchJob from "../../hooks/useSearchJob";
 import Trash from "../../assets/trashSkill.png"
 import AllOffers from "../AllOffers/AllOffers";
 import Search from "../../assets/search.png"
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchGetOffersFunction } from "../../store/slices/getOffers.slice";
 const OffersLeftSidePanel = memo(() => {
     const sidebar = useRef(null)
+    const dispatch = useDispatch()
     const sidebarButton = useRef(null)
     const [isHide, setIsHide] = useState(false)
     const [currentPosition, setCurrentPosition] = useState( 0)
@@ -25,7 +28,13 @@ const OffersLeftSidePanel = memo(() => {
             setIsHide(false)
         }
     }
-    return (
+    const handleSearch = () => {
+        dispatch(fetchGetOffersFunction({page: 1, limit: 6, title: searchJobState.title , skills: searchJobState.skills, workingPerDay:searchJobState.workingPerDay,
+            location: searchJobState.location,  salary: searchJobState.salary
+            }))
+        
+    }
+        return (
         <OffersWrapper>
             <OffersNavigation
                 ref={sidebar}
@@ -110,7 +119,9 @@ const OffersLeftSidePanel = memo(() => {
                              onChange={(event) => { handleChange(event); }} />
                         <RangeSliderValue>{searchJobState.salary.from ? searchJobState.salary.from : "0"}-{searchJobState.salary.to ? searchJobState.salary.to : "0"} salary (BYN)</RangeSliderValue>
                     </OffersSearchNavigationWrapper>
-                  <LeftSidePanelSearchButton>
+                  <LeftSidePanelSearchButton
+                  onClick={handleSearch}
+                  >
                     Search
                     </LeftSidePanelSearchButton>  
                 </OffersPanelBlock>

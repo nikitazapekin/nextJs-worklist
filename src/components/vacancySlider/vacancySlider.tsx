@@ -3,20 +3,56 @@ import { VacanctSliderLeft, VacanctSliderRight, VacancySliderCarousel, VacancySl
 interface VacancySliderTypes {
     images: String[]
 }
+
 const VacancySlider = ({images}: VacancySliderTypes) => {
     const slider= useRef(null)
-    const [sliderWidth, setSliderComponent] = useState(0)
+    const [sliderWidth, setSliderWidth] = useState(0)
+    const [scrollValue,  setScrollValue] =useState(0)
+    const [amountOfSlides, setAmountOfSlides] = useState(images.length)
+    const [currectSlide, setCurrentSlide] = useState(0)
+    const [animate, setAnimate] = useState(false);
+    const handleScroll = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        const target = event.target as HTMLElement;
+        setAnimate(true);
+        setTimeout(() => setAnimate(false), 2000);
+        if( target.dataset.name === "right") {
+            if(currectSlide!=amountOfSlides-1) {
+                setScrollValue(prev => prev - sliderWidth)     
+                setCurrentSlide(prev=>prev+1)
+            } else{
+                setScrollValue(prev => prev + sliderWidth*currectSlide)     
+                setCurrentSlide(0)
+            }
+        }
+        else {
+            if(currectSlide>0){
+                setScrollValue(prev => prev + sliderWidth);
+                setCurrentSlide(prev=>prev-1)
+            }
+            else {
+                setCurrentSlide(amountOfSlides-1)
+                setScrollValue(prev=> prev-sliderWidth*(amountOfSlides-1))
+            }
+        }
+    }
     useEffect(()=> {
-console.log("WIDTG"+slider.current.offsetWidth)
+setSliderWidth(slider.current.offsetWidth)
     }, [slider])
     return ( 
       <VacancySliderComponent
       ref={slider}
       >
-        <VacanctSliderLeft>Left</VacanctSliderLeft>
-        <VacanctSliderRight>Rigth</VacanctSliderRight>
+        <VacanctSliderLeft
+          onClick={(event)=>handleScroll(event)}
+        data-name="left"
+        >⬅</VacanctSliderLeft>
+        <VacanctSliderRight
+        data-name="right"
+        onClick={(event)=>handleScroll(event)}
+        >⮕</VacanctSliderRight>
         <VacancySliderCarousel
-        left={sliderWidth}
+        left={scrollValue}
+        animate={animate}
         >
         {images.map((item)=> (
             <VacancySliderItem>
@@ -29,3 +65,9 @@ console.log("WIDTG"+slider.current.offsetWidth)
 }
  
 export default VacancySlider;
+
+/*
+  const handleNavigate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+setCurrentPagePersonal((event.target as HTMLElement).dataset.name)
+  }
+*/

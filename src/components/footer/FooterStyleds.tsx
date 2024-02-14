@@ -10,6 +10,7 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 gap: 20px;
+flex-shrink: 0;
 `
 //margin-top: 30px;
 export const TemplateFooter = styled.h2`
