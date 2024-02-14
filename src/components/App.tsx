@@ -47,16 +47,19 @@ export const App = () => {
 
     return (
         <div>
-            <HashRouter>
+              <Routes>
+                    {publicRoutes.map(({ path, Component }) => (
+                        <Route key={path} path={path} element={<Component />} />
+                    ))}
+                </Routes>
+         {/*   <HashRouter>
                 <Routes>
                     {publicRoutes.map(({ path, Component }) => (
                         <Route key={path} path={path} element={<Component />} />
                     ))}
                 </Routes>
-            </HashRouter>
-            <h1>Hello world</h1>
-      <button>Click me</button>
-      <input type="text" placeholder="Input value" />
+                    </HashRouter> */}
+  
         </div>
     );
 };
