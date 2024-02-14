@@ -22,6 +22,7 @@ jobs:
         run: yarn run build:dev
       - name: lint code
         run: yarn run lint
-
+      - name: test
+        run: yarn run test
 
 
