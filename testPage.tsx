@@ -4,7 +4,7 @@ const TestPahe = () => {
     const {id} =useParams()
     return ( 
 
-        <>TEeggregrtttttttSTTT {id}</>
+        <>TEeggregrtttttttSTTrrrrrrrrrT {id}</>
      );
 }
  
