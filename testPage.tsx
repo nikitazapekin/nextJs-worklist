@@ -4,7 +4,7 @@ const TestPahe = () => {
     const {id} =useParams()
     return ( 
 
-        <>TESTTT {id}</>
+        <>TEeggregrSTTT {id}</>
      );
 }
  
