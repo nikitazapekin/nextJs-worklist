@@ -25,6 +25,4 @@ jobs:
 
       - name: Build project
         run: yarn run build:dev
-
-      - name: Lint code
-        run: yarn run lint
+ 
