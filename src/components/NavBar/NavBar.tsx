@@ -3,10 +3,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems, NavBarItemSearch, FindUserItem, FindUserBlock} from "./styles.NavBar";
-
 import useJwt from "../../hooks/useJwt";
 const NavBar = () => {
-    const users = ["users", "ew" , "cdwe", "wfefew", "feeefw"]
+    const users: String[] = []
     const {jwtToken} =useJwt()
     useEffect(()=> {
 console.log("jwt"+jwtToken)

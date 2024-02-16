@@ -15,7 +15,6 @@ flex-direction: row;
 padding-left: 20px;
 padding-right: 20px;
 justify-content: space-between;
- 
 `
 export const NavBarBackground = styled.div`
 background-color: black;
@@ -73,13 +72,16 @@ font-size: 23px;
  export const FindUserItem = styled.div`
  width: 100%;
  height: 60px;
- background-color: red;
- text-align: center;
+ background-color: rgba(58, 59, 58);
+display: flex;
+justify-content: center;
+align-items: center;
+ border-bottom: 2px solid black;
  `
  export const FindUserBlock = styled.div`
  width: 100%;
  display: flex;
  flex-direction: column;
  position: absolute;
- top: 100px;
+ top: 70px;
  `
