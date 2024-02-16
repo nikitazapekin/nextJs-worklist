@@ -33,6 +33,7 @@ z-index: -1
  color: #fff;
  cursor:pointer;
  font-weight: 800;
+ position: relative;
  font-size: 22px;
  max-width: 700px;
  `
@@ -47,6 +48,7 @@ background-color: rgba(62, 63, 64);
 border-radius: 10px;
 padding: 4px;
 padding-left: 10px;
+position: relative;
 color: #fff;
 font-size: 23px;
  `
@@ -67,4 +69,17 @@ font-size: 23px;
  font-size: 22px;
  white-space: nowrap;
  `
- //width: auto;
+
+ export const FindUserItem = styled.div`
+ width: 100%;
+ height: 60px;
+ background-color: red;
+ text-align: center;
+ `
+ export const FindUserBlock = styled.div`
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ position: absolute;
+ top: 100px;
+ `

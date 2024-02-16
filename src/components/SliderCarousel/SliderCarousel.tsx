@@ -70,9 +70,13 @@ const sld=useRef(null)
             key={index} imageLink={item} />
         ))}
       </SliderCarouselWrapper>
-      <SliderDots>
+      <SliderDots
+       data-testid="users-link"
+    //  id="users-link"
+      >
         {imgs.map((item, index) => (
           <SliderDot key={index}
+          data-testid={`clickable element ${index}`}
             background={currentSlide == index ? "#fff" : "black"}
             onClick={() => { handleDot(index); }}
           >

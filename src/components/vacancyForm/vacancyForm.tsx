@@ -161,14 +161,10 @@ const VacancyForm = () => {
                         <SalaryOfOffer>
                             Salary:  {data.salary} (BYN)
                         </SalaryOfOffer>
+                        <VacancySlider  images={data.image_set} />
                         <ApplyForJobButton>
                             Apply for job
                         </ApplyForJobButton>
-
-                        <VacancySlider  images={data.image_set} />
-         
-
-              
                         <ChatKeypadComponent />
                     </VacancyFormOfOffer>
                 </VacancyFormWrapper>

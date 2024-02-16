@@ -2,9 +2,14 @@ import { useParams } from "react-router-dom";
 
 const TestPahe = () => {
     const {id} =useParams()
+
+ 
     return ( 
 
-        <>TEeggregrtttttttSTdsTrvdssvrrrrrrrrT {id}</>
+        <>TEeggregrtttttttSTdsTrvdssvrrrrrrrrT {id}
+           
+        
+        </>
      );
 }
  

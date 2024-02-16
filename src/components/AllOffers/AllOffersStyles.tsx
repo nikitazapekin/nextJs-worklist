@@ -131,12 +131,16 @@ justify-content: center;
 gap: 20px;
 margin-bottom: 10px;
 `
-export const PageNumber = styled.div`
+
+interface PageNumberProps {
+  color: string
+}
+export const PageNumber = styled.button<PageNumberProps>`
 display: flex;
 justify-content: center;
 align-items: center;
 background-color: rgba(87, 87, 87);
-color: #fff;
+color: ${props=> props.color};
 padding: 20px;
 font-size: 32px;
 border: 2px solid black;

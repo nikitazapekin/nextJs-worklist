@@ -1,9 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import type {LOADING_STATUS} from '../../constants/loadingStatus';
 import type { PayloadAction } from '@reduxjs/toolkit';
- 
-
 interface getOffersState {
     data: Array<
 {
@@ -14,42 +11,10 @@ interface getOffersState {
     salary: string,
     skills: String[],
     workingPerDay: string,
-}> /*,
-payloadParams: {
-    title: string,
-    skills: String[],
-    workingPerDay: number,
-    location: string,
-  salary: {
-    from: string,
-    to: string
-} */
-   
+}> 
 }
-/*interface searchProps {
-    payloadParams: {
-        title: string,
-        skills: String[],
-        workingPerDay: number,
-        location: string,
-      salary: {
-        from: string,
-        to: string
-    }
-       
-    }
-} */
 const initialState: getOffersState = {
     data: [],
- /*   payloadParams: {
-        title: "",
-        skills:  [],
-        workingPerDay: 0,
-        location: "",
-      salary: {
-        from: "",
-        to: ""
-    } */
 };
 interface getOffersProps {
     limit: number, 
@@ -82,7 +47,6 @@ export const getOffersSlice = createSlice({
 	reducers: {
 		setGetOffersResult: (state, action: PayloadAction<getOffersResponse>) => {
             console.log("SLIXE" +JSON.stringify(action.payload))
-
             state.data = action.payload.data
             
 		},

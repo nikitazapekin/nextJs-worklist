@@ -2,25 +2,33 @@ import { useState, memo } from "react";
 
 import axios from "axios";
 
-import { AddSkillBtn, CreateYourOffer, CreateYourOfferForm, CreateYourOfferTitle, FormError, FormImage, InputBlockTitle, InputBlockWrapper, InputCreateOffer, InputCreateOfferWrapper, ListOfSkills, SaveButton, SelectOption, SelectOptionElement, SkillElement, SkillElementButtonTrash, SkillElementButtonWrapper, SkillElementTitle } from "./createYourFormStyles";
+import { AddSkillBtn, CreateYourOffer, CreateYourOfferForm, CreateYourOfferTitle, FormError, FormImage, InputBlockTitle, InputBlockWrapper, InputCreateOffer, InputCreateOfferWrapper, ListOfSkills, SaveButton, SeeListOfYourOffers, SelectOption, SelectOptionElement, SkillElement, SkillElementButtonTrash, SkillElementButtonWrapper, SkillElementTitle, TitleBlock } from "./createYourFormStyles";
 import ModalWindow from "../modal/modal";
 import Draw from "../../assets/draw.png"
 import useCreateOffer from "../../hooks/useCreateOffer";
 import TrashSkill from "../../assets/trashSkill.png"
 import useJwt from "../../hooks/useJwt";
 import handleSubmit from "../../api/uploadFile";
+import { useNavigate } from "react-router-dom";
 const CreateYourOfferComponent = memo(() => {
     const {jwtToken} =useJwt()
-
-    const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange,// handleSubmit,
+    const navigate = useNavigate()
+    const { handleChange, handleAddSkill, handleSave, isClickedFirst, handleFileChange,
          handleChangeSelect,
         skillInput, stateOfOffer, handleRemove,   stateOfOfferError, selectedFiles} = useCreateOffer()     
         const [isOpen, setIsOpen] = useState(false)   
     return (
         <CreateYourOffer>
+            <TitleBlock>
             <CreateYourOfferTitle>
                 Create your offer
             </CreateYourOfferTitle>
+            <SeeListOfYourOffers
+            onClick={()=> navigate("/personal/offers")}
+            >
+                See your offers
+            </SeeListOfYourOffers>
+            </TitleBlock>
             <CreateYourOfferForm
              onSubmit={async (event)=>{ await handleSubmit(event, jwtToken); }}
              method="POST" encType="multipart/form-data" 
@@ -130,17 +138,15 @@ multiple
                 </InputBlockWrapper>
                 <SaveButton 
                 onClick={()=>{
-                    
                     handleSave()
                     setIsOpen(true) 
-                
                 }}
                  type="submit"
                 >
                     Save
                 </SaveButton>
             </CreateYourOfferForm>
-            <ModalWindow  open={isOpen} //setIsOpen={setIsOpen} 
+            <ModalWindow  open={isOpen} 
         onClose={() => setIsOpen(false)}>
         Contragulation! You have successfully changed your personal data!
                     </ModalWindow>

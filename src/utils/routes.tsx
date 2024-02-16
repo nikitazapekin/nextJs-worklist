@@ -9,7 +9,8 @@ import {
    OFFERS_PAGE_ROUTE,
    VACANCY_ROUTE,
    TEST_ROUTE,
-   CHAT_ROUTE
+   CHAT_ROUTE,
+   YOUR_OFFERS_ROUTE
 } from "./consts"
 
 import Homepage from "../pages/homepage/homepage"
@@ -21,6 +22,7 @@ import OffersPage from "../pages/offersPage/offersPage"
 import VacancyPage from "../pages/vacancyPage/vacancyPage"
 import TestPage from "../pages/test"
 import ChatWithUser from "../pages/chatWithUserPage/chatWithUserPage"
+import YourOffersPage from "../pages/yourOffers/yourOffers"
 export const publicRoutes = [
     {
         path: HOMEPAGE_ROUTE,
@@ -60,7 +62,11 @@ export const publicRoutes = [
  {
    path: CHAT_ROUTE,
    Component: ChatWithUser
- }
+ },
+{
+   path: YOUR_OFFERS_ROUTE,
+   Component: YourOffersPage
+}
 
 ]
 const privateRoutes = [

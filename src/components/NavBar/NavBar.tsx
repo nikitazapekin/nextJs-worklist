@@ -2,10 +2,11 @@ import { useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems, NavBarItemSearch} from "./styles.NavBar";
+import {  NavBarBackground, Navbar, NavBarItem, NavBarWrapper, SubNavBarItem, NavBarItems, NavBarItemSearch, FindUserItem, FindUserBlock} from "./styles.NavBar";
 
 import useJwt from "../../hooks/useJwt";
 const NavBar = () => {
+    const users = ["users", "ew" , "cdwe", "wfefew", "feeefw"]
     const {jwtToken} =useJwt()
     useEffect(()=> {
 console.log("jwt"+jwtToken)
@@ -23,11 +24,14 @@ console.log("jwt"+jwtToken)
                 Offers
             </Link>
                 </NavBarItem>
-
-                {/*
-            <NavBarItem>CV</NavBarItem>   */}
                  <NavBarItem>
                     <NavBarItemSearch placeholder="Type username" />
+                    <FindUserBlock>
+
+                    {users.map(item => (
+                        <FindUserItem>{item}</FindUserItem>
+                        ))}
+                        </FindUserBlock>
                  </NavBarItem>
             <NavBarItems>
 {jwtToken==null ? (

@@ -8,6 +8,7 @@ top: 100px;
 border-radius: 20px;
 padding-top: 100px;
 padding-bottom: 100px;
+margin-bottom: 150px;
 `
 export const RegisterFormWrapper = styled.div`
 display: flex;

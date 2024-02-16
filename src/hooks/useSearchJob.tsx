@@ -1,7 +1,20 @@
-import { useEffect, useState, memo } from "react"
+import { useEffect, useState, memo, useRef } from "react"
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchParamsState } from "../store/slices/searchParams.slice"
+import { fetchGetOffersFunction } from "../store/slices/getOffers.slice";
+interface searchJobStateProps {
+    title: string,
+    skills: string[],
+    workingPerDay: number,
+    location: string,
+  salary: {
+    from: string,
+    to: string
+  }
+}
 const useSearchJob = () => {
-    //const [isChanged, setIsChanged] 
-    const [searchJobState, setSearchJobState] = useState({
+const dispatch = useDispatch()
+    const [searchJobState, setSearchJobState] = useState<searchJobStateProps>({
         title: "",
         skills: [],
         workingPerDay: 0,
@@ -58,8 +71,41 @@ const useSearchJob = () => {
         const { value } = event.target
         setHandleChangeValue(value)
     }
-
-  
-    return { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill, handleOnChange }
+    const sidebar = useRef(null)
+ //   const dispatch = useDispatch()
+    const sidebarButton = useRef(null)
+    const [isHide, setIsHide] = useState(false)
+    const [currentPosition, setCurrentPosition] = useState( 0)
+    const [currentPositionOfHideButton, setCurrentPositionOfHideButton] = useState( 0 )
+    const onHide = () => {
+        if (isHide == false) {
+            setCurrentPosition(sidebar.current.offsetWidth)
+            setCurrentPositionOfHideButton(sidebarButton.current.offsetWidth)
+            setIsHide(true)
+        }
+        else {
+            setCurrentPosition(0)
+            setCurrentPositionOfHideButton(0)
+            setIsHide(false)
+        }
+    }
+    const handleSearch = () => {
+        dispatch(fetchGetOffersFunction({page: 1, limit: 6, title: searchJobState.title , skills: searchJobState.skills, workingPerDay:searchJobState.workingPerDay,
+            location: searchJobState.location,  salary: searchJobState.salary
+            }))
+            dispatch(setSearchParamsState({
+title: searchJobState.title,
+skills: searchJobState.skills,
+workingPerDay: searchJobState.workingPerDay,
+location: searchJobState.location,
+salary: {
+    from: searchJobState.salary.from,
+    to: searchJobState.salary.to,
+}
+            }))
+    }
+    return { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill, handleOnChange ,
+    onHide, handleSearch, sidebar, sidebarButton, isHide, currentPosition, currentPositionOfHideButton
+    }
 }
 export default useSearchJob

@@ -2,7 +2,6 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOADING_STATUS } from '../../constants/loadingStatus';
 import { offersApi } from '../../api/offers.api';
 import { setGetOffersLoadingStatus, setGetOffersResult, fetchGetOffersFunction } from "../slices/getOffers.slice"
-
 import type { PayloadAction } from '@reduxjs/toolkit';
 interface AuthProps {
     limit: number;

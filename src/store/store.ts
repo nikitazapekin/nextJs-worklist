@@ -16,6 +16,7 @@ import getOffersSlice from './slices/getOffers.slice';
 import getUsernameSlice from './slices/getUsername.slice';
 import getAmountOfOffersSlice from './slices/getAmountOfOffers.slice';
 import getOfferSlice from './slices/getOffer.slice';
+import searchParamsSlice from './slices/searchParams.slice';
 //import { addToLocalStorageClickedOfferSlice } from './slices/addToLocalStorageClikedOffer';
 const rootReducer = combineReducers({
     authSlice: authSlice,
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
 	getOffersSlice: getOffersSlice,
 	getUsernameSlice: getUsernameSlice,
 	getAmountOfOffers: getAmountOfOffersSlice, 
-	getOfferSlice: getOfferSlice
+	getOfferSlice: getOfferSlice,
+	searchParamsSlice: searchParamsSlice
 	//addToLocalStorageSlice: addToLocalStorageClickedOfferSlice
 });
 const persistConfig = getPersistConfig({
@@ -41,6 +43,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
 	reducer: persistedReducer,
+	/*preloadedState: {
+		data: initialState.data
+	}, */
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {

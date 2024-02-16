@@ -5,35 +5,10 @@ import useSearchJob from "../../hooks/useSearchJob";
 import Trash from "../../assets/trashSkill.png"
 import AllOffers from "../AllOffers/AllOffers";
 import Search from "../../assets/search.png"
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchGetOffersFunction } from "../../store/slices/getOffers.slice";
 const OffersLeftSidePanel = memo(() => {
-    const sidebar = useRef(null)
-    const dispatch = useDispatch()
-    const sidebarButton = useRef(null)
-    const [isHide, setIsHide] = useState(false)
-    const [currentPosition, setCurrentPosition] = useState( 0)
-    const [currentPositionOfHideButton, setCurrentPositionOfHideButton] = useState( 0 )
-    const { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill , handleOnChange} = useSearchJob()
-
-    const onHide = () => {
-        if (isHide == false) {
-            setCurrentPosition(sidebar.current.offsetWidth)
-            setCurrentPositionOfHideButton(sidebarButton.current.offsetWidth)
-            setIsHide(true)
-        }
-        else {
-            setCurrentPosition(0)
-            setCurrentPositionOfHideButton(0)
-            setIsHide(false)
-        }
-    }
-    const handleSearch = () => {
-        dispatch(fetchGetOffersFunction({page: 1, limit: 6, title: searchJobState.title , skills: searchJobState.skills, workingPerDay:searchJobState.workingPerDay,
-            location: searchJobState.location,  salary: searchJobState.salary
-            }))
-        
-    }
+    const { searchJobState, setSearchJobState, handleChange, handleAdd, handleAddChange, handleRemoveSkill , handleOnChange, isHide,
+        onHide, handleSearch, sidebar, sidebarButton, currentPosition, currentPositionOfHideButton
+    } = useSearchJob()
         return (
         <OffersWrapper>
             <OffersNavigation
@@ -51,7 +26,6 @@ const OffersLeftSidePanel = memo(() => {
                 </IsHideSideBar>
                 <OffersPanelBlock>
                     <OffersPanelBlockTitleWrapper>
-
                     <OffersPanelBlockTitle>
                         Search job
                     </OffersPanelBlockTitle>
@@ -126,7 +100,7 @@ const OffersLeftSidePanel = memo(() => {
                     </LeftSidePanelSearchButton>  
                 </OffersPanelBlock>
             </OffersNavigation>
-            <AllOffers />
+            <AllOffers searchJobState={searchJobState} />
         </OffersWrapper>
     );
 })

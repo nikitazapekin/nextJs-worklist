@@ -3,13 +3,23 @@ import styled from "styled-components";
 export const CreateYourOffer = styled.div`
 width: 100%;
 height: 100vh;
- 
 padding: 100px;
 `
 export const CreateYourOfferTitle = styled.h1`
 color: #fff;
 font-size: 50px;
 
+`
+export const TitleBlock = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+`
+export const SeeListOfYourOffers = styled.h3`
+color: #fff;
+font-size: 30px;
+cursor: pointer;
 `
 export const CreateYourOfferForm = styled.form`
 display: flex;
@@ -18,8 +28,6 @@ height: auto;
 width: 100%;
 margin-top: 100px;
 gap: 50px;
-
-
 `
 export const InputBlockWrapper = styled.div`
 width: 100%;
@@ -80,6 +88,14 @@ border-radius: 20px;
 left: 50%;
 font-size: 34px;
 font-weight: 900;
+
+transition: 1s ease-in-out;
+&:hover{
+    letter-spacing: 2px;
+background-color: orange;
+transform: scale(1.01);
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
 `
 export const FormImage = styled.img`
 width: 40px;
